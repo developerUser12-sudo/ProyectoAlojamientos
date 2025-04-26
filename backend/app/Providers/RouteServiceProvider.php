@@ -28,6 +28,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::pattern('id', '[0-9]+');
 
+        // 🛠️ Añade esta línea para registrar el Rate Limiter
+        $this->configureRateLimiting();
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
@@ -37,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+
 
 
     /**

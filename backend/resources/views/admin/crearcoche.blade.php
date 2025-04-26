@@ -5,38 +5,44 @@
    
         <h1>Crear Coche</h1>
 
-        <form id="createCocheForm">
-            @csrf <!-- Token CSRF -->
-            <label for="origen">Origen:</label>
-            <input type="text" id="origen" name="origen" required><br>
+        <form action="{{ route('coches.store') }}" method="POST">
+        @csrf
 
-            <label for="destino">Destino:</label>
-            <input type="text" id="destino" name="destino" required><br>
+        <div class="mb-3">
+            <label for="origen" class="form-label">Origen</label>
+            <input type="text" name="origen" class="form-control" required>
+        </div>
 
-            <label for="marca">Marca:</label>
-            <input type="text" id="marca" name="marca" required><br>
+        <div class="mb-3">
+            <label for="destino" class="form-label">Destino</label>
+            <input type="text" name="destino" class="form-control" required>
+        </div>
 
-            <label for="modelo">Modelo:</label>
-            <input type="text" id="modelo" name="modelo" required><br>
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            <input type="text" name="marca" class="form-control" required>
+        </div>
 
-            <label for="imagen">Imagen:</label>
-            <input type="text" id="imagen" name="imagen" required><br>
+        <div class="mb-3">
+            <label for="modelo" class="form-label">Modelo</label>
+            <input type="text" name="modelo" class="form-control" required>
+        </div>
 
-            <label for="precio_noche">Precio por noche:</label>
-            <input type="number" id="precio_noche" name="precio_noche" required><br>
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input type="text" name="imagen" class="form-control" required>
+        </div>
 
-            <button type="submit">Crear Coche</button>
-        </form>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" name="precio" step="0.01" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Coche</button>
+    </form>
 
 </div>
 @endsection
-<script>
-    document.getElementById('createCocheForm').addEventListener('submit', function(event) {
-        const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData.entries());
-        axios.post('/api/coches', data)
-    });
-</script>
 </body>
 
 </html>

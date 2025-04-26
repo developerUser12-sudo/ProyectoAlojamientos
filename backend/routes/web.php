@@ -8,34 +8,40 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('admin/login', [AdminAuthController::class, 'login']);
-Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+// Rutas de login de Admin (públicas)
+Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.loginAdmin');
+Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.loginAdmin.post');
+
+// Rutas protegidas solo para Admins
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('admin/paneladministracion', function () {
+        return view('admin.paneladministracion');
+    })->name('admin.paneladministracion');
+
+    Route::get('admin/crear-coche', function () {
+        return view('admin.crearcoche');
+    })->name('admin.crearcoche');
+    
+
+    Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
+
+// Rutas de usuarios normales (protegidas por auth:user)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/crear-coche', function () {
-    return view('admin.crearcoche');
-});
-Route::middleware('auth')->group(function () {
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Rutas de autenticación (breeze)
 require __DIR__.'/auth.php';

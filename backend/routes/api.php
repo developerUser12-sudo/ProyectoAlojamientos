@@ -7,10 +7,10 @@ use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\CocheController;
 
 // Definir las rutas para coches
-Route::post('/coches', [CocheController::class, 'store']);
+Route::post('/crearCoche', [CocheController::class, 'store']);
 
 // Obtener todos los coches (GET)
-
+Route::apiResource('coches', CocheController::class);
 
 /*
 |--------------------------------------------------------------------------

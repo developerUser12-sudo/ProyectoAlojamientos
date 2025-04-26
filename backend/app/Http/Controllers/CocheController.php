@@ -20,35 +20,43 @@ class CocheController extends Controller
             'destino' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
             'modelo' => 'required|string|max:255',
-            'imagen' => 'required|string|max:255',
-            'precio_noche' => 'required|numeric',
+            'imagen' => 'required|string|max:255', // o puede ser un archivo
+            'precio' => 'required|numeric',
         ]);
 
-        // Crear el coche
-        $coche = Coche::create($validated);
+        // Crear coche
+        Coche::create($validated);
 
-        // Retornar el coche creado como respuesta
-        return response()->json($coche, 201);
+        return redirect()->route('admin.crearcoche')->with('success', 'Coche creado correctamente.');
     }
 
     // Mostrar un coche específico
-    public function show($id)
+    public function show(Coche $coche)
     {
-        return Coche::findOrFail($id);
-    }
-
-    // Actualizar un coche específico
-    public function update(Request $request, $id)
-    {
-        $coche = Coche::findOrFail($id);
-        $coche->update($request->all());
-
         return $coche;
     }
 
-    // Eliminar un coche
-    public function destroy($id)
+    // Actualizar un coche específico
+    public function update(Request $request, Coche $coche)
     {
-        return Coche::destroy($id);
+        $validated = $request->validate([
+            'origen' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'marca' => 'required|string|max:255',
+            'modelo' => 'required|string|max:255',
+            'imagen' => 'required|string|max:255',
+            'precio' => 'required|numeric',
+        ]);
+        $coche->update($request->all());
+
+        return response()->json($coche);
+    }
+
+    // Eliminar un coche
+    public function destroy(Coche $coche)
+    {
+        $coche->delete();
+
+        return response()->json(null, 204);
     }
 }

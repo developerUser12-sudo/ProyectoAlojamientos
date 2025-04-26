@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('marca');
             $table->string('modelo');
             $table->string('imagen');
-            $table->decimal('precio_noche', 10, 2);
+            $table->decimal('precio', 10, 2);
             
             $table->timestamps();
         });
