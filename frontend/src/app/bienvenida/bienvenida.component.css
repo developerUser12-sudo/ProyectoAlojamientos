@@ -1,36 +1,39 @@
-.carousel-item {
-    height: 600px;
-    font-family:'Roboto',sans-serif;
-    font-weight:bolder;
-    background-position: center;
-}
-.carousel-control-prev{
-    animation: moverIzquierda 1s infinite ease-in-out;
-}
-.carousel-control-next{
-    animation: moverDerecha 1s infinite ease-in-out;
-}
-@keyframes moverIzquierda {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(-7px); }
-    100% { transform: translateX(0); }
-}
-@keyframes moverDerecha {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(7px); }
-    100% { transform: translateX(0); }
-}
-#carrousel1 {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url('/assets/img/vacaciones1_m.webp');
-}
+    .carousel-item {
+        height: 600px;
+        font-weight:bolder;
+        background-position: center;
+        transition: 1s;
+    }
+    .carousel-control-prev{
+        animation: moverIzquierda 1s infinite ease-in-out;
+    }
+    .carousel-control-next{
+        animation: moverDerecha 1s infinite ease-in-out;
+    }
+    
+    @keyframes moverIzquierda {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-7px); }
+        100% { transform: translateX(0); }
+    }
+    @keyframes moverDerecha {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(7px); }
+        100% { transform: translateX(0); }
+    }
+    #carrousel1 {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url('/assets/img/vacaciones1_m.webp');
+    }
 
-#carrousel2 {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),url('/assets/img/vacaciones2_m.webp');
-}
+    #carrousel2 {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),url('/assets/img/vacaciones2_m.webp');
+    }
 
-#carrousel3 {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.6) 100%),url('/assets/img/vacaciones3_m.webp');
-}
-.nav-item{
-    width: 170px;
-}
+    #carrousel3 {
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.6) 100%),url('/assets/img/vacaciones3_m.webp');
+    }
+    .nav-item{
+        width: 170px;
+    }
+    
+        
