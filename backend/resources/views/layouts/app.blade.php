@@ -37,7 +37,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container-fluid">
                     <!-- Logo con enlace a Angular -->
-                    <a class="navbar-brand d-flex flex-column align-items-center" href="http://localhost:4200/" routerLinkActive="active">
+                    <a class="navbar-brand d-flex flex-column align-items-center" href="https://proyectoalojamientos.onrender.com" routerLinkActive="active">
                         <i class="bi bi-airplane"></i> Instaholidays
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
