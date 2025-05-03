@@ -12,12 +12,15 @@ class TrustProxies extends Middleware
      *
      * @var array|string|null
      */
-    protected $proxies = '*';
+    protected $proxies = '*';  // Puedes usar '*' o la IP de tu proxy si tienes una dirección específica
 
     /**
      * The headers that should be used to detect proxies.
      *
      * @var int
      */
-    protected $headers = SymfonyRequest::HEADER_X_FORWARDED_ALL;
+    protected $headers = SymfonyRequest::HEADER_X_FORWARDED_FOR |
+                         SymfonyRequest::HEADER_X_FORWARDED_HOST |
+                         SymfonyRequest::HEADER_X_FORWARDED_PROTO |
+                         SymfonyRequest::HEADER_X_FORWARDED_PORT;
 }
