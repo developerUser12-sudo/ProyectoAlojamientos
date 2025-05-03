@@ -1,37 +1,23 @@
-# Etapa 1: dependencias
-FROM php:8.2-cli AS build
+FROM php:8.2-apache
 
-# Instala extensiones y dependencias necesarias
+# Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    git unzip curl libzip-dev libpng-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo_mysql zip mbstring
+    git unzip zip curl libpng-dev libonig-dev libxml2-dev libzip-dev libpq-dev \
+    && docker-php-ext-install pdo pdo_mysql zip
 
 # Instala Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 
 # Copia archivos del proyecto
-WORKDIR /var/www
-COPY . .
+COPY . /var/www/html/
 
-# Instala dependencias
-RUN composer install --no-dev --optimize-autoloader
+# Establece permisos
+RUN chown -R www-data:www-data /var/www/html
 
-# Etapa 2: ejecución
-FROM php:8.2-cli
+# Habilita mod_rewrite
+RUN a2enmod rewrite
 
-WORKDIR /var/www
+# Cambia el document root
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 
-# Instala extensiones de nuevo
-RUN apt-get update && apt-get install -y \
-    libzip-dev libpng-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo_mysql zip mbstring
-
-COPY --from=build /var/www /var/www
-
-# Copia el binario de composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Puerto que Laravel usa por defecto
-EXPOSE 8000
-
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+EXPOSE 80
