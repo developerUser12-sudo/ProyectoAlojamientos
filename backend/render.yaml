@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: laravel-backend
+    env: php
+    buildCommand: |
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/local/bin/composer
+      composer install --no-dev --optimize-autoloader
+    startCommand: php artisan serve --host=0.0.0.0 --port=8080
+    envVars:
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: dpg-d0ai8dgdl3ps73eb4bt0-a.frankfurt-postgres.render.com
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: proyectoalojamientos
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        value: DaHSbOg8HARvkKrhZd9K2SGEsghjWbdq
