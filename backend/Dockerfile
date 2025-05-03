@@ -11,6 +11,12 @@ COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 # Copia archivos del proyecto
 COPY . /var/www/html/
 
+# Establece el directorio de trabajo
+WORKDIR /var/www/html
+
+# Instala dependencias PHP
+RUN composer install --no-dev --optimize-autoloader
+
 # Establece permisos
 RUN chown -R www-data:www-data /var/www/html
 
