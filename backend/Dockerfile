@@ -27,4 +27,7 @@ RUN a2enmod rewrite
 # Cambia el document root
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 
+# Instala las extensiones de PostgreSQL
+RUN apt-get install -y libpq-dev && docker-php-ext-install pdo_pgsql
+
 EXPOSE 80
