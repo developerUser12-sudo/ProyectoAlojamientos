@@ -14,6 +14,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
+
 // Rutas de login de Admin (públicas)
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.loginAdmin');
 Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.loginAdmin.post');
