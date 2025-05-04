@@ -9,8 +9,7 @@ class CocheController extends Controller
 {
     public function index()
     {   
-        $coche=Coche::find(1);
-        return view('auth.login',compact('coche'));
+        return Coche::all();
     }
 
     // Crear un nuevo coche

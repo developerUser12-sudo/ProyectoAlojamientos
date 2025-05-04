@@ -70,6 +70,5 @@
         </div>
     </div>
 </div>
-<h1>Bienvenido, {{ $coche->origen }}</h1>
 @endsection
 
