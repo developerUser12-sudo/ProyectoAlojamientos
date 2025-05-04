@@ -17,8 +17,9 @@ WORKDIR /var/www/html
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Establece permisos
-RUN chown -R www-data:www-data /var/www/html
+# Establece permisos necesarios para Laravel
+RUN chmod -R 775 storage bootstrap/cache && \
+    chown -R www-data:www-data /var/www/html
 
 # Habilita mod_rewrite
 RUN a2enmod rewrite
