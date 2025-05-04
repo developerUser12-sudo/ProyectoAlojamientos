@@ -8,8 +8,9 @@ use App\Models\Coche;
 class CocheController extends Controller
 {
     public function index()
-    {
-        return Coche::all();
+    {   
+        $coche=Coche::find(1);
+        return view('auth.login',compact('coche'));
     }
 
     // Crear un nuevo coche
