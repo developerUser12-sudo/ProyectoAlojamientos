@@ -1,41 +1,49 @@
 <header>
-  <nav class="navbar bg-primary  shadow-sm">
-    <div class="container-fluid ">
-      <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold" routerLink="/" routerLinkActive="active">
-        <i class="bi bi-airplane-fill"></i> Instaholidays
+  <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
+         routerLink="/" routerLinkActive="active">
+        <i class="bi bi-airplane-fill"></i> HolidaysNow
       </a>
-
-      <div class="navbar-nav ms-auto d-flex flex-row gap-4">
-        <a class="nav-link text-light" href="http://127.0.0.1:8000">Mi cuenta</a>
-
-        <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <div class="navbar-nav ms-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4">
+          <a class="nav-link text-light" routerLink="/vuelos" routerLinkActive="active">Vuelos</a>
+          <a class="nav-link text-light" routerLink="/hoteles" routerLinkActive="active">Hoteles</a>
+          <a class="nav-link text-light" routerLink="/alquilercoches" routerLinkActive="active">Alquiler de coches</a>
+          <a class="nav-link text-light" href="http://127.0.0.1:8000">Mi cuenta</a>
+          <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
+        </div>
       </div>
-     
-
     </div>
   </nav>
 </header>
+
 
 <main class="bg-body-secondary">
   <router-outlet></router-outlet>
 </main>
 <footer class="footer bg-primary d-flex flex-column">
-  <div class="row w-100 justify-content-around p-4">
-    <ul class="col-auto">
-      <li class="list-unstyled"><a class="text-decoration-none text-white" href="">Política de cookies</a></li>
-      <li class="list-unstyled mt-3"><a class="text-decoration-none text-white" href="">Términos de servicio</a></li>
+  <div class="w-100 d-flex flex-column flex-md-row justify-content-md-around text-center p-4">
+    <ul class="list-unstyled me-3">
+      <li><a class="text-decoration-none text-white" href="#">Política de cookies</a></li>
+      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Términos de servicio</a></li>
     </ul>
-    <ul class="col-auto">
-      <li class="list-unstyled"><a class="text-decoration-none text-white" href="">Política de privacidad</a></li>
-      <li class="list-unstyled mt-3"><a class="text-decoration-none text-white" href="">Sobre nosotros</a></li>
+    <ul class="list-unstyled me-3">
+      <li><a class="text-decoration-none text-white" href="#">Política de privacidad</a></li>
+      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Sobre nosotros</a></li>
     </ul>
-    <ul class="col-auto">
-      <li class="list-unstyled"><a class="text-decoration-none text-white" href="">Preguntas frecuentes</a></li>
-      <li class="list-unstyled mt-3"><a class="text-decoration-none text-white" href="">Información de la empresa</a>
-      </li>
+    <ul class="list-unstyled">
+      <li><a class="text-decoration-none text-white" href="#">Preguntas frecuentes</a></li>
+      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Información de la empresa</a></li>
     </ul>
   </div>
+
   <div class="row w-100">
-    <p class="col text-center text-light"><i class="bi bi-c-circle-fill me-2"></i>Todos los derechos reservados</p>
+    <p class="col text-center text-light">
+      <i class="bi bi-c-circle-fill me-2"></i>Todos los derechos reservados
+    </p>
   </div>
 </footer>
