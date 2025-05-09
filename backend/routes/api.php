@@ -5,11 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\CocheController;
-
-// Definir las rutas para coches
 Route::post('/crearCoche', [CocheController::class, 'store']);
-
-// Obtener todos los coches (GET)
 Route::apiResource('coches', CocheController::class);
 
 /*
@@ -26,4 +22,8 @@ Route::apiResource('coches', CocheController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/sanctum/csrf-cookie', function () {
+    return response()->json(['csrf_cookie' => csrf_token()]);
+});
+
 

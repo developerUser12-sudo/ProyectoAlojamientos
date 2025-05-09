@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SesionService } from './sesion.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  logeado="";
+  constructor(private usuario: SesionService) { }
+  
+    ngOnInit(): void {
+      this.usuario.getUsuario().subscribe((data) => {
+        console.log(data.name);
+        
+  
+      });
+    }
 }

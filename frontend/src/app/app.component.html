@@ -13,7 +13,11 @@
           <a class="nav-link text-light" routerLink="/vuelos" routerLinkActive="active">Vuelos</a>
           <a class="nav-link text-light" routerLink="/hoteles" routerLinkActive="active">Hoteles</a>
           <a class="nav-link text-light" routerLink="/alquilercoches" routerLinkActive="active">Alquiler de coches</a>
-          <a class="nav-link text-light" href="http://127.0.0.1:8000">Mi cuenta</a>
+          <div >
+
+            <a class="nav-link text-light" href="http://127.0.0.1:8000" >{{this.logeado}}</a>
+          </div>
+          <a class="nav-link text-light" href="http://127.0.0.1:8000" *ngIf="this.logeado">ygtu</a>
           <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
         </div>
       </div>

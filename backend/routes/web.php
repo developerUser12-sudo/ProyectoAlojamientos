@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuthController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +14,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/phpinfo', function () {
-    phpinfo();
-});
-
-// Rutas de login de Admin (públicas)
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.loginAdmin');
 Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.loginAdmin.post');
+Route::middleware('auth')->get('/api/user', function (Request $request) {
+    return $request->user();
+});
 
-// Rutas protegidas solo para Admins
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/paneladministracion', function () {
         return view('admin.paneladministracion');
@@ -36,7 +33,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
 
-// Rutas de usuarios normales (protegidas por auth:user)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
