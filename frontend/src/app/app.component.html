@@ -1,8 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
     <div class="container-fluid">
-      <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
-         routerLink="/" routerLinkActive="active">
+      <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold" routerLink="/"
+        routerLinkActive="active">
         <i class="bi bi-airplane-fill"></i> HolidaysNow
       </a>
       <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
@@ -13,11 +13,9 @@
           <a class="nav-link text-light" routerLink="/vuelos" routerLinkActive="active">Vuelos</a>
           <a class="nav-link text-light" routerLink="/hoteles" routerLinkActive="active">Hoteles</a>
           <a class="nav-link text-light" routerLink="/alquilercoches" routerLinkActive="active">Alquiler de coches</a>
-          <div >
-
-            <a class="nav-link text-light" href="http://127.0.0.1:8000" >{{this.logeado}}</a>
-          </div>
-          <a class="nav-link text-light" href="http://127.0.0.1:8000" *ngIf="this.logeado">ygtu</a>
+          
+          <a class="nav-link text-light" href="http://127.0.0.1:8000" *ngIf="this.logeado=='invitado'">Identificarse</a>
+          <a class="nav-link text-light" href="http://127.0.0.1:8000" *ngIf="this.logeado!='invitado'">{{this.logeado}}</a>
           <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
         </div>
       </div>

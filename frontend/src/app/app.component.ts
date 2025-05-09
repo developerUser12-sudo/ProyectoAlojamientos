@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SesionService } from './sesion.service';
+import { ServiciosService } from './servicios.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +9,14 @@ import { SesionService } from './sesion.service';
 })
 export class AppComponent {
   title = 'frontend';
-  logeado="";
-  constructor(private usuario: SesionService) { }
-  
-    ngOnInit(): void {
-      this.usuario.getUsuario().subscribe((data) => {
-        console.log(data.name);
-        
-  
-      });
-    }
+  logeado = "";
+  constructor(private auth: ServiciosService) { }
+
+  ngOnInit(): void {
+    this.auth.getUsuario().subscribe((data) => {
+      this.logeado = data.username;
+
+    });
+  }
+
 }

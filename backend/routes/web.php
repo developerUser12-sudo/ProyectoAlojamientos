@@ -32,7 +32,15 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
-
+Route::get('/username', function () {
+    $user = Auth::user();
+    if ($user) {
+        return response()->json(['username' => $user->name]);
+    } else {
+        return response()->json(['username' => 'invitado']);
+    }   
+});
+    
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
