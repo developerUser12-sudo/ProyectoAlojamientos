@@ -15,7 +15,7 @@ export class ServiciosService {
     return this.http.get(this.apiUrl);
   }
   getUsuario() {
-    return this.http.get<User>('http://localhost:8000/username', { withCredentials: true });
+    return this.http.get<User>('https://holidaysnowauth.onrender.com/username', { withCredentials: true });
   }
   
 
