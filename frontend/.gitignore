@@ -1,4 +1,3 @@
-# Node
 /node_modules
 /public/build
 /public/hot
@@ -6,7 +5,6 @@
 /storage/*.key
 /vendor
 
-# Archivos de configuración
 .env
 .env.backup
 .env.production
@@ -15,11 +13,11 @@ Homestead.json
 Homestead.yaml
 auth.json
 
-# Archivos de log
+
 npm-debug.log
 yarn-error.log
 
-# Archivos y carpetas de herramientas/editores
+
 /.fleet
 /.idea
 /.vscode

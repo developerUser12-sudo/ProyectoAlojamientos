@@ -74,7 +74,7 @@
                         <div class="row mt-5">
                             <div class="d-flex flex-row gap-4 justify-content-center">
                                 <p>¿No tienes una cuenta?</p>
-                                <form action="http://127.0.0.1:8000/register">
+                                <form action=https://holidaysnowauth.onrender.com/register">
                                     <input type="submit" class="btn btn-primary  justify-content-center" value="Regístrate">
                                 </form>
                             </div>

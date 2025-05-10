@@ -23,12 +23,12 @@
             <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
                 <div class="container-fluid d-flex flex-row gap-4">
                     <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
-                        href="http://localhost:4200/frontend/">
+                        href="https://holidaysnow.onrender.com">
                         <i class="bi bi-airplane-fill"></i> HolidaysNow
                     </a>
-                    <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/">Vuelos</a>
-                    <a class="nav-link text-light" href="http://localhost:4200/frontend/hoteles/">Hoteles</a>
-                    <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/alquilercoches">Alquiler
+                    <a class="nav-link text-light" href="https://holidaysnow.onrender.com/vuelos/">Vuelos</a>
+                    <a class="nav-link text-light" href="https://holidaysnow.onrender.com/hoteles/">Hoteles</a>
+                    <a class="nav-link text-light" href="https://holidaysnow.onrender.com/alquilercoches">Alquiler
                         de coches</a>
                     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarContent">
@@ -42,15 +42,11 @@
                                     <div class="dropdown inline-block text-left">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-people-fill"></i>{{ Auth::user()->name }}
+                                            <i class="bi bi-people-fill me-2"></i>{{ Auth::user()->name }}
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                             <li>
-                                                <!-- <form  action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <button type="submit" class="dropdown-item">Mi cuenta</button>
-                                                </form> -->
-                                                 <a href="http://localhost:8000/dashboard" class="dropdown-item">Mi cuenta</a>
+                                                 <a href="https://holidaysnowauth.onrender.com/cuenta" class="dropdown-item">Mi cuenta</a>
                                             </li>
                                         </ul>
                                     </div>

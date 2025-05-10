@@ -15,6 +15,7 @@ Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('
 Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.loginAdmin.post');
 
 
+
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/paneladministracion', function () {
         return view('admin.paneladministracion');
@@ -23,7 +24,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/crear-coche', function () {
         return view('admin.crearcoche');
     })->name('admin.crearcoche');
-    
+
 
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
@@ -34,7 +35,7 @@ Route::middleware('auth')->get('/username', function () {
     return response()->json(['username' => $user ? $user->name : 'invitado']);
 });
 
-    
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -45,4 +46,4 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

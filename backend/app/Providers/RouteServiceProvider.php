@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = 'http://localhost:4200/frontend/';
+    public const HOME = 'https://holidaysnow.onrender.com';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -28,7 +28,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::pattern('id', '[0-9]+');
 
-        // 🛠️ Añade esta línea para registrar el Rate Limiter
         $this->configureRateLimiting();
 
         $this->routes(function () {

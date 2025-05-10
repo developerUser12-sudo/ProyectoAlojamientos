@@ -12,7 +12,6 @@ class CocheController extends Controller
         return Coche::all();
     }
 
-    // Crear un nuevo coche
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -20,23 +19,20 @@ class CocheController extends Controller
             'destino' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
             'modelo' => 'required|string|max:255',
-            'imagen' => 'required|string|max:255', // o puede ser un archivo
+            'imagen' => 'required|string|max:255', 
             'precio' => 'required|numeric',
         ]);
 
-        // Crear coche
         Coche::create($validated);
 
         return redirect()->route('admin.crearcoche')->with('success', 'Coche creado correctamente.');
     }
 
-    // Mostrar un coche específico
     public function show(Coche $coche)
     {
         return $coche;
     }
 
-    // Actualizar un coche específico
     public function update(Request $request, Coche $coche)
     {
         $validated = $request->validate([
@@ -52,7 +48,6 @@ class CocheController extends Controller
         return response()->json($coche);
     }
 
-    // Eliminar un coche
     public function destroy(Coche $coche)
     {
         $coche->delete();
