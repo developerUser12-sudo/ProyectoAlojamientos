@@ -10,11 +10,13 @@ import { ServiciosService } from './servicios.service';
 export class AppComponent {
   title = 'frontend';
   logeado = "";
+  cargando=true;
   constructor(private auth: ServiciosService) { }
 
   ngOnInit(): void {
     this.auth.getUsuario().subscribe((data) => {
       this.logeado = data.username;
+      this.cargando=false;
 
     });
   }
