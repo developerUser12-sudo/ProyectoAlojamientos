@@ -1,20 +1,12 @@
 <?php
 
 return [
-
-    'paths' => ['api/*', 'sanctum/csrf-cookie','*'],
-
-    'allowed_methods' => ['*'],
-
-    'allowed_origins' => ['https://holidaysnow.onrender.com/','http://localhost:4200/frontend'],
-
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*'],
+    'allowed_methods' => ['*'], // Permite todos los métodos HTTP
+    'allowed_origins' => ['https://holidaysnow.onrender.com'], // Permite solo solicitudes de este dominio
     'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
-
+    'allowed_headers' => ['*'], // Permite todos los encabezados
     'exposed_headers' => [],
-
     'max_age' => 0,
-
-    'supports_credentials' => true, 
+    'supports_credentials' => true, // Permite cookies y credenciales
 ];
