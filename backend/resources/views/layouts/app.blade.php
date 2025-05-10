@@ -38,26 +38,23 @@
                         <div class="navbar-nav ms-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4">
 
                             @if (Route::has('login'))
-                                    @auth
-                                        <div class="dropdown inline-block text-left">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                Hola, {{ Auth::user()->name }}
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                                <li>
-                                                    <form method="POST" action="{{ route('logout') }}">
-                                                        @csrf
-                                                        <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                    @else
-                                   
-
-                                      
+                                @auth
+                                    <div class="dropdown inline-block text-left">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-people-fill"></i>{{ Auth::user()->name }}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                            <li>
+                                                <!-- <form  action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item">Mi cuenta</button>
+                                                </form> -->
+                                                 <a href="http://localhost:8000/dashboard" class="dropdown-item">Mi cuenta</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     @endauth
-                                </div>
                             @endif
                             <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
                         </div>

@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.loginAdmin');
 Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.loginAdmin.post');
-Route::middleware('auth')->get('/api/user', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/paneladministracion', function () {
@@ -35,9 +33,7 @@ Route::middleware('auth')->get('/username', function () {
     $user = Auth::user();
     return response()->json(['username' => $user ? $user->name : 'invitado']);
 });
-Route::get('/check-login', function () {
-    return Auth::check() ? 'Autenticado como ' . Auth::user()->name : 'No autenticado';
-});
+
     
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -49,5 +45,4 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Rutas de autenticación (breeze)
 require __DIR__.'/auth.php';

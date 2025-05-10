@@ -17,6 +17,7 @@ export class ServiciosService {
   getUsuario() {
     return this.http.get<User>('http://localhost:8000/username', { withCredentials: true });
   }
+  
 
 
 

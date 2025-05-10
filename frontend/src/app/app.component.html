@@ -14,10 +14,21 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <div class="navbar-nav ms-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4">
 
-          
-          <a class="nav-link text-light" href="http://localhost:8000" *ngIf="this.logeado=='invitado'||this.logeado==''">Identificarse</a>
-          <a class="nav-link text-light" href="http://localhost:8000/dashboard"
-            *ngIf="this.logeado!='invitado'&&this.logeado!=''">{{this.logeado}}</a>
+
+          <a class="nav-link text-light" href="http://localhost:8000"
+            *ngIf="this.logeado=='invitado'||this.logeado==''">Identificarse</a>
+
+          <div class="dropdown inline-block text-left" *ngIf="this.logeado!='invitado'&&this.logeado!=''">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-people-fill me-2"></i>{{this.logeado}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li>
+                 <a href="http://localhost:8000/dashboard" class="dropdown-item">Mi cuenta</a>
+              </li>
+            </ul>
+          </div>
           <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
         </div>
       </div>
