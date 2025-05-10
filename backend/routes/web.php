@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.loginAdmin');
 Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.loginAdmin.post');
@@ -32,13 +29,14 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
-Route::get('/username', function () {
+
+
+Route::middleware('auth')->get('/username', function () {
     $user = Auth::user();
-    if ($user) {
-        return response()->json(['username' => $user->name]);
-    } else {
-        return response()->json(['username' => 'invitado']);
-    }   
+    return response()->json(['username' => $user ? $user->name : 'invitado']);
+});
+Route::get('/check-login', function () {
+    return Auth::check() ? 'Autenticado como ' . Auth::user()->name : 'No autenticado';
 });
     
 Route::get('/dashboard', function () {

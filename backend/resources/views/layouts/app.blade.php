@@ -21,21 +21,44 @@
     <div id="app">
         <header>
             <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
-                <div class="container-fluid">
+                <div class="container-fluid d-flex flex-row gap-4">
                     <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
                         href="http://localhost:4200/frontend/">
                         <i class="bi bi-airplane-fill"></i> HolidaysNow
                     </a>
+                    <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/">Vuelos</a>
+                    <a class="nav-link text-light" href="http://localhost:4200/frontend/hoteles/">Hoteles</a>
+                    <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/alquilercoches">Alquiler
+                        de coches</a>
                     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarContent">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarContent">
                         <div class="navbar-nav ms-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4">
-                            <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/">Vuelos</a>
-                            <a class="nav-link text-light" href="http://localhost:4200/frontend/hoteles/" >Hoteles</a>
-                            <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/alquilercoches">Alquiler de coches</a>
-                            <a class="nav-link text-light" href="http://127.0.0.1:8000">Mi cuenta</a>
+
+                            @if (Route::has('login'))
+                                    @auth
+                                        <div class="dropdown inline-block text-left">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Hola, {{ Auth::user()->name }}
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                                <li>
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+                                                        <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                    @else
+                                   
+
+                                      
+                                    @endauth
+                                </div>
+                            @endif
                             <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
                         </div>
                     </div>

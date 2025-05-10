@@ -14,9 +14,9 @@ export class ServiciosService {
   getCoches(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
- getUsuario() {
-  return this.http.get<User>('http://localhost:8000/username', { withCredentials: true });
-}
+  getUsuario() {
+    return this.http.get<User>('http://localhost:8000/username', { withCredentials: true });
+  }
 
 
 
