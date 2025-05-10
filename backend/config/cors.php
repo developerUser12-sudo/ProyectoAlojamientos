@@ -6,7 +6,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://holidaysnow.onrender.com/','http://localhost:4200/frontend'],
 
     'allowed_origins_patterns' => [],
 
