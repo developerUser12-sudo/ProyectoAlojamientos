@@ -23,13 +23,13 @@
             <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
                 <div class="container-fluid d-flex flex-row gap-4">
                     <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
-                        href="http://localhost:4200">
+                        href="{{ config('app.frontend_url') }}">
                         <i class="bi bi-airplane-fill"></i> HolidaysNow
                     </a>
-                    <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/">Vuelos</a>
-                    <a class="nav-link text-light" href="http://localhost:4200/frontend/hoteles/">Hoteles</a>
-                    <a class="nav-link text-light" href="http://localhost:4200/frontend/alquilercoches">Alquiler
-                        de coches</a>
+                    <a class="nav-link text-light" href="{{ config('app.frontend_url') }}/vuelos">Vuelos</a>
+                    <a class="nav-link text-light" href="{{ config('app.frontend_url') }}/hoteles">Hoteles</a>
+                    <a class="nav-link text-light" href="{{ config('app.frontend_url') }}/alquilercoches">Alquiler de coches</a>
+
                     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarContent">
                         <span class="navbar-toggler-icon"></span>
@@ -46,11 +46,11 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                             <li>
-                                                 <a href="http://localhost:8000/cuenta" class="dropdown-item">Mi cuenta</a>
+                                                <a href="{{ env('FRONTEND_URL') }}/cuenta" class="dropdown-item">Mi cuenta</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    @endauth
+                                @endauth
                             @endif
                             <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
                         </div>

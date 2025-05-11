@@ -15,7 +15,7 @@
         <div class="navbar-nav ms-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4">
 
 
-          <a class="nav-link text-light" href="http://localhost:8000"
+          <a class="nav-link text-light" [href]="getProductUrl()"
             *ngIf="this.logeado=='invitado'||this.logeado==''">Identificarse</a>
           <p *ngIf="this.logeado=='Cargando...'" class="nav-link text-light m-0"> {{ this.logeado }} </p>
 
@@ -28,7 +28,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
               <li>
-                <a href="http://localhost:8000/cuenta" class="dropdown-item">Mi cuenta</a>
+                <a [href]="getProductUrl()+'/cuenta'" class="dropdown-item">Mi cuenta</a>
               </li>
             </ul>
           </div>

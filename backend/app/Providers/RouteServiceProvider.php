@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    
     /**
      * The path to the "home" route for your application.
      *
@@ -17,7 +18,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = 'http://localhost:4200/frontend';
+    
+    public const HOME = 'https://holidaysnow.onrender.com';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

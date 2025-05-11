@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiciosService } from './servicios.service';
-
+import { environment } from '../environments/environment'; 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,6 +19,9 @@ export class AppComponent {
 
       });
     }, 3000);
+  }
+   getProductUrl(): string {
+    return `${environment.apiUrl}`;
   }
 
 
