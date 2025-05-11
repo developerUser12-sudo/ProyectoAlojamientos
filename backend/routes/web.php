@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -17,20 +18,18 @@ Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.l
 
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('admin/paneladministracion', function () {
-        return view('admin.paneladministracion');
-    })->name('admin.paneladministracion');
+    Route::get('admin/paneladministracion', [ServicesController::class, 'index'])->name('admin.paneladministracion');
 
     Route::get('admin/crear-coche', function () {
         return view('admin.crearcoche');
     })->name('admin.crearcoche');
 
-
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
 
 
-Route::middleware('auth')->get('/username', function () {
+
+Route::get('/username', function () {
     $user = Auth::user();
     return response()->json(['username' => $user ? $user->name : 'invitado']);
 });

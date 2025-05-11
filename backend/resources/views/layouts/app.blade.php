@@ -23,12 +23,12 @@
             <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
                 <div class="container-fluid d-flex flex-row gap-4">
                     <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
-                        href="https://holidaysnow.onrender.com">
+                        href="http://localhost:4200">
                         <i class="bi bi-airplane-fill"></i> HolidaysNow
                     </a>
-                    <a class="nav-link text-light" href="https://holidaysnow.onrender.com/vuelos/">Vuelos</a>
-                    <a class="nav-link text-light" href="https://holidaysnow.onrender.com/hoteles/">Hoteles</a>
-                    <a class="nav-link text-light" href="https://holidaysnow.onrender.com/alquilercoches">Alquiler
+                    <a class="nav-link text-light" href="http://localhost:4200/frontend/vuelos/">Vuelos</a>
+                    <a class="nav-link text-light" href="http://localhost:4200/frontend/hoteles/">Hoteles</a>
+                    <a class="nav-link text-light" href="http://localhost:4200/frontend/alquilercoches">Alquiler
                         de coches</a>
                     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarContent">
@@ -46,7 +46,7 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                             <li>
-                                                 <a href="https://holidaysnowauth.onrender.com/cuenta" class="dropdown-item">Mi cuenta</a>
+                                                 <a href="http://localhost:8000/cuenta" class="dropdown-item">Mi cuenta</a>
                                             </li>
                                         </ul>
                                     </div>

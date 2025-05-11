@@ -7,7 +7,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class ServiciosService {
-  private apiUrl = 'http://127.0.0.1:8000/api/coches';
+  private apiUrl = 'http://localhost:8000/api/coches';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class ServiciosService {
     return this.http.get(this.apiUrl);
   }
   getUsuario() {
-    return this.http.get<User>('https://holidaysnowauth.onrender.com/username', { withCredentials: true });
+    return this.http.get<User>('http://localhost:8000/username', { withCredentials: true });
   }
   
 

@@ -57,8 +57,6 @@
                     </form>
 
                     <hr>
-
-                    {{-- Cerrar sesión --}}
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="btn btn-danger">Cerrar sesión</button>

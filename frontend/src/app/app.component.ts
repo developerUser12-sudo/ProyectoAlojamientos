@@ -9,17 +9,17 @@ import { ServiciosService } from './servicios.service';
 })
 export class AppComponent {
   title = 'frontend';
-  logeado = "";
-  cargando=true;
+  logeado = "Cargando...";
   constructor(private auth: ServiciosService) { }
 
   ngOnInit(): void {
-    this.auth.getUsuario().subscribe((data) => {
-      this.logeado = data.username;
-      this.cargando=false;
+    setTimeout(() => {
+      this.auth.getUsuario().subscribe((data) => {
+        this.logeado = data.username;
 
-    });
+      });
+    }, 3000);
   }
-  
+
 
 }
