@@ -197,6 +197,8 @@ return [
     |
     */
 
-    'same_site' => 'lax',
+   'same_site' => str_contains(env('FRONTEND_URL'), 'https://holidaysnow.onrender.com') ? 'none' : 'lax',
+
+
 
 ];
