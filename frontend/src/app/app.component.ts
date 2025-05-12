@@ -20,6 +20,7 @@ export class AppComponent {
       });
     }, 3000);
   }
+  
    getProductUrl(): string {
     return `${environment.apiUrl}`;
   }

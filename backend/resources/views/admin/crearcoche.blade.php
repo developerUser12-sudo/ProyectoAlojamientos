@@ -40,7 +40,9 @@
 
         <button type="submit" class="btn btn-primary">Crear Coche</button>
     </form>
-
+    <form action="{{ route('admin.paneladministracion') }}">
+        <input type="submit" value="Volver" class="btn btn-secondary">
+    </form>
 </div>
 @endsection
 </body>

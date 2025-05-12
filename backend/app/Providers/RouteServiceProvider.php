@@ -19,7 +19,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     
-    public const HOME = 'https://holidaysnow.onrender.com';
+    // public const HOME = 'https://holidaysnow.onrender.com';
+     public const HOME = 'http://localhost:4200';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

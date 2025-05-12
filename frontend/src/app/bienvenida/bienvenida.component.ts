@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Coche } from '../coche';
+import { ServiciosService } from '../servicios.service';
 
 @Component({
   selector: 'app-bienvenida',
@@ -8,7 +10,15 @@ import { Component } from '@angular/core';
 })
 export class BienvenidaComponent {
   
+  coches : Coche[] = [];
+    constructor(private serviciosService: ServiciosService) { }
   
+    ngOnInit(): void {
+      this.serviciosService.getCoches().subscribe((data) => {
+        this.coches = data;
+  
+      });
+    }
   
   
 }

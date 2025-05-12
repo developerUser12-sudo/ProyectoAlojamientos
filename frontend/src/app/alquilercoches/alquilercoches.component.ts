@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiciosService } from '../servicios.service';
+import { Coche } from '../coche';
 
 @Component({
   selector: 'app-alquilercoches',
@@ -8,7 +9,7 @@ import { ServiciosService } from '../servicios.service';
   styleUrl: './alquilercoches.component.css'
 })
 export class AlquilercochesComponent {
-  coches = [];
+  coches : Coche[] = [];
   constructor(private serviciosService: ServiciosService) { }
 
   ngOnInit(): void {
