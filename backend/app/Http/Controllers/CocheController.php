@@ -8,7 +8,7 @@ use App\Models\Coche;
 class CocheController extends Controller
 {
     public function index()
-    {   
+    {
         return Coche::all();
     }
 
@@ -19,22 +19,27 @@ class CocheController extends Controller
             'destino' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
             'modelo' => 'required|string|max:255',
-            'imagen' => 'required|string|max:255', 
+            'imagen' => 'required|string|max:255',
             'precio' => 'required|numeric',
         ]);
 
         Coche::create($validated);
 
-        return redirect()->route('admin.crearcoche')->with('success', 'Coche creado correctamente.');
+        return redirect()->route('admin.paneladministracion');
     }
 
-    public function show(Coche $coche)
+    public function edit($id)
     {
-        return $coche;
+        $coche = Coche::find($id);
+        return view('admin.actualizarcoche', compact('coche'));
     }
 
-    public function update(Request $request, Coche $coche)
+
+
+    public function update(Request $request, $id)
     {
+        $coche = Coche::find($id);
+
         $validated = $request->validate([
             'origen' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
@@ -43,15 +48,18 @@ class CocheController extends Controller
             'imagen' => 'required|string|max:255',
             'precio' => 'required|numeric',
         ]);
-        $coche->update($request->all());
 
-        return response()->json($coche);
+        $coche->update($validated);
+
+        return redirect()->route('admin.paneladministracion');
     }
 
-    public function destroy(Coche $coche)
+
+    public function destroy($id)
     {
+        $coche = Coche::find($id);
         $coche->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('admin.paneladministracion');
     }
 }

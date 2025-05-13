@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-flex flex-row">
+    <div class="container-xxl d-flex flex-row">
 
-        <div class="card">
+        <div class="card w-100">
 
             <div class="card-header">{{ __('Coches') }}</div>
 
@@ -16,23 +16,48 @@
                     </button>
                 </form>
                 <br>
+                <table class="table">
+                    <tr>
+                        <th>Imagen y precio</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Precio</th>
+                    </tr>
+                    @foreach ($coches as $coche)
+                        <tr>
+                            <td><img src="{{ $coche->imagen }}" alt="" class="img-fluid w-50" style="min-width:130px;"><br><b
+                                    class="text-center"> {{ $coche->precio }}</b></td>
+                            <td>
+                                <p> {{ $coche->origen }}</p>
+                            </td>
+                            <td>
+                                <p> {{ $coche->destino }}</p>
+                            </td>
+                            <td>
+                                <p> {{ $coche->marca }}</p>
+                            </td>
+                            <td>
+                                <p> {{ $coche->modelo }}</p>
+                            </td>
+                            <td>
+                                <div class="ms-auto d-flex flex-md-row flex-column gap-2">
+                                    <form action="{{ route('admin.actualizarcoche', $coche->id) }}">
+                                        <input type="submit" class="btn btn-warning" value="Editar">
+                                    </form>
+                                    <form action="{{ route('admin.deletecoche', $coche->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
 
-                @foreach ($coches as $coche)
-                    <div class="border border-secondary rounded d-flex flex-row flex-wrap w-auto gap-3">
-                        <img src="{{ $coche->imagen }}" alt="" style="width:250px;margin-left:4px;">
-                        <p><b>Origen:</b> {{ $coche->origen }}</p>
-                        <p><b>Destino:</b> {{ $coche->destino }}</p>
-                        <p><b>Marca:</b> {{ $coche->marca }}</p>
-                        <p><b>Modelo:</b> {{ $coche->modelo }}</p>
-                        <p><b>Precio:</b> {{ $coche->precio }}</p>
-                        <form action="">
-                            <input type="submit" class="btn btn-warning" value="Editar">
-                        </form>
-                        <form action="">
-                            <input type="submit" class="btn btn-danger" value="Eliminar">
-                        </form>
-                    </div>
-                @endforeach
+                                        <input type="submit" class="btn btn-danger" value="Eliminar">
+                                    </form>
+                                </div>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </table>
 
             </div>
         </div>

@@ -5,7 +5,7 @@
    
         <h1>Crear Coche</h1>
 
-        <form action="{{ route('coches.store') }}" method="POST">
+        <form action="{{ route('admin.createcoche') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -35,7 +35,7 @@
 
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
-            <input type="number" name="precio" step="0.01" class="form-control" required>
+            <input type="number" name="precio" class="form-control" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Crear Coche</button>
