@@ -16,32 +16,17 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Correo electrónico') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ "Correo inválido" }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                                 </div>
                             </div>
 
 
                             <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
+                                    <input id="password" type="password" class="form-control" name="password" required >
 
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ "Contraseña inválida" }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -56,7 +41,13 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row text-center mb-3">
+                                @if(session('error'))
+                                    <div class="text-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+                            </div>
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -74,7 +65,7 @@
                         <div class="row mt-5">
                             <div class="d-flex flex-row gap-4 justify-content-center">
                                 <p>¿No tienes una cuenta?</p>
-                                <form action="https://holidaysnowauth.onrender.com/register">
+                                <form action="{{ config('app.url') }}/register">
                                     <input type="submit" class="btn btn-primary  justify-content-center" value="Regístrate">
                                 </form>
                             </div>

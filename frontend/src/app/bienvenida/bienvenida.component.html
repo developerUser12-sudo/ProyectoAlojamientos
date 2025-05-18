@@ -43,16 +43,7 @@
             <span class="visually-hidden h-25">Next</span>
         </button>
     </div>
-    <div class="w-75 d-flex flex-wrap gap-3 m-auto">
-        <h3 class="w-100">Coches</h3>
-        <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded">
-            <img [src]="coche.imagen" alt="" style="width: 250px;">
-            <p>Trayecto: {{coche.origen}} - {{coche.destino}}</p>
-            <p>Marca: {{coche.marca}}</p>
-            <p>Modelo: {{coche.modelo}}</p>
-            <b style="font-size: large;">{{coche.precio}}</b>
-        </div>
-    </div>
+    
 
 
 </div>

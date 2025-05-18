@@ -46,7 +46,7 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                             <li>
-                                                <a href="{{ env('FRONTEND_URL') }}/cuenta" class="dropdown-item">Mi cuenta</a>
+                                                <a href="{{ config('app.url') }}/cuenta" class="dropdown-item">Mi cuenta</a>
                                             </li>
                                         </ul>
                                     </div>

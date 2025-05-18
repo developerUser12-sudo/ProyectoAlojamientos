@@ -37,6 +37,10 @@
             <label for="precio" class="form-label">Precio</label>
             <input type="number" name="precio" class="form-control" required>
         </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Total</label>
+            <input type="number" name="total" class="form-control" required>
+        </div>
 
         <button type="submit" class="btn btn-primary">Crear Coche</button>
     </form>

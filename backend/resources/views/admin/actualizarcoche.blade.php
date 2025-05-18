@@ -16,7 +16,8 @@
 
             <div class="mb-3">
                 <label for="destino" class="form-label">Destino</label>
-                <input type="text" name="destino" class="form-control" required value="{{ old('destino', $coche->destino) }}">
+                <input type="text" name="destino" class="form-control" required
+                    value="{{ old('destino', $coche->destino) }}">
             </div>
 
             <div class="mb-3">
@@ -36,9 +37,13 @@
 
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
-                <input type="number" name="precio"  class="form-control" required value="{{ old('precio', $coche->precio) }}">
+                <input type="number" name="precio" class="form-control" required
+                    value="{{ old('precio', $coche->precio) }}">
             </div>
-
+            <div class="mb-3">
+                <label for="precio" class="form-label">Total</label>
+                <input type="number" name="total" class="form-control" required>
+            </div>
             <button type="submit" class="btn btn-primary">Actualizar Coche</button>
         </form>
         <form action="{{ route('admin.paneladministracion') }}">

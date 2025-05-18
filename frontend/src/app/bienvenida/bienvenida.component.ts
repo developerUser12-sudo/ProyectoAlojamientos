@@ -10,15 +10,9 @@ import { ServiciosService } from '../servicios.service';
 })
 export class BienvenidaComponent {
   
-  coches : Coche[] = [];
-    constructor(private serviciosService: ServiciosService) { }
+    constructor() { }
   
-    ngOnInit(): void {
-      this.serviciosService.getCoches().subscribe((data) => {
-        this.coches = data;
-  
-      });
-    }
+    
   
   
 }

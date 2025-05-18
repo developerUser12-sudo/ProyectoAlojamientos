@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
-    // Mostrar formulario de login de administrador
     public function showLoginForm()
     {
         return view('admin.login');
     }
 
-    // Login de administrador
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -23,10 +21,9 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.paneladministracion');
         }
 
-        return back()->with('error', 'Credenciales incorrectas');
+        return back()->with('error','Una o más credenciales son incorrectas');
     }
 
-    // Logout de administrador
     public function logout()
     {
         Auth::guard('admin')->logout();

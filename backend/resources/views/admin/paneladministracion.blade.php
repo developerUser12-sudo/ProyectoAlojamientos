@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-xxl d-flex flex-row">
+    <div class="container-xxl d-flex flex-column gap-3">
 
         <div class="card w-100">
 
@@ -23,12 +23,13 @@
                         <th>Destino</th>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        <th>Precio</th>
+                        <th>Disponibles</th>
+                        <th>Total</th>
                     </tr>
                     @foreach ($coches as $coche)
                         <tr>
                             <td><img src="{{ $coche->imagen }}" alt="" class="img-fluid w-50" style="min-width:130px;"><br><b
-                                    class="text-center"> {{ $coche->precio }}</b></td>
+                                    class="text-center"> {{ $coche->precio }}€</b></td>
                             <td>
                                 <p> {{ $coche->origen }}</p>
                             </td>
@@ -40,6 +41,12 @@
                             </td>
                             <td>
                                 <p> {{ $coche->modelo }}</p>
+                            </td>
+                            <td>
+                                <p> {{ $coche->disponibles }}</p>
+                            </td>
+                            <td>
+                                <p> {{ $coche->total }}</p>
                             </td>
                             <td>
                                 <div class="ms-auto d-flex flex-md-row flex-column gap-2">
@@ -61,11 +68,23 @@
 
             </div>
         </div>
+        @if(session('success'))
+            <div id="cocheCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
+                {{ session('success') }}
+                <button onclick="document.getElementById('cocheCreado').remove()"
+                    style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
+                    ×
+                </button>
+            </div>
+        @endif
+
+
+        <form method="POST" action="{{ route('admin.logoutAdmin') }}">
+            @csrf
+            <button type="submit" class="btn btn-danger">
+                Cerrar sesión
+            </button>
+        </form>
     </div>
-    <form method="POST" action="{{ route('admin.logoutAdmin') }}">
-        @csrf
-        <button type="submit" class="btn btn-danger">
-            Cerrar sesión
-        </button>
-    </form>
+
 @endsection
