@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>HolidaysNow</title>
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,25 +21,39 @@
     <div id="app">
         <header>
             <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
-                <div class="container-fluid d-flex flex-row gap-4">
-                    <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
-                        href="{{ config('app.frontend_url') }}">
-                        <i class="bi bi-airplane-fill"></i> HolidaysNow
-                    </a>
-                    <a class="nav-link text-light" href="{{ config('app.frontend_url') }}/vuelos">Vuelos</a>
-                    <a class="nav-link text-light" href="{{ config('app.frontend_url') }}/hoteles">Hoteles</a>
-                    <a class="nav-link text-light" href="{{ config('app.frontend_url') }}/alquilercoches">Alquiler de coches</a>
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
+                            href="{{ config('app.frontend_url') }}">
+                            <i class="bi bi-airplane-fill"></i> HolidaysNow
+                        </a>
 
-                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarContent">
-                        <div class="navbar-nav ms-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
 
-                            @if (Route::has('login'))
-                                @auth
-                                    <div class="dropdown inline-block text-left">
+                    <div class="collapse navbar-collapse text-center mt-2 mt-sm-0" id="navbarContent">
+                        <div class="navbar-nav d-flex flex-column flex-sm-row gap-2 gap-sm-4 w-100 align-items-sm-center w-100">
+
+                            <div class="d-flex flex-column flex-sm-row gap-4 p-3">
+                                <a class="nav-link text-light ms-2" href="{{ config('app.frontend_url') }}/vuelos">Vuelos</a>
+                                <a class="nav-link text-light"
+                                    href="{{ config('app.frontend_url') }}/hoteles">Hoteles</a>
+                                <a class="nav-link text-light"
+                                    href="{{ config('app.frontend_url') }}/alquilercoches">Alquiler de coches</a>
+                            </div>
+
+                            <div class="ms-sm-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4 align-items-sm-center">
+
+                                @guest
+                                    <a class="nav-link text-light" href="{{ route('login') }}">
+                                        <i class="bi bi-door-open-fill"></i> Identificarse
+                                    </a>
+                                @else
+                                    <div class="dropdown">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="bi bi-people-fill me-2"></i>{{ Auth::user()->name }}
@@ -48,19 +62,23 @@
                                             <li>
                                                 <a href="{{ config('app.url') }}/cuenta" class="dropdown-item">Mi cuenta</a>
                                             </li>
+                                            <li>
+                                                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
-                                @endauth
-                            @endif
-                            <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
+                                @endguest
+
+                                <a class="nav-link text-light" href="http://127.0.0.1:8000">Soporte</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
-
-
-
         <main class="py-4">
             @yield('content')
         </main>

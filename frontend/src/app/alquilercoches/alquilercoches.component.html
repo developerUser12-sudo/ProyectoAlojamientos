@@ -21,7 +21,7 @@
         <h3 class="w-100">Échale un vistazo a nuestros mejores coches</h3>
         <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded">
             <img [src]="coche.imagen" alt="" style="width: 250px;">
-            <p>Trayecto: {{coche.origen}} - {{coche.destino}}</p>
+            <p><i class="bi bi-geo-alt-fill"></i>     {{coche.origen}} - {{coche.destino}}</p>
             <p>Marca: {{coche.marca}}</p>
             <p>Modelo: {{coche.modelo}}</p>
             <b style="font-size: large;">{{coche.precio}}€</b>

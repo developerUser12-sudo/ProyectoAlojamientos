@@ -13,19 +13,15 @@ class CocheController extends Controller
         if ($request->has('origen')) {
             $query->where('origen', 'like', '%' . $request->origen . '%');
         }
-
         if ($request->has('destino')) {
             $query->where('destino', 'like', '%' . $request->destino . '%');
         }
-
         if ($request->has('marca') && !empty($request->marca)) {
             $query->where('marca', 'like', '%' . $request->marca . '%');
         }
-
         if ($request->has('modelo') && !empty($request->modelo)) {
             $query->where('modelo', 'like', '%' . $request->modelo . '%');
         }
-
         if ($request->has('precio_min') && !empty($request->precio_min)) {
             $query->where('precio', '>=', $request->precio_min);
         }
@@ -57,7 +53,7 @@ class CocheController extends Controller
         $validated['disponibles'] = $validated['total'];
         Coche::create($validated);
 
-        return redirect()->route('admin.paneladministracion')->with('success', 'Coche creado correctamente');
+        return redirect()->route('admin.paneladministracion')->with('cocheCreado', 'Coche creado correctamente');
     }
 
     public function edit($id)
@@ -84,7 +80,7 @@ class CocheController extends Controller
 
         $coche->update($validated);
 
-        return redirect()->route('admin.paneladministracion');
+        return redirect()->route('admin.paneladministracion')->with('cocheActualizado', 'Coche actualizado correctamente');
     }
 
 
@@ -93,6 +89,6 @@ class CocheController extends Controller
         $coche = Coche::find($id);
         $coche->delete();
 
-        return redirect()->route('admin.paneladministracion');
+        return redirect()->route('admin.paneladministracion')->with('cocheBorrado', 'Coche borrado correctamente');
     }
 }

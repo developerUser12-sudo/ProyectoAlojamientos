@@ -7,7 +7,7 @@
 
             <div class="card-header">{{ __('Coches') }}</div>
 
-            <div class="card-body d-flex flex-column gap-2">
+            <div class="card-body d-flex flex-column gap-2 table-responsive">
 
                 <form method="GET" action="{{ route('admin.crearcoche') }}">
                     @csrf
@@ -68,9 +68,27 @@
 
             </div>
         </div>
-        @if(session('success'))
+        @if(session('cocheCreado'))
             <div id="cocheCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
-                {{ session('success') }}
+                {{ session('cocheCreado') }}
+                <button onclick="document.getElementById('cocheCreado').remove()"
+                    style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
+                    ×
+                </button>
+            </div>
+        @endif
+        @if(session('cocheActualizado'))
+            <div id="cocheCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
+                {{ session('cocheActualizado') }}
+                <button onclick="document.getElementById('cocheCreado').remove()"
+                    style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
+                    ×
+                </button>
+            </div>
+        @endif
+        @if(session('cocheBorrado'))
+            <div id="cocheCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
+                {{ session('cocheBorrado') }}
                 <button onclick="document.getElementById('cocheCreado').remove()"
                     style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
                     ×
