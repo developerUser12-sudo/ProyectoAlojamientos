@@ -4,6 +4,7 @@ import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { VuelosComponent } from './vuelos/vuelos.component';
 import { HotelesComponent } from './hoteles/hoteles.component';
 import { AlquilercochesComponent } from './alquilercoches/alquilercoches.component';
+import { DetalleComponent } from './detalle/detalle.component';
 
 const routes: Routes = [
   {path:'',component:BienvenidaComponent},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path:'vuelos',component:VuelosComponent},
   {path:'hoteles',component:HotelesComponent},
   {path:'alquilercoches',component:AlquilercochesComponent},
+  {path:'detalle/:id',component:DetalleComponent},
 
 ];
 

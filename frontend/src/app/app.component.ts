@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ServiciosService } from './servicios.service';
 import { environment } from '../environments/environment'; 
+import { UsuarioService } from './usuario.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 export class AppComponent {
   title = 'frontend';
   logeado = "Cargando...";
-  constructor(private auth: ServiciosService) { }
+  constructor(private auth: UsuarioService) { }
 
   ngOnInit(): void {
     setTimeout(() => {

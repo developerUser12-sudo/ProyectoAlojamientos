@@ -5,8 +5,10 @@
             <h5 class="mb-4">Es necesario introducir un origen y un destino para empezar a buscar</h5>
             <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm">
                 <div class="input-group mb-3">
-                    <input type="text" name="origen" [(ngModel)]="origen" class="form-control" placeholder="Origen" required>
-                    <input type="text" class="form-control" name="destino" [(ngModel)]="destino" placeholder="Destino" required >
+                    <input type="text" name="origen" [(ngModel)]="origen" class="form-control" placeholder="Origen"
+                        required>
+                    <input type="text" class="form-control" name="destino" [(ngModel)]="destino" placeholder="Destino"
+                        required>
                     <input type="text" class="form-control" name="marca" [(ngModel)]="marca" placeholder="Marca">
                     <input type="text" class="form-control" name="modelo" [(ngModel)]="modelo" placeholder="Modelo">
                     <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options">
@@ -14,23 +16,25 @@
                 </div>
                 <button class="btn btn-primary" type="submit" [disabled]="formBusqueda.invalid">Buscar</button>
             </form>
-        </div>          
+        </div>
     </div>
     <div class="w-75 d-flex flex-wrap gap-3 m-auto" *ngIf="!buscado||filtrar.length==0">
         <h4 *ngIf="filtrar.length==0&&buscado" class="mb-5">No se han encontrado resultados</h4>
         <h3 class="w-100">Échale un vistazo a nuestros mejores coches</h3>
         <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded">
-            <img [src]="coche.imagen" alt="" style="width: 250px;">
-            <p><i class="bi bi-geo-alt-fill"></i>     {{coche.origen}} - {{coche.destino}}</p>
-            <p>Marca: {{coche.marca}}</p>
-            <p>Modelo: {{coche.modelo}}</p>
-            <b style="font-size: large;">{{coche.precio}}€</b>
+            <a [routerLink]="['/detalle', coche.id]" routerLinkActive="active" class="text-decoration-none text-black">
+                <img [src]="coche.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
+                <p><i class="bi bi-geo-alt-fill"></i> {{coche.origen}} - {{coche.destino}}</p>
+                <p>Marca: {{coche.marca}}</p>
+                <p>Modelo: {{coche.modelo}}</p>
+                <b style="font-size: large;">{{coche.precio}}€</b>
+            </a>
         </div>
     </div>
     <div class="w-75 d-flex flex-wrap gap-3 m-auto" *ngIf="buscado&&filtrar.length>0">
         <h3 class="w-100">Tus resultados</h3>
         <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded">
-            <img [src]="filtra.imagen" alt="" style="width: 250px;">
+            <img [src]="filtra.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
             <p>Trayecto: {{filtra.origen}} - {{filtra.destino}}</p>
             <p>Marca: {{filtra.marca}}</p>
             <p>Modelo: {{filtra.modelo}}</p>

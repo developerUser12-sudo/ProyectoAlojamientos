@@ -59,14 +59,15 @@
 
     @media screen and (max-width:768px) {
         .carousel-item .c-item h1 {
-            font-size: 20px;
+            font-size: 22px;
             width: 100%;
-            
+
         }
 
         .c-item3 {
-            position: static;
             margin-top: 8rem;
+           
         }
         
+
     }

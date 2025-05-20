@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ServiciosService } from '../servicios.service';
 import { Coche } from '../coche';
 import { Options } from '@angular-slider/ngx-slider';
 import { HttpClient } from '@angular/common/http';
+import { CochesService } from '../coches.service';
 
 @Component({
   selector: 'app-alquilercoches',
@@ -28,7 +28,7 @@ export class AlquilercochesComponent {
   };
   coches: Coche[] = [];
   filtrar: any = [];
-  constructor(private serviciosService: ServiciosService, private http: HttpClient) { }
+  constructor(private serviciosService: CochesService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.serviciosService.getCoches().subscribe((data) => {

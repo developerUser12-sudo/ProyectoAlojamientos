@@ -22,7 +22,7 @@
         <header>
             <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
                 <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between">
+                   
                         <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
                             href="{{ config('app.frontend_url') }}">
                             <i class="bi bi-airplane-fill"></i> HolidaysNow
@@ -33,7 +33,6 @@
                             aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                    </div>
 
                     <div class="collapse navbar-collapse text-center mt-2 mt-sm-0" id="navbarContent">
                         <div class="navbar-nav d-flex flex-column flex-sm-row gap-2 gap-sm-4 w-100 align-items-sm-center w-100">

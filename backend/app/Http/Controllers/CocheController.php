@@ -10,23 +10,32 @@ class CocheController extends Controller
     public function filtrar(Request $request)
     {
         $query = Coche::query();
-        if ($request->has('origen')) {
-            $query->where('origen', 'like', '%' . $request->origen . '%');
-        }
-        if ($request->has('destino')) {
-            $query->where('destino', 'like', '%' . $request->destino . '%');
-        }
-        if ($request->has('marca') && !empty($request->marca)) {
-            $query->where('marca', 'like', '%' . $request->marca . '%');
-        }
-        if ($request->has('modelo') && !empty($request->modelo)) {
-            $query->where('modelo', 'like', '%' . $request->modelo . '%');
-        }
-        if ($request->has('precio_min') && !empty($request->precio_min)) {
-            $query->where('precio', '>=', $request->precio_min);
-        }
-        if ($request->has('precio_max') && !empty($request->precio_max)) {
-            $query->where('precio', '<=', $request->precio_max);
+
+        if ($request->has('id')) {
+            $query->where('id', 'like', $request->id);
+        } else {
+            if ($request->has('origen')) {
+                $query->where('origen', 'like', '%' . $request->origen . '%');
+            }
+            if ($request->has('destino')) {
+                $query->where('destino', 'like', '%' . $request->destino . '%');
+            }
+            if ($request->has('marca') && !empty($request->marca)) {
+                $query->where('marca', 'like', '%' . $request->marca . '%');
+            }
+            if ($request->has('modelo') && !empty($request->modelo)) {
+                $query->where('modelo', 'like', '%' . $request->modelo . '%');
+            }
+            if ($request->has('precio_min') && !empty($request->precio_min)) {
+                $query->where('precio', '>=', $request->precio_min);
+            }
+            if ($request->has('precio_max') && !empty($request->precio_max)) {
+                $query->where('precio', '<=', $request->precio_max);
+            }
+            if (!$request->hasAny(['origen', 'destino', 'marca', 'modelo', 'precio_min', 'precio_max'])) {
+                return redirect(config('app.frontend_url') . '/noencontrado');
+                
+            }
         }
 
         $coches = $query->get();

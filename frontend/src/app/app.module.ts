@@ -10,6 +10,7 @@ import { AlquilercochesComponent } from './alquilercoches/alquilercoches.compone
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { DetalleComponent } from './detalle/detalle.component';
 @NgModule({
   declarations: [
 
@@ -18,6 +19,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     VuelosComponent,
     HotelesComponent,
     AlquilercochesComponent,
+    DetalleComponent,
     
   ],
   imports: [
