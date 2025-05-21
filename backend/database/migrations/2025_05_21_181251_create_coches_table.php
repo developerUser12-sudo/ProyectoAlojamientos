@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+      public function up(): void
     {
          Schema::create('coches', function (Blueprint $table) {
             $table->id();
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('precio', 10, 2);
             $table->integer('disponibles');
             $table->integer('total');
+            $table->integer('descuento');
             $table->timestamps();
         });
     }

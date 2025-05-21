@@ -25,6 +25,7 @@
                         <th>Modelo</th>
                         <th>Disponibles</th>
                         <th>Total</th>
+                        <th>Descuento</th>
                     </tr>
                     @foreach ($coches as $coche)
                         <tr>
@@ -47,6 +48,9 @@
                             </td>
                             <td>
                                 <p> {{ $coche->total }}</p>
+                            </td>
+                            <td>
+                                <p> {{ $coche->descuento }}</p>
                             </td>
                             <td>
                                 <div class="ms-auto d-flex flex-md-row flex-column gap-2">

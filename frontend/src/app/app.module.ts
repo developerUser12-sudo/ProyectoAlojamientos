@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { DetalleComponent } from './detalle/detalle.component';
+import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 @NgModule({
   declarations: [
 
@@ -20,6 +21,7 @@ import { DetalleComponent } from './detalle/detalle.component';
     HotelesComponent,
     AlquilercochesComponent,
     DetalleComponent,
+    NoencontradoComponent,
     
   ],
   imports: [

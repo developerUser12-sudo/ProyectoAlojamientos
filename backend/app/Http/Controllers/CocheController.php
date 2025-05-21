@@ -32,10 +32,7 @@ class CocheController extends Controller
             if ($request->has('precio_max') && !empty($request->precio_max)) {
                 $query->where('precio', '<=', $request->precio_max);
             }
-            if (!$request->hasAny(['origen', 'destino', 'marca', 'modelo', 'precio_min', 'precio_max'])) {
-                return redirect(config('app.frontend_url') . '/noencontrado');
-                
-            }
+            
         }
 
         $coches = $query->get();
@@ -57,9 +54,14 @@ class CocheController extends Controller
             'imagen' => 'required|string|max:255',
             'precio' => 'required|numeric',
             'total' => 'required|numeric',
+            'descuento' => 'required|numeric',
 
         ]);
         $validated['disponibles'] = $validated['total'];
+        if ($validated['descuento']>0) {
+            $cantidad=($validated['precio']*$validated['descuento'])/100;
+            $validated['precio']-= $cantidad;
+        }
         Coche::create($validated);
 
         return redirect()->route('admin.paneladministracion')->with('cocheCreado', 'Coche creado correctamente');
@@ -76,7 +78,7 @@ class CocheController extends Controller
     public function update(Request $request, $id)
     {
         $coche = Coche::find($id);
-
+        $descuento=$coche->descuento;
         $validated = $request->validate([
             'origen' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
@@ -85,8 +87,15 @@ class CocheController extends Controller
             'imagen' => 'required|string|max:255',
             'precio' => 'required|numeric',
             'total' => 'required|numeric',
+            'descuento' => 'required|numeric',
         ]);
+        if ($validated['descuento']>0) {
+            $cantidad=($validated['precio']*$validated['descuento'])/100;
+            $validated['precio']-= $cantidad;
+        }else {
+            $validated['precio']=$validated['precio']/(1-$descuento/100);
 
+        }
         $coche->update($validated);
 
         return redirect()->route('admin.paneladministracion')->with('cocheActualizado', 'Coche actualizado correctamente');

@@ -18,27 +18,41 @@
             </form>
         </div>
     </div>
-    <div class="w-75 d-flex flex-wrap gap-3 m-auto" *ngIf="!buscado||filtrar.length==0">
+    <div class="w-75 d-flex flex-column gap-3 m-auto" *ngIf="!buscado||filtrar.length==0">
         <h4 *ngIf="filtrar.length==0&&buscado" class="mb-5">No se han encontrado resultados</h4>
         <h3 class="w-100">Échale un vistazo a nuestros mejores coches</h3>
-        <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded">
-            <a [routerLink]="['/detalle', coche.id]" routerLinkActive="active" class="text-decoration-none text-black">
-                <img [src]="coche.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
-                <p><i class="bi bi-geo-alt-fill"></i> {{coche.origen}} - {{coche.destino}}</p>
-                <p>Marca: {{coche.marca}}</p>
-                <p>Modelo: {{coche.modelo}}</p>
-                <b style="font-size: large;">{{coche.precio}}€</b>
-            </a>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+            <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded">
+                <a [routerLink]="['/detalle', coche.id]" routerLinkActive="active"
+                    class="text-decoration-none text-black">
+                    <img [src]="coche.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
+                    <p><i class="bi bi-geo-alt-fill"></i> {{coche.origen}} - {{coche.destino}}</p>
+                    <p>Marca: {{coche.marca}}</p>
+                    <p>Modelo: {{coche.modelo}}</p>
+                    <b *ngIf="coche.descuento==0" class="fs-5">{{coche.precio}}€</b>
+                    <b *ngIf="coche.descuento>0" class="fs-5"><span
+                            class="text-decoration-line-through text-muted">{{+coche.precio / (1 - coche.descuento /
+                            100)}}€</span><span> {{coche.precio}}€</span></b>
+                </a>
+            </div>
         </div>
     </div>
     <div class="w-75 d-flex flex-wrap gap-3 m-auto" *ngIf="buscado&&filtrar.length>0">
         <h3 class="w-100">Tus resultados</h3>
-        <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded">
-            <img [src]="filtra.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
-            <p>Trayecto: {{filtra.origen}} - {{filtra.destino}}</p>
-            <p>Marca: {{filtra.marca}}</p>
-            <p>Modelo: {{filtra.modelo}}</p>
-            <b style="font-size: large;">{{filtra.precio}}€</b>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+            <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded">
+                <a [routerLink]="['/detalle', filtra.id]" routerLinkActive="active"
+                    class="text-decoration-none text-black">
+                    <img [src]="filtra.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
+                    <p>Trayecto: {{filtra.origen}} - {{filtra.destino}}</p>
+                    <p>Marca: {{filtra.marca}}</p>
+                    <p>Modelo: {{filtra.modelo}}</p>
+                    <b *ngIf="filtra.descuento==0" class="fs-5">{{filtra.precio}}€</b>
+                    <b *ngIf="filtra.descuento>0" class="fs-5"><span
+                            class="text-decoration-line-through text-muted">{{+filtra.precio / (1 - filtra.descuento /
+                            100)}}€</span><span> {{filtra.precio}}€</span></b>
+                </a>
+            </div>
         </div>
     </div>
 </div>

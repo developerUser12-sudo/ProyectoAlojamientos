@@ -4,8 +4,10 @@ export interface Coche {
     destino: string;
     marca: string;
     modelo: string;
-    imagen: string;
     precio: string;
+    imagen: string;
+    disponibles: number;
+    descuento: number;
     created_at: string;
     updated_at: string;
 

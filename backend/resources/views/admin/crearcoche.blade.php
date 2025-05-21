@@ -35,11 +35,15 @@
 
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
-            <input type="number" name="precio" class="form-control" required>
+            <input type="number" name="precio" class="form-control" required min="1">
         </div>
         <div class="mb-3">
-            <label for="precio" class="form-label">Total</label>
-            <input type="number" name="total" class="form-control" required>
+            <label for="total" class="form-label">Total</label>
+            <input type="number" name="total" class="form-control" required min="1">
+        </div>
+        <div class="mb-3">
+            <label for="descuento" class="form-label">Descuento</label>
+            <input type="number" name="descuento" class="form-control" required min="0">
         </div>
 
         <button type="submit" class="btn btn-primary">Crear Coche</button>

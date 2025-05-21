@@ -1,6 +1,10 @@
-<div *ngIf="coche">
-    <p>
-
-        {{coche.origen}}
-    </p>
+<div *ngIf="coche" class="container">
+    <div class="d-flex flex-row rounded gap-2 p-3 border border-secondary">
+        <img [src]="coche.imagen" alt="">
+        <div class="d-flex flex-column">
+            <p>Origen: {{coche.origen}}</p>
+            <p>Destino: {{coche.destino}}</p>
+            
+        </div>
+    </div>
 </div>
