@@ -11,6 +11,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
   getUsuario() {
-      return this.http.get<User>(`${this.apiUrl}/username`, { withCredentials: true });
-    }
+    return this.http.get<User>(`${this.apiUrl}/username`, { withCredentials: true });
+  }
+  
 }

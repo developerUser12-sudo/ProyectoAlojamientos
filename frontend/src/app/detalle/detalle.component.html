@@ -1,10 +1,24 @@
 <div *ngIf="coche" class="container">
-    <div class="d-flex flex-row rounded gap-2 p-3 border border-secondary">
-        <img [src]="coche.imagen" alt="">
-        <div class="d-flex flex-column">
-            <p>Origen: {{coche.origen}}</p>
-            <p>Destino: {{coche.destino}}</p>
-            
+    <div class="d-flex flex-column flex-md-row">
+
+        <div class="d-flex flex-row rounded gap-2 p-3 border border-secondary">
+            <img [src]="coche.imagen" alt="">
+            <div class="d-flex flex-column">
+                <p>Origen: {{coche.origen}}</p>
+                <p>Destino: {{coche.destino}}</p>
+
+            </div>
+        </div>
+        <div>
+            <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm">
+                <input type="datetime-local" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control" 
+                    required>
+                <input type="datetime-local" name="fechaFin" [(ngModel)]="fechaFin" class="form-control" 
+                    required>
+               <input type="hidden" name="id" [value]="coche.id">
+                <button class="btn btn-primary" type="submit" [disabled]="formBusqueda.invalid">Buscar</button>
+            </form>
         </div>
     </div>
+
 </div>

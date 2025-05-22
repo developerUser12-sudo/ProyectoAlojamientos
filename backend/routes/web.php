@@ -37,8 +37,19 @@ Route::middleware(['auth:admin'])->group(function () {
 
 
 Route::get('/username', function () {
-    $user = Auth::user();
-    return response()->json(['username' => $user ? $user->name : 'invitado']);
+     $user = Auth::user();
+
+    if ($user) {
+        return response()->json([
+            'id' => $user->id,
+            'username' => $user->name,
+        ]);
+    } else {
+        return response()->json([
+            'id' => null,
+            'username' => 'invitado',
+        ]);
+    }
 });
 
 

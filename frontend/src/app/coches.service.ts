@@ -7,16 +7,17 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class CochesService {
-private apiUrl = environment.apiUrl;
+private apiCochesUrl = environment.apiUrl;
+private apiCochesReservadosUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
    getCoches(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/coches`);
+    return this.http.get(`${this.apiCochesUrl}/api/coches`);
   }
   getCoche(id:string): Observable<any> {
      let params = new HttpParams();
 
     params = params.set('id', id);
-    return this.http.get(`${this.apiUrl}/api/coches/filtrar`,{params});
+    return this.http.get(`${this.apiCochesUrl}/api/coches/filtrar`,{params});
   }
   getCochesBusqueda(origen: string, destino: string, marca: string, modelo: string, precio_min: number, precio_max: number) {
     let params = new HttpParams();
@@ -36,6 +37,17 @@ private apiUrl = environment.apiUrl;
       params = params.set('precio_max', precio_max.toString());
     }
 
-    return this.http.get(`${this.apiUrl}/api/coches/filtrar`, { params });
+    return this.http.get(`${this.apiCochesUrl}/api/coches/filtrar`, { params });
+  }
+  cochesReservados(): Observable<any>{
+    return this.http.get(`${this.apiCochesReservadosUrl}/api/coches-reservados`);
+  }
+  reservarCoche(idCoche:string|null,idUsuario:number,fechaInicio:Date,fechaFin:Date){
+    let datos=
+      {id_coche:idCoche,id_usuario:idUsuario,fecha_recogida:fechaInicio,fecha_devolucion:fechaFin}
+    ;
+    console.log(datos);
+    
+    return this.http.post(`${this.apiCochesReservadosUrl}/api/coches-reservados`,datos);
   }
 }

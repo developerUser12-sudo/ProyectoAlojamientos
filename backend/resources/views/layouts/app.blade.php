@@ -20,12 +20,12 @@
 <body>
     <div id="app">
         <header>
-            <nav class="navbar navbar-expand-md bg-primary shadow-sm" id="customNavbar">
+            <nav class="navbar navbar-expand-lg bg-primary shadow-sm" id="customNavbar">
                 <div class="container-fluid">
                    
                         <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
                             href="{{ config('app.frontend_url') }}">
-                            <i class="bi bi-airplane-fill"></i> HolidaysNow
+                            <img src="{{ config('app.frontend_url') }}/assets/img/logo.webp" style="max-width: 200px;">
                         </a>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
