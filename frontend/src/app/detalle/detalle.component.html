@@ -25,16 +25,17 @@
         <div class="border border-secondary rounded">
             <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm" class="d-flex flex-column gap-2 w-75 p-3">
                 <label for="fechaInicio" class="form-label">Desde: </label>
-                <input type="datetime-local" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control" required
+                <input type="datetime-local" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-75" required
                     id="fechaInicio">
                 <label for="fechaFin" class="form-label">Hasta: </label>
-                <input type="datetime-local" name="fechaFin" id="fechaFin" [(ngModel)]="fechaFin" class="form-control"
+                <input type="datetime-local" name="fechaFin" id="fechaFin" [(ngModel)]="fechaFin" class="form-control w-75"
                     required>
-                <button *ngIf="coche.disponibles>0" class="btn btn-primary" type="submit"
+                    <input type="hidden" [value]="coche.precio" name="precio">
+                <button *ngIf="coche.disponibles>0" class="btn btn-primary w-75" type="submit"
                     [disabled]="formBusqueda.invalid">Reservar</button>
-                <button *ngIf="coche.disponibles==0" class="btn btn-primary" type="submit" disabled>Agotado</button>
+                <button *ngIf="coche.disponibles==0" class="btn btn-primary w-75" type="submit" disabled>Agotado</button>
                 <p class="text-danger" *ngIf="noDisponible">Este coche no está disponible en este horario</p>
-                <p class="text-danger" *ngIf="errorFecha">La fecha de devolución es incorrecta</p>
+                <p class="text-danger" *ngIf="errorFecha">La diferencia entre fechas no puede ser mayor de 20 dias ni menor a 1</p>
                 <p class="text-success" *ngIf="reservado">Has reservado el coche</p>
 
             </form>

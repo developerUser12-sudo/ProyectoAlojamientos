@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+   public function up(): void
     {
          Schema::create('cochesreservados', function (Blueprint $table) {
             $table->id();
@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_usuario')->constrained('users');
             $table->dateTime('fecha_recogida');
             $table->dateTime('fecha_devolucion');
+            $table->integer('precio');
             $table->timestamps();
         });
     }

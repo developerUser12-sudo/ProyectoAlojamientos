@@ -3,6 +3,7 @@ import { Coche } from '../coche';
 import { Options } from '@angular-slider/ngx-slider';
 import { HttpClient } from '@angular/common/http';
 import { CochesService } from '../coches.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-alquilercoches',
@@ -16,8 +17,8 @@ export class AlquilercochesComponent {
   marca = '';
   modelo = '';
   buscado = false;
-  minValue: number = 100;
-  maxValue: number = 500;
+  minValue: number = 0;
+  maxValue: number = 1000;
   options: Options = {
     floor: 0,
     ceil: 1000,
@@ -32,10 +33,19 @@ export class AlquilercochesComponent {
 
   ngOnInit(): void {
     this.serviciosService.getCoches().subscribe((data) => {
-      
+
       this.coches = data;
 
     });
+  }
+  limpiarFormulario(form: NgForm) {
+    form.resetForm();
+    this.origen = '';
+    this.destino = '';
+    this.marca = '';
+    this.modelo = '';
+    this.minValue = 0;
+    this.maxValue = 1000;
   }
   onSubmit() {
     this.buscado = true;

@@ -39,12 +39,10 @@ private apiCochesReservadosUrl = environment.apiUrl;
 
     return this.http.get(`${this.apiCochesUrl}/api/coches/filtrar`, { params });
   }
-  cochesReservados(): Observable<any>{
-    return this.http.get(`${this.apiCochesReservadosUrl}/api/coches-reservados`);
-  }
-  reservarCoche(idCoche:string|null,idUsuario:number,fechaInicio:Date,fechaFin:Date){
+  
+  reservarCoche(idCoche:string|null,idUsuario:number,fechaInicio:Date,fechaFin:Date,precio:number){
     let datos=
-      {id_coche:idCoche,id_usuario:idUsuario,fecha_recogida:fechaInicio,fecha_devolucion:fechaFin}
+      {id_coche:idCoche,id_usuario:idUsuario,fecha_recogida:fechaInicio,fecha_devolucion:fechaFin,precio:precio}
     ;
     
     return this.http.post(`${this.apiCochesReservadosUrl}/api/coches-reservados`,datos);

@@ -12,10 +12,11 @@ import { UsuarioService } from '../usuario.service';
 })
 export class DetalleComponent {
   coche: Coche | null = null;
-  fechaInicio: string = '';
-  fechaFin: string = '';
+  fechaInicio: Date = new Date();
+  fechaFin: Date = new Date();
   coches: Coche[] = [];
   id: number = 0;
+  precio: number = 0;
   noDisponible: boolean = false;
   errorFecha: boolean = false;
   reservado: boolean = false;
@@ -30,39 +31,28 @@ export class DetalleComponent {
     }
   }
   onSubmit() {
+    let salir = false;
     let inicio = new Date(this.fechaInicio);
-    let fin = new Date(this.fechaFin); 
-    if (inicio < fin) {
+    let fin = new Date(this.fechaFin);
+    let diffMs = fin.getTime() - inicio.getTime();
+    let diffDias = diffMs / (1000 * 60 * 60 * 24);
+    if (diffDias > 20 || diffDias < 1) {
       this.errorFecha = true;
       this.noDisponible = false;
     } else {
-      this.cocheDetalle.cochesReservados().subscribe((data) => {
-        let idCoche = this.route.snapshot.paramMap.get('id');
-        this.usuario.getUsuario().subscribe((dataUsuario) => {
-          if (data.length == 0) {
-            this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio, fin).subscribe(response => {
-              this.noDisponible = false;
-              this.errorFecha = false;
-              this.reservado = true;
-            });;
+      if (this.coche) {
 
-          } else {
-            for (let index = 0; index < data.length; index++) {
-              if (idCoche == data[index].id_coche && (inicio >= data[index].fecha_recogida && inicio <= data[index].fecha_devolucion) || (fin >= data[index].fecha_recogida && fin <= data[index].fecha_devolucion)) {
-                this.noDisponible = true;
-                this.errorFecha = false;
-              } else {
-                this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio, fin).subscribe(response => {
-                  this.reservado = true;
-                  this.noDisponible = false;
-                  this.errorFecha = false;
+        this.precio = parseFloat(this.coche.precio) * diffDias;
+      }
 
-                });
-              }
-            }
-          }
-        });
+      let idCoche = this.route.snapshot.paramMap.get('id');
+      this.usuario.getUsuario().subscribe((dataUsuario) => {
 
+        this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, this.fechaInicio, this.fechaFin, this.precio)
+          .subscribe(() => {
+            this.errorFecha = false;
+            this.reservado = true;
+          });
 
       });
     }

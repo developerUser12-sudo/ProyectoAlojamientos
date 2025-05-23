@@ -12,11 +12,24 @@ class CocheReservadoController extends Controller
     {
         return CocheReservado::all();
     }
-    public function getCochesById(){
-        $cochesUsuario=CocheReservado::where('id_usuario',Auth::id())->get();
-        $idCoche=$cochesUsuario->pluck('id_coche')->toArray();
-        $coches=Coche::where('id',$idCoche)->get();
+    public function getCochesById()
+    {
+        $cochesUsuario = CocheReservado::where('id_usuario', Auth::id())->get();
+        $idCoche = $cochesUsuario->pluck('id_coche')->toArray();
+        $coches = collect();
+        for ($i = 0; $i < count($idCoche); $i++) {
+            $coche = Coche::find($idCoche[$i]);
+            if ($coche) {
+                $coches->push($coche);
+            }
+        }
         return $coches;
+    }
+
+    public function getPrecioById()
+    {
+        $cochesUsuario = CocheReservado::where('id_usuario', Auth::id())->get();
+        return $cochesUsuario;
     }
     public function store(Request $request)
     {
@@ -24,14 +37,15 @@ class CocheReservadoController extends Controller
             'id_coche' => 'required|integer',
             'id_usuario' => 'required|integer',
             'fecha_recogida' => 'required|date',
-            'fecha_devolucion' => 'required|date'
+            'fecha_devolucion' => 'required|date',
+            'precio' => 'required|integer'
         ]);
-        $coche=Coche::find($validated['id_coche']);
+        $coche = Coche::find($validated['id_coche']);
         if ($coche) {
-            $coche->disponibles-=1;
+            $coche->disponibles -= 1;
             $coche->save();
         }
-        $reserva=CocheReservado::create($validated);
+        $reserva = CocheReservado::create($validated);
         return response()->json([
             'success' => true,
             'reserva' => $reserva
@@ -40,7 +54,7 @@ class CocheReservadoController extends Controller
     }
     public function destroy($id)
     {
-        $coche = CocheReservado::where('id_coche',$id)->where('id_usuario',Auth::id());
+        $coche = CocheReservado::where('id', $id);
         $coche->delete();
         return redirect()->route('reservas');
     }

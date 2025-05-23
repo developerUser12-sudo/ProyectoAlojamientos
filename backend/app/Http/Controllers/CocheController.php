@@ -14,17 +14,14 @@ class CocheController extends Controller
         if ($request->has('id')) {
             $query->where('id', 'like', $request->id);
         } else {
-            if ($request->has('origen')) {
-                $query->where('origen', 'like', '%' . $request->origen . '%');
-            }
-            if ($request->has('destino')) {
-                $query->where('destino', 'like', '%' . $request->destino . '%');
-            }
+
+            $query->where('origen', 'like', '%' . $request->origen . '%');
+            $query->where('destino', 'like', '%' . $request->destino . '%');
             if ($request->has('marca') && !empty($request->marca)) {
-                $query->where('marca', 'like', '%' . $request->marca . '%');
+                $query->whereRaw('LOWER(TRIM(origen)) like ?', ['%' . strtolower(trim($request->origen)) . '%']);
             }
             if ($request->has('modelo') && !empty($request->modelo)) {
-                $query->where('modelo', 'like', '%' . $request->modelo . '%');
+                $query->whereRaw('LOWER(TRIM(destino)) like ?', ['%' . strtolower(trim($request->destino)) . '%']);
             }
             if ($request->has('precio_min') && !empty($request->precio_min)) {
                 $query->where('precio', '>=', $request->precio_min);
@@ -32,7 +29,7 @@ class CocheController extends Controller
             if ($request->has('precio_max') && !empty($request->precio_max)) {
                 $query->where('precio', '<=', $request->precio_max);
             }
-            
+
         }
 
         $coches = $query->get();
@@ -41,7 +38,7 @@ class CocheController extends Controller
     }
     public function index()
     {
-        return Coche::simplePaginate(5);
+        return Coche::all();
     }
 
     public function store(Request $request)
@@ -58,9 +55,9 @@ class CocheController extends Controller
 
         ]);
         $validated['disponibles'] = $validated['total'];
-        if ($validated['descuento']>0) {
-            $cantidad=($validated['precio']*$validated['descuento'])/100;
-            $validated['precio']-= $cantidad;
+        if ($validated['descuento'] > 0) {
+            $cantidad = ($validated['precio'] * $validated['descuento']) / 100;
+            $validated['precio'] -= $cantidad;
         }
         Coche::create($validated);
 
@@ -78,7 +75,7 @@ class CocheController extends Controller
     public function update(Request $request, $id)
     {
         $coche = Coche::find($id);
-        $descuento=$coche->descuento;
+        $descuento = $coche->descuento;
         $validated = $request->validate([
             'origen' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
@@ -89,11 +86,11 @@ class CocheController extends Controller
             'total' => 'required|numeric',
             'descuento' => 'required|numeric',
         ]);
-        if ($validated['descuento']>0) {
-            $cantidad=($validated['precio']*$validated['descuento'])/100;
-            $validated['precio']-= $cantidad;
-        }else {
-            $validated['precio']=$validated['precio']/(1-$descuento/100);
+        if ($validated['descuento'] > 0) {
+            $cantidad = ($validated['precio'] * $validated['descuento']) / 100;
+            $validated['precio'] -= $cantidad;
+        } else {
+            $validated['precio'] = $validated['precio'] / (1 - $descuento / 100);
 
         }
         $coche->update($validated);
