@@ -46,7 +46,6 @@ private apiCochesReservadosUrl = environment.apiUrl;
     let datos=
       {id_coche:idCoche,id_usuario:idUsuario,fecha_recogida:fechaInicio,fecha_devolucion:fechaFin}
     ;
-    console.log(datos);
     
     return this.http.post(`${this.apiCochesReservadosUrl}/api/coches-reservados`,datos);
   }

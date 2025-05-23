@@ -41,7 +41,7 @@ class CocheController extends Controller
     }
     public function index()
     {
-        return Coche::all();
+        return Coche::simplePaginate(5);
     }
 
     public function store(Request $request)

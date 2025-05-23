@@ -12,11 +12,13 @@ import { UsuarioService } from '../usuario.service';
 })
 export class DetalleComponent {
   coche: Coche | null = null;
-  fechaInicio: Date = new Date();
-  fechaFin: Date = new Date();
+  fechaInicio: string = '';
+  fechaFin: string = '';
   coches: Coche[] = [];
   id: number = 0;
-
+  noDisponible: boolean = false;
+  errorFecha: boolean = false;
+  reservado: boolean = false;
   constructor(private route: ActivatedRoute, private cocheDetalle: CochesService, private usuario: UsuarioService) { }
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
@@ -28,31 +30,41 @@ export class DetalleComponent {
     }
   }
   onSubmit() {
-    this.cocheDetalle.cochesReservados().subscribe((data) => {
-      let idCoche = this.route.snapshot.paramMap.get('id');
-      if (data.length == 0) {
-        this.usuario.getUsuario().subscribe((data) => {
-          this.cocheDetalle.reservarCoche(idCoche, data.id, this.fechaInicio, this.fechaFin).subscribe(response => {
-            console.log('Reserva realizada', response);
-          }, error => {
-            console.error('Error al reservar', error);
-          });;
-
-        });
-      } else {
-
-
-        for (let index = 0; index < data.length; index++) {
-          console.log("data[index].fecha_recogid");
-
-          if (idCoche == data[index].id_coche && (this.fechaInicio > data[index].fecha_recogida && this.fechaInicio < data[index].fecha_devolucion)) {
-            console.log("si");
+    let inicio = new Date(this.fechaInicio);
+    let fin = new Date(this.fechaFin); 
+    if (inicio < fin) {
+      this.errorFecha = true;
+      this.noDisponible = false;
+    } else {
+      this.cocheDetalle.cochesReservados().subscribe((data) => {
+        let idCoche = this.route.snapshot.paramMap.get('id');
+        this.usuario.getUsuario().subscribe((dataUsuario) => {
+          if (data.length == 0) {
+            this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio, fin).subscribe(response => {
+              this.noDisponible = false;
+              this.errorFecha = false;
+              this.reservado = true;
+            });;
 
           } else {
-          }
-        }
-      }
+            for (let index = 0; index < data.length; index++) {
+              if (idCoche == data[index].id_coche && (inicio >= data[index].fecha_recogida && inicio <= data[index].fecha_devolucion) || (fin >= data[index].fecha_recogida && fin <= data[index].fecha_devolucion)) {
+                this.noDisponible = true;
+                this.errorFecha = false;
+              } else {
+                this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio, fin).subscribe(response => {
+                  this.reservado = true;
+                  this.noDisponible = false;
+                  this.errorFecha = false;
 
-    });
+                });
+              }
+            }
+          }
+        });
+
+
+      });
+    }
   }
 }

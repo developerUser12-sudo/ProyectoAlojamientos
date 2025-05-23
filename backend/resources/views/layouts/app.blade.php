@@ -62,10 +62,7 @@
                                                 <a href="{{ config('app.url') }}/cuenta" class="dropdown-item">Mi cuenta</a>
                                             </li>
                                             <li>
-                                                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
-                                                </form>
+                                                <a href="{{ route('reservas') }}" class="dropdown-item">Mis reservas</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -83,6 +80,28 @@
         </main>
 
     </div>
+    <footer class="footer bg-primary d-flex flex-column">
+  <div class="w-100 d-flex flex-column flex-md-row justify-content-md-around text-center p-4">
+    <ul class="list-unstyled me-3">
+      <li><a class="text-decoration-none text-white" href="#">Política de cookies</a></li>
+      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Términos de servicio</a></li>
+    </ul>
+    <ul class="list-unstyled me-3">
+      <li><a class="text-decoration-none text-white" href="#">Política de privacidad</a></li>
+      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Sobre nosotros</a></li>
+    </ul>
+    <ul class="list-unstyled">
+      <li><a class="text-decoration-none text-white" href="#">Preguntas frecuentes</a></li>
+      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Información de la empresa</a></li>
+    </ul>
+  </div>
+
+  <div class="row w-100">
+    <p class="col text-center text-light">
+      <i class="bi bi-c-circle-fill me-2"></i>Todos los derechos reservados
+    </p>
+  </div>
+</footer>
 </body>
 
 </html>

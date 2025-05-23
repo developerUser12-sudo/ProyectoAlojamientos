@@ -6,7 +6,10 @@ use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CocheController;
-
+use App\Http\Controllers\CocheReservadoController;
+use App\Http\Controllers\ReservadosController;
+use App\Models\CocheReservado;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +55,8 @@ Route::get('/username', function () {
     }
 });
 
+Route::get('/reservas',[ReservadosController::class,'index'])->name('reservas');
+Route::delete('reservas/{id}', [CocheReservadoController::class, 'destroy'])->name('cancelarreserva');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
