@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use \App\Models\CocheReservado;
+use \App\Models\Coche;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -27,10 +28,15 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
     protected function schedule(Schedule $schedule)
-    {
-        $schedule->call(function () {
-            CocheReservado::where('fecha_devolucion', '<', now())->delete();
-        })->everyTwoHours();
-    }
+{
+    $schedule->call(function () {
+        $reservasPasadas = CocheReservado::where('fecha_devolucion', '<', now())->get();
+        foreach ($reservasPasadas as $reserva) {
+            Coche::where('id', $reserva->id_coche)->increment('disponibles');
+        }
+        CocheReservado::where('fecha_devolucion', '<', now())->delete();
+    })->everyFiveMinutes();
+}
+
 }
     

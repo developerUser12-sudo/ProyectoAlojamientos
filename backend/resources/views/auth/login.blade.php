@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card border border-secondary">
                     <div class="card-header">{{ __('Iniciar sesión') }}</div>
 
                     <div class="card-body">
@@ -16,16 +16,25 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Correo electrónico') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="email" type="email" class="form-control  @error('error') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autofocus>
                                 </div>
                             </div>
 
 
                             <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required >
+                                    <input id="password" type="password"
+                                        class="form-control @error('error') is-invalid @enderror" name="password"
+                                        required>
+                                    @error('error')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 
                                 </div>
                             </div>
@@ -41,13 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row text-center mb-3">
-                                @if(session('error'))
-                                    <div class="text-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
-                            </div>
+                            
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

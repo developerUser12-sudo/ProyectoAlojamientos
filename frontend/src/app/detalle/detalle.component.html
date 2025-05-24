@@ -2,7 +2,7 @@
         <div class="d-flex flex-column flex-md-row gap-3 p-4">
 
             <div class="d-flex flex-column rounded gap-2 p-3 border border-secondary">
-                <div class="d-flex flex-row gap-3">
+                <div class="d-flex flex-md-row flex-column gap-3">
                     <img [src]="coche.imagen" class="rounded border border-black car-image img-fluid" alt="Imagen coche">
                     <div class="d-flex flex-column">
                         <p>Origen: {{coche.origen}}</p>
@@ -21,8 +21,16 @@
                     </div>
 
                 </div>
+                <div class="p-2">
+                    <h5>Condiciones de alquiler</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-body-secondary border-secondary">Edad mínima del conductor: 21 años</li>
+                        <li class="list-group-item bg-body-secondary border-secondary">Prohibido usar silla de bebés</li>
+                        <li class="list-group-item bg-body-secondary border-secondary">Seguro incluido: básico</li>
+                    </ul>
+                </div>
             </div>
-            <div class="border border-secondary rounded">
+            <div class="border border-secondary rounded h-100">
                 <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm" class="d-flex flex-column gap-2 w-100 p-3">
                     <label for="fechaInicio" class="form-label">Desde: </label>
                     <input type="datetime-local" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-100" required

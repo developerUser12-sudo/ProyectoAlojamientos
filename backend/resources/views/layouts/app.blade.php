@@ -4,14 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="{{ config('app.frontend_url') }}/assets/img/favicon.png">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>HolidaysNow</title>
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-
-
 
 </head>
 
@@ -73,7 +71,7 @@
                 </div>
             </nav>
         </header>
-        <main class="py-4 content">
+        <main class="py-4 content bg-body-secondary">
             @yield('content')
         </main>
 

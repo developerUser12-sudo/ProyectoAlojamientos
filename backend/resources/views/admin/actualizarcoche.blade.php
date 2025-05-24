@@ -37,7 +37,7 @@
 
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
-                <input type="number" name="precio" class="form-control" required min="1"
+                <input type="number" name="precio" class="form-control" required min="1 "
                     value="{{ old('precio', $coche->precio) }}" >
             </div>
             <div class="mb-3">

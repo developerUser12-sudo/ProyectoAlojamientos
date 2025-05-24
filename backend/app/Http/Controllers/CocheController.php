@@ -40,6 +40,10 @@ class CocheController extends Controller
     {
         return Coche::all();
     }
+    public function getCochesPaginados()
+    {
+        return Coche::paginate(5);
+    }
 
     public function store(Request $request)
     {
