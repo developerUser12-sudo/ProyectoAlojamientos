@@ -29,7 +29,7 @@
                 </tr>
                 @foreach ($coches as $coche)
                 <tr>
-                    <td><img src="{{ $coche->imagen }}" alt="" class="img-fluid w-50" style="min-width:130px;"><br><b
+                    <td><img src="{{ $coche->imagen }}" alt="Imagen coche" class="img-fluid w-50" style="min-width:130px;"><br><b
                             class="text-center"> {{ $coche->precio }}€</b></td>
                     <td>
                         <p> {{ $coche->origen }}</p>

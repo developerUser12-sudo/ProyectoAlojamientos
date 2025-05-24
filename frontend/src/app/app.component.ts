@@ -24,6 +24,7 @@ export class AppComponent {
    getBackendUrl(): string {
     return `${environment.apiUrl}`;
   }
+  
 
 
 }

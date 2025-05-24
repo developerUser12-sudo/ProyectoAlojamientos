@@ -2,7 +2,7 @@
     <h2 class="text-center">Busca los mejores coches</h2>
     <div class="row justify-content-center mt-4">
         <div class="col-md-6  col-10">
-            <h5 class="mb-4">Es necesario introducir un origen y un destino para empezar a buscar</h5>
+            <h5 class="mb-4 h5">Es necesario introducir un origen y un destino para empezar a buscar</h5>
             <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm">
                 <div class="d-flex flex-column flex-md-row gap-2">
                     <input type="text" name="origen" [(ngModel)]="origen" class="form-control" placeholder="Origen"
@@ -28,7 +28,7 @@
             <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded cars">
                 <a [routerLink]="['/detalle', coche.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
-                    <img [src]="coche.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
+                    <img [src]="coche.imagen" alt="Imagen coche" style="width: 200px;height:100px;object-fit: cover;">
                     <p><i class="bi bi-geo-alt-fill"></i> {{coche.origen}} - {{coche.destino}}</p>
                     <p>Marca: {{coche.marca}}</p>
                     <p>Modelo: {{coche.modelo}}</p>
@@ -46,7 +46,7 @@
             <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded cars">
                 <a [routerLink]="['/detalle', filtra.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
-                    <img [src]="filtra.imagen" alt="" style="width: 200px;height:100px;object-fit: cover;">
+                    <img [src]="filtra.imagen" alt="Imagen coche" style="width: 200px;height:100px;object-fit: cover;">
                     <p>Trayecto: {{filtra.origen}} - {{filtra.destino}}</p>
                     <p>Marca: {{filtra.marca}}</p>
                     <p>Modelo: {{filtra.modelo}}</p>

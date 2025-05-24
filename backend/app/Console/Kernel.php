@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use \App\Models\CocheReservado;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,10 +13,7 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')->hourly();
-    }
+   
 
     /**
      * Register the commands for the application.
@@ -29,4 +26,11 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            CocheReservado::where('fecha_devolucion', '<', now())->delete();
+        })->everyTwoHours();
+    }
 }
+    

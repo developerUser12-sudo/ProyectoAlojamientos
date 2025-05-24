@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://holidaysnowauth.onrender.com' // tu backend en Render
+  apiUrl: 'https://holidaysnowauth.onrender.com'
 };

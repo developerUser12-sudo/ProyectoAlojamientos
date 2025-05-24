@@ -1,3 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+.content{
+    flex: 1;
+}
+.page{
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}   

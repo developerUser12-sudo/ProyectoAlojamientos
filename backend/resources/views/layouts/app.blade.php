@@ -7,25 +7,23 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>HolidaysNow</title>
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2" defer></script>
+
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+
+
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" class="page">
         <header>
             <nav class="navbar navbar-expand-lg bg-primary shadow-sm" id="customNavbar">
                 <div class="container-fluid">
                    
                         <a class="navbar-brand d-flex flex-column align-items-center text-light fs-5 fw-semibold"
                             href="{{ config('app.frontend_url') }}">
-                            <img src="{{ config('app.frontend_url') }}/assets/img/logo.webp" style="max-width: 200px;">
+                            <img src="{{ config('app.frontend_url') }}/assets/img/logo.webp" alt="Logo" style="max-width: 200px;">
                         </a>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -38,7 +36,7 @@
                         <div class="navbar-nav d-flex flex-column flex-sm-row gap-2 gap-sm-4 w-100 align-items-sm-center w-100">
 
                             <div class="d-flex flex-column flex-sm-row gap-4 p-3">
-                                <a class="nav-link text-light ms-2" href="{{ config('app.frontend_url') }}/vuelos">Vuelos</a>
+                                <a class="nav-link text-light ms-lg-2" href="{{ config('app.frontend_url') }}/vuelos">Vuelos</a>
                                 <a class="nav-link text-light"
                                     href="{{ config('app.frontend_url') }}/hoteles">Hoteles</a>
                                 <a class="nav-link text-light"
@@ -75,33 +73,33 @@
                 </div>
             </nav>
         </header>
-        <main class="py-4">
+        <main class="py-4 content">
             @yield('content')
         </main>
 
+            <footer class="footer bg-primary d-flex flex-column">
+        <div class="w-100 d-flex flex-column flex-md-row justify-content-md-around text-center p-4">
+            <ul class="list-unstyled me-3">
+            <li><a class="text-decoration-none text-white" href="#">Política de cookies</a></li>
+            <li class="mt-3"><a class="text-decoration-none text-white" href="#">Términos de servicio</a></li>
+            </ul>
+            <ul class="list-unstyled me-3">
+            <li><a class="text-decoration-none text-white" href="#">Política de privacidad</a></li>
+            <li class="mt-3"><a class="text-decoration-none text-white" href="#">Sobre nosotros</a></li>
+            </ul>
+            <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="#">Preguntas frecuentes</a></li>
+            <li class="mt-3"><a class="text-decoration-none text-white" href="#">Información de la empresa</a></li>
+            </ul>
+        </div>
+        
+        <div class="row w-100">
+            <p class="col text-center text-light">
+            <i class="bi bi-c-circle-fill me-2"></i>Todos los derechos reservados
+            </p>
+        </div>
+        </footer>
     </div>
-    <footer class="footer bg-primary d-flex flex-column">
-  <div class="w-100 d-flex flex-column flex-md-row justify-content-md-around text-center p-4">
-    <ul class="list-unstyled me-3">
-      <li><a class="text-decoration-none text-white" href="#">Política de cookies</a></li>
-      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Términos de servicio</a></li>
-    </ul>
-    <ul class="list-unstyled me-3">
-      <li><a class="text-decoration-none text-white" href="#">Política de privacidad</a></li>
-      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Sobre nosotros</a></li>
-    </ul>
-    <ul class="list-unstyled">
-      <li><a class="text-decoration-none text-white" href="#">Preguntas frecuentes</a></li>
-      <li class="mt-3"><a class="text-decoration-none text-white" href="#">Información de la empresa</a></li>
-    </ul>
-  </div>
-
-  <div class="row w-100">
-    <p class="col text-center text-light">
-      <i class="bi bi-c-circle-fill me-2"></i>Todos los derechos reservados
-    </p>
-  </div>
-</footer>
 </body>
 
 </html>
