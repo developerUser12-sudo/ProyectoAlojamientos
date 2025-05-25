@@ -34,7 +34,7 @@ export class DetallecocheComponent {
   onSubmit() {
     this.reservado = false;
     this.diaIncorrecto = false;
-    this.faltaLugar = false;
+    this.faltaLugar = false;  
     this.usuario.getUsuario().subscribe((dataUsuario) => {
       if (dataUsuario.username == 'invitado') {
         window.location.href = environment.apiUrl;
