@@ -18,16 +18,14 @@ class CorreoCoche extends Mailable
      */
     public $usuario;
     public $coche;
-    public $lugar;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($usuario,$coche,$lugar)
+    public function __construct($usuario,$coche)
     {
         $this->usuario = $usuario;
         $this->coche = $coche;
-        $this->lugar = $lugar;
     }
 
     /**
@@ -37,7 +35,7 @@ class CorreoCoche extends Mailable
 {
     return $this->subject('Has reservado tu coche')
                 ->view('emails.coche')
-                ->with(['usuario' => $this->usuario,'coche'=> $this->coche,'lugar'=> $this->lugar]);
+                ->with(['usuario' => $this->usuario,'coche'=> $this->coche]);
 }
 
 }

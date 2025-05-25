@@ -24,16 +24,7 @@ return new class extends Migration
             $table->date('fecha_cierre');
             $table->timestamps();
         });
-        Schema::create('habitaciones', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
-            $table->string('tipo_habitacion');
-            $table->decimal('precio_noche', 10, 2);
-            $table->integer('capacidad');
-            $table->integer('disponibles');
-            $table->json('imagenes');
-            $table->timestamps();
-        });
+        
     }
 
     /**

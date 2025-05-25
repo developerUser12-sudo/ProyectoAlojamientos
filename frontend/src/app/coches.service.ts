@@ -40,11 +40,12 @@ private apiCochesReservadosUrl = environment.apiUrl;
     return this.http.get(`${this.apiCochesUrl}/api/coches/filtrar`, { params });
   }
   
-  reservarCoche(idCoche:string|null,idUsuario:number,fechaSalida:Date,lugar:string){
+  reservarCoche(idCoche:string|null,idUsuario:number,fechaSalida:Date){
     let datos=
-      {id_coche:Number(idCoche),id_usuario:idUsuario,fecha_salida:fechaSalida.toISOString().substring(0, 10),lugar:lugar}
+      {id_coche:Number(idCoche),id_usuario:idUsuario,fecha_salida:fechaSalida.toISOString().substring(0, 10)}
     ;
-    
+      console.log(datos);
+      
     return this.http.post(`${this.apiCochesReservadosUrl}/api/coches-reservados`,datos);
   }
 

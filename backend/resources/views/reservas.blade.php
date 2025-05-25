@@ -28,24 +28,23 @@
                         <td>{{ $coches[$i]->destino }}</td>
                         <td>{{ $coches[$i]->precio }}</td>
                         <td>
-                            <span class="fw-bold">Inicio:</span>
-                            {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_recogida)->format('d/m/Y H:i') }}<br>
-                            <span class="fw-bold">Fin:</span>
-                            {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_devolucion)->format('d/m/Y H:i') }}
+                            <span class="fw-bold">Día:</span>
+                            {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_salida)->format('d/m/Y H:i') }}<br>
+                           
                         </td>
 
                         <td>
                             <form action="{{ route('cancelarreserva', $cochesUsuario[$i]->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                @if (\Carbon\Carbon::now()->diffInMinutes($cochesUsuario[$i]->fecha_recogida, false) < 180)
+                                @if (\Carbon\Carbon::now()->diffInDays($cochesUsuario[$i]->fecha_salida, false) < 1)
 
                                     <input type="submit" class="btn btn-danger" value="Cancelar reserva" disabled>
                                 @else
                                     <input type="submit" class="btn btn-danger" value="Cancelar reserva">
                                 @endif
                             </form>
-                        </td>
+                        </td>   
                     </tr>
                 @endfor
             </table>

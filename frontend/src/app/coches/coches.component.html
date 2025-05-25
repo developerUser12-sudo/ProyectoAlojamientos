@@ -44,7 +44,7 @@
         <h3 class="w-100">Tus resultados</h3>
         <div class="d-flex justify-content-center flex-wrap gap-3">
             <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded cars">
-                <a [routerLink]="['/detalle', filtra.id]" routerLinkActive="active"
+                <a [routerLink]="['/detalle-coche', filtra.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
                     <img [src]="filtra.imagen" alt="Imagen coche" style="width: 200px;height:100px;object-fit: cover;">
                     <p>Trayecto: {{filtra.origen}} - {{filtra.destino}}</p>

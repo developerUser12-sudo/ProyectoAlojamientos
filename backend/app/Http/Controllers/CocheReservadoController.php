@@ -42,7 +42,6 @@ class CocheReservadoController extends Controller
             'id_coche' => 'required|integer',
             'id_usuario' => 'required|integer',
             'fecha_salida' => 'required|date',
-            'lugar' => 'required|string',
         ]);
         $coche = Coche::find($validated['id_coche']);
         if ($coche) {
@@ -53,7 +52,7 @@ class CocheReservadoController extends Controller
         $usuario = User::find($validated['id_usuario']);
         if ($usuario) {
             
-            Mail::to($usuario->email)->send(new CorreoCoche($usuario,$coche,$validated['lugar']));
+            Mail::to($usuario->email)->send(new CorreoCoche($usuario,$coche));
         }
 
 

@@ -15,7 +15,6 @@ export class DetallecocheComponent {
   fechaInicio: Date = new Date();
   coches: Coche[] = [];
   id: number = 0;
-  lugar: string = '';
   precio: number = 0;
   reservado = false;
   diaIncorrecto = false;
@@ -38,8 +37,6 @@ export class DetallecocheComponent {
     this.usuario.getUsuario().subscribe((dataUsuario) => {
       if (dataUsuario.username == 'invitado') {
         window.location.href = environment.apiUrl;
-      } else if (this.lugar == '') {
-        this.faltaLugar = true;
       } else {
         let now = new Date();
         let inicio = new Date(this.fechaInicio);
@@ -50,7 +47,7 @@ export class DetallecocheComponent {
 
         } else {
           let idCoche = this.route.snapshot.paramMap.get('id');
-          this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio, this.lugar)
+          this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio)
             .subscribe(() => {
 
               this.reservado = true;
