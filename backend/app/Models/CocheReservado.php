@@ -9,5 +9,5 @@ class CocheReservado extends Model
 {
     use HasFactory;
     protected $table = 'cochesreservados';
-    protected $fillable = ['id_coche', 'id_usuario', 'fecha_recogida', 'fecha_devolucion','precio'];
+    protected $fillable = ['id_coche', 'id_usuario', 'fecha_salida','lugar'];
 }

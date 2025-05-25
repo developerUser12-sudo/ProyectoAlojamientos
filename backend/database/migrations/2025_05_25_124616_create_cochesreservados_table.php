@@ -9,15 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
+     public function up(): void
     {
-         Schema::create('cochesreservados', function (Blueprint $table) {
+        Schema::create('cochesreservados', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_coche')->constrained('coches');
-            $table->foreignId('id_usuario')->constrained('users');
-            $table->dateTime('fecha_recogida');
-            $table->dateTime('fecha_devolucion');
-            $table->integer('precio');
+            $table->foreignId('id_coche')->constrained('coches')->onDelete('cascade');
+            $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
+            $table->date('fecha_salida');
+            $table->string('lugar');
             $table->timestamps();
         });
     }

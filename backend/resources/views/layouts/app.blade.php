@@ -34,11 +34,10 @@
                         <div class="navbar-nav d-flex flex-column flex-sm-row gap-2 gap-sm-4 w-100 align-items-sm-center w-100">
 
                             <div class="d-flex flex-column flex-sm-row gap-4 p-3">
-                                <a class="nav-link text-light ms-lg-2" href="{{ config('app.frontend_url') }}/vuelos">Vuelos</a>
-                                <a class="nav-link text-light"
+                                <a class="nav-link text-light ms-lg-2"
                                     href="{{ config('app.frontend_url') }}/hoteles">Hoteles</a>
                                 <a class="nav-link text-light"
-                                    href="{{ config('app.frontend_url') }}/alquilercoches">Alquiler de coches</a>
+                                    href="{{ config('app.frontend_url') }}/coches">Coches</a>
                             </div>
 
                             <div class="ms-sm-auto d-flex flex-column flex-sm-row gap-2 gap-sm-4 align-items-sm-center">

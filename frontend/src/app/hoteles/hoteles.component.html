@@ -4,18 +4,15 @@
         <div class="col-md-8">
             <form>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Origen" aria-label="Origen">
-                    <input type="text" class="form-control" placeholder="Destino" aria-label="Destino">
-                    <span class="form-control">
-                        <span>Fecha salida</span>
-                        <input type="date">
-                    </span>
-                    <span class="form-control">
-                        <span>Fecha vuelta</span>
-                        <input type="date">
-                    </span>
-                    <input class="form-control" type="number" placeholder="Num adultos">
-                    <input class="form-control" type="number" placeholder="Num niños">
+                    <input type="text" class="form-control" placeholder="Ubicación">
+                    <select name="estrellas" id="">
+                        <option value="1">⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                    </select>
+                    <input class="form-control" type="number" placeholder="Num personas" name="personas">
                     <button class="btn btn-primary" type="submit">Buscar</button>
                 </div>
             </form>

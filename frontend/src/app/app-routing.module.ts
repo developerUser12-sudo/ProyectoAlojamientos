@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
-import { VuelosComponent } from './vuelos/vuelos.component';
 import { HotelesComponent } from './hoteles/hoteles.component';
-import { AlquilercochesComponent } from './alquilercoches/alquilercoches.component';
-import { DetalleComponent } from './detalle/detalle.component';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
+import { CochesComponent } from './coches/coches.component';
+import { DetallecocheComponent } from './detallecoche/detallecoche.component';
 
 const routes: Routes = [
   {path:'',component:BienvenidaComponent},
   {path:'bienvenida',component:BienvenidaComponent},
-  {path:'vuelos',component:VuelosComponent},
   {path:'hoteles',component:HotelesComponent},
-  {path:'alquilercoches',component:AlquilercochesComponent},
-  {path:'detalle/:id',component:DetalleComponent},
+  {path:'coches',component:CochesComponent},
+  {path:'detalle-coche/:id',component:DetallecocheComponent},
   {path:'**',component:NoencontradoComponent},
 
 ];

@@ -42,7 +42,7 @@ class CocheController extends Controller
     }
     public function getCochesPaginados()
     {
-        return Coche::paginate(5);
+        return Coche::simplePaginate(3);
     }
 
     public function store(Request $request)

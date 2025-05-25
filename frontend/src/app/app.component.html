@@ -11,9 +11,8 @@
       </button>
       <div class="collapse navbar-collapse text-center" id="navbarContent">
         <div class="navbar-nav d-flex flex-column flex-sm-row gap-2 gap-sm-4 w-100">
-          <a class="nav-link text-light ms-sm-0 ms-md-2 ms-lg-0" routerLink="/vuelos" routerLinkActive="active">Vuelos</a>
-          <a class="nav-link text-light" routerLink="/hoteles" routerLinkActive="active">Hoteles</a>
-          <a class="nav-link text-light" routerLink="/alquilercoches" routerLinkActive="active">Alquiler de coches</a>
+          <a class="nav-link text-light ms-sm-0 ms-md-2 ms-lg-0" routerLink="/hoteles" routerLinkActive="active">Hoteles</a>
+          <a class="nav-link text-light" routerLink="/coches" routerLinkActive="active">Coches</a>
 
           <a class="nav-link text-light ms-sm-auto" [href]="getBackendUrl()"
             *ngIf="this.logeado=='invitado'||this.logeado==''">

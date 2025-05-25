@@ -4,24 +4,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
-import { VuelosComponent } from './vuelos/vuelos.component';
 import { HotelesComponent } from './hoteles/hoteles.component';
-import { AlquilercochesComponent } from './alquilercoches/alquilercoches.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { DetalleComponent } from './detalle/detalle.component';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
+import { CochesComponent } from './coches/coches.component';
+import { DetallecocheComponent } from './detallecoche/detallecoche.component';
 @NgModule({
   declarations: [
 
     AppComponent,
     BienvenidaComponent,
-    VuelosComponent,
     HotelesComponent,
-    AlquilercochesComponent,
-    DetalleComponent,
     NoencontradoComponent,
+    CochesComponent,
+    DetallecocheComponent,
     
   ],
   imports: [

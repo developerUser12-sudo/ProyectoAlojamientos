@@ -27,23 +27,28 @@
                         <li class="list-group-item bg-body-secondary border-secondary">Edad mínima del conductor: 21 años</li>
                         <li class="list-group-item bg-body-secondary border-secondary">Prohibido usar silla de bebés</li>
                         <li class="list-group-item bg-body-secondary border-secondary">Seguro incluido: básico</li>
+                        <li class="list-group-item bg-body-secondary border-secondary">Solo puedes reservar coches 3 dias despues de la fecha actual</li>
+                        <li class="list-group-item bg-body-secondary border-secondary">Hora de salida: 11 AM</li>
                     </ul>
                 </div>
             </div>
             <div class="border border-secondary rounded h-100">
-                <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm" class="d-flex flex-column gap-2 w-100 p-3">
-                    <label for="fechaInicio" class="form-label">Desde: </label>
-                    <input type="datetime-local" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-100" required
+                <form (ngSubmit)="onSubmit()" class="d-flex flex-column gap-2 w-100 p-3">
+                    <label for="lugar" class="form-label">Ciudad de salida: </label>
+                    <select id="lugar" class="form-select" name="lugar" [(ngModel)]="lugar" required>
+                        <option value="" disabled selected>-- Selecciona una opción --</option>
+                        <option value="Sevilla">Sevilla</option>
+                        <option value="Madrid">Madrid</option>
+                    </select>
+                    <label for="fechaInicio" class="form-label">Día de salida: </label>
+                    <input type="date" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-100" required
                         id="fechaInicio">
-                    <label for="fechaFin" class="form-label">Hasta: </label>
-                    <input type="datetime-local" name="fechaFin" id="fechaFin" [(ngModel)]="fechaFin" class="form-control w-100"
-                        required>
                         <input type="hidden" [value]="coche.precio" name="precio">
                     <button *ngIf="coche.disponibles>0" class="btn btn-primary w-100" type="submit"
-                        [disabled]="formBusqueda.invalid">Reservar</button>
+                        >Reservar</button>
                     <button *ngIf="coche.disponibles==0" class="btn btn-primary w-100" type="submit" disabled>Agotado</button>
-                    <p class="text-danger" *ngIf="diferenciaDias">La diferencia entre fechas no puede ser mayor de 20 dias ni menor a 1</p>
                     <p class="text-danger" *ngIf="diaIncorrecto">Día de salida incorrecto</p>
+                    <p class="text-danger" *ngIf="faltaLugar">Selecciona el lugar de salida</p>
                     <p class="text-success" *ngIf="reservado">Has reservado el coche</p>
 
                 </form>

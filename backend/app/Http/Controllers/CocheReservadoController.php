@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CocheReservado;
 use App\Models\Coche;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use \App\Mail\CorreoCoche;
 class CocheReservadoController extends Controller
 {
     public function index()
     {
         return CocheReservado::all();
     }
-   
+
 
     public function getCochesById()
     {
@@ -38,20 +41,21 @@ class CocheReservadoController extends Controller
         $validated = $request->validate([
             'id_coche' => 'required|integer',
             'id_usuario' => 'required|integer',
-            'fecha_recogida' => 'required|date',
-            'fecha_devolucion' => 'required|date',
-            'precio' => 'required|integer'
+            'fecha_salida' => 'required|date',
+            'lugar' => 'required|string',
         ]);
         $coche = Coche::find($validated['id_coche']);
         if ($coche) {
             $coche->disponibles -= 1;
             $coche->save();
         }
-        $reserva = CocheReservado::create($validated);
-        return response()->json([
-            'success' => true,
-            'reserva' => $reserva
-        ]);
+        CocheReservado::create($validated);
+        $usuario = User::find($validated['id_usuario']);
+        if ($usuario) {
+            
+            Mail::to($usuario->email)->send(new CorreoCoche($usuario,$coche,$validated['lugar']));
+        }
+
 
     }
     public function destroy($id)
