@@ -8,7 +8,7 @@ RUN npm install
 
 COPY vite.config.js ./
 COPY resources ./resources
-COPY webpack.mix.js ./
+
 # (Si usas webpack.mix.js) Si no, solo resources y vite.config.js bastan
 
 RUN npm run build
