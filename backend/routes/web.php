@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ServicesController;
@@ -33,7 +34,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/crearCoche', [CocheController::class, 'store'])->name('admin.createcoche');
     Route::put('admin/actualizar-coche/{id}', [CocheController::class, 'update'])->name('admin.updatecoche');
     Route::delete('admin/eliminar-coche/{id}', [CocheController::class, 'destroy'])->name('admin.deletecoche');
-
+    
+    Route::get('admin/crear-hotel', function () {
+        return view('admin.crearhotel');
+    })->name('admin.crearhotel');
+    Route::post('/crearHotel', [HotelController::class, 'store'])->name('admin.createhotel');
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
 

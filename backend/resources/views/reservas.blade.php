@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{\Carbon\Carbon::parse($cochesUsuario[$i]->created_at)->format('d/m/Y H:i') }}</td>
                         <td>
-                            <a href="{{ config('app.frontend_url') }}/detalle/{{ $coches[$i]->id }}"
+                            <a href="{{ config('app.frontend_url') }}/detalle-coche/{{ $coches[$i]->id }}"
                                 class="text-decoration-none text-black">
                                 <img src="{{ $coches[$i]->imagen }}" alt="Imagen coche" class="img-fluid w-50"
                                     style="max-width:300px;min-width:100px"><br><b>{{ $coches[$i]->marca }}
@@ -29,7 +29,7 @@
                         <td>{{ $coches[$i]->precio }}</td>
                         <td>
                             <span class="fw-bold">Día:</span>
-                            {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_salida)->format('d/m/Y H:i') }}<br>
+                            {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_salida)->format('d/m/Y') }}<br>
                            
                         </td>
 

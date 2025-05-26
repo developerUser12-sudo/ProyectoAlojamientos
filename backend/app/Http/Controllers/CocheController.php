@@ -7,35 +7,36 @@ use Illuminate\Http\Request;
 use App\Models\Coche;
 class CocheController extends Controller
 {
-    public function filtrar(Request $request)
-    {
-        $query = Coche::query();
+   public function filtrar(Request $request)
+{
+    $query = Coche::query();
 
-        if ($request->has('id')) {
-            $query->where('id', 'like', $request->id);
-        } else {
+    if ($request->has('id')) {
+        $query->where('id', 'like', $request->id);
+    } else {
 
-            $query->where('origen', 'like', '%' . $request->origen . '%');
-            $query->where('destino', 'like', '%' . $request->destino . '%');
-            if ($request->has('marca') && !empty($request->marca)) {
-                $query->whereRaw('LOWER(TRIM(origen)) like ?', ['%' . strtolower(trim($request->origen)) . '%']);
-            }
-            if ($request->has('modelo') && !empty($request->modelo)) {
-                $query->whereRaw('LOWER(TRIM(destino)) like ?', ['%' . strtolower(trim($request->destino)) . '%']);
-            }
-            if ($request->has('precio_min') && !empty($request->precio_min)) {
-                $query->where('precio', '>=', $request->precio_min);
-            }
-            if ($request->has('precio_max') && !empty($request->precio_max)) {
-                $query->where('precio', '<=', $request->precio_max);
-            }
-
+        $query->where('origen', 'like', '%' . $request->origen . '%');
+        $query->where('destino', 'like', '%' . $request->destino . '%');
+        if ($request->has('marca') && !empty($request->marca)) {
+            $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
+        }
+        if ($request->has('modelo') && !empty($request->modelo)) {
+            $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
+        }
+        if ($request->has('precio_min') && !empty($request->precio_min)) {
+            $query->where('precio', '>=', $request->precio_min);
+        }
+        if ($request->has('precio_max') && !empty($request->precio_max)) {
+            $query->where('precio', '<=', $request->precio_max);
         }
 
-        $coches = $query->get();
-
-        return response()->json($coches);
     }
+
+    $coches = $query->get();
+
+    return response()->json($coches);
+}
+
     public function index()
     {
         return Coche::all();

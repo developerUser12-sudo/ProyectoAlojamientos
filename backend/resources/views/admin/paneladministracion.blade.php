@@ -102,6 +102,19 @@
         </button>
     </div>
     @endif
+    <div class="card w-100">
+
+        <div class="card-header">{{ __('Hoteles') }}</div>
+        <div class="card-body d-flex flex-column gap-2 table-responsive">
+            <form method="GET" action="{{ route('admin.crearhotel') }}">
+                @csrf
+                <button type="submit" class="btn btn-primary">
+                    Crear hotel
+                </button>
+            </form>
+        </div>
+    </div>
+
 
 
     <form method="POST" action="{{ route('admin.logoutAdmin') }}">

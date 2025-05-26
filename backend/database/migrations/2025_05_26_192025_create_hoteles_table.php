@@ -20,8 +20,8 @@ return new class extends Migration
             $table->json('servicios');
             $table->json('imagenes');
             $table->integer('capacidad');
-            $table->date('fecha_apertura');
-            $table->date('fecha_cierre');
+            $table->time('hora_apertura');
+            $table->time('hora_cierre');
             $table->timestamps();
         });
         

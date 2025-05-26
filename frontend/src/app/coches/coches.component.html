@@ -24,8 +24,9 @@
     <div class="w-75 d-flex flex-column gap-3 m-auto" *ngIf="!buscado||filtrar.length==0">
         <h4 *ngIf="filtrar.length==0&&buscado" class="mb-5">No se han encontrado resultados</h4>
         <h3 class="w-100">Échale un vistazo a nuestros mejores coches</h3>
+        <p>{{cargando}}</p>
         <div class="d-flex justify-content-center flex-wrap gap-3">
-            <div *ngFor="let coche of coches.slice(0,10)" class="border border-secondary bg-white p-2 rounded cars">
+            <div *ngFor="let coche of coches.slice(0,20)" class="border border-secondary bg-white p-2 rounded cars">
                 <a [routerLink]="['/detalle-coche', coche.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
                     <img [src]="coche.imagen" alt="Imagen coche" style="width: 200px;height:100px;object-fit: cover;">

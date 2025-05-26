@@ -16,6 +16,7 @@ origen = '';
   destino = '';
   marca = '';
   modelo = '';
+  cargando:string='';
   buscado = false;
   minValue: number = 0;
   maxValue: number = 1000;
@@ -32,11 +33,14 @@ origen = '';
   constructor(private serviciosService: CochesService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.serviciosService.getCoches().subscribe((data) => {
-
-      this.coches = data;
-
-    });
+    this.cargando='Cargando...';
+    setTimeout(() => {
+      this.serviciosService.getCoches().subscribe((data) => {
+        this.cargando='';
+        this.coches = data;
+  
+      });
+       }, 3000);
   }
   limpiarFormulario(form: NgForm) {
     form.resetForm();
