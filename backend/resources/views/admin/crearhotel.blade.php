@@ -34,7 +34,7 @@
 
         <div id="serviciosContainer" class="mb-3"></div>
         <div class="mb-3">
-            <label for="numImagenes" class="form-label">Imágene (Max 10)s</label>
+            <label for="numImagenes" class="form-label">Imágenes (Max 10)</label>
             <input type="number" id="numImagenes" class="form-control" min="1" max="10" oninput="aniadirInputImagen()">
         </div>
         <div id="imagenesContainer" class="mb-3"></div>
@@ -58,6 +58,8 @@
 
         <button type="submit" class="btn btn-primary">Crear Coche</button>
         </form>
+      
+
         <form action="{{ route('admin.paneladministracion') }}">
             <input type="submit" value="Volver" class="btn btn-secondary">
         </form>
@@ -76,6 +78,7 @@
                     child.name = 'imagenes[]';
                     child.classList.add('form-control', 'mt-2');
                     child.placeholder = `URL de la imagen ${index + 1}`;
+                     child.required = true;
                     imagenesContainer.appendChild(child);
 
                 }
@@ -90,6 +93,7 @@
                     child.name = 'servicios[]';
                     child.classList.add('form-control', 'mt-2');
                     child.placeholder = `Servicio ${index + 1}`;
+                     child.required = true;
                     serviciosContainer.appendChild(child);
 
                 }

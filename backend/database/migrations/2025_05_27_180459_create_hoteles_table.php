@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+   public function up()
     {
         Schema::create('hoteles', function (Blueprint $table) {
             $table->id();
@@ -26,7 +26,6 @@ return new class extends Migration
         });
         
     }
-
     /**
      * Reverse the migrations.
      */

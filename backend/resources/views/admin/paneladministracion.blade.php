@@ -29,7 +29,7 @@
                 </tr>
                 @foreach ($coches as $coche)
                 <tr>
-                    <td><img src="{{ $coche->imagen }}" alt="Imagen coche" class="img-fluid w-50" style="min-width:130px;"><br><b
+                    <td><img src="{{ $coche->imagen }}" alt="Imagen coche {{ $coche->marca }} {{ $coche->modelo }}" class="img-fluid w-50" style="min-width:130px;"><br><b
                             class="text-center"> {{ $coche->precio }}€</b></td>
                     <td>
                         <p> {{ $coche->origen }}</p>
@@ -112,10 +112,62 @@
                     Crear hotel
                 </button>
             </form>
+             <br>
+            <table class="table">
+                <tr>
+                    <th>Imagen y precio por noche</th>
+                    <th>Nombre</th>
+                    <th>Localizacion</th>
+                    <th>Direccion</th>
+                    <th>Estrellas</th>
+                    <th>Servicios</th>
+                    <th>Capacidad</th>
+                  
+                </tr>
+                @foreach ($hoteles as $hotel)
+                <tr>
+                    <td><img src="{{ $hotel->imagenes[0] }}" alt="Imagen hotel {{ $hotel->nombre }}" class="img-fluid w-50" style="min-width:130px;"><br><b
+                            class="text-center"> </b></td>
+                    <td>
+                        <p> {{ $hotel->nombre }}</p>
+                    </td>
+                    <td>
+                        <p> {{ $hotel->localizacion }}</p>
+                    </td>
+                    <td>
+                        <p> {{ $hotel->direccion }}</p>
+                    </td>
+                    <td>
+                        <p> {{ $hotel->estrellas }}</p>
+                    </td>
+                    <td>
+                        <p> {{ $hotel->servicios }}</p>
+                    </td>
+                    <td>
+                        <p> {{ $hotel->capacidad }}</p>
+                    </td>
+                    <td>
+                        <div class="ms-auto d-flex flex-md-row flex-column gap-2">
+                            <form action="{{ route('admin.actualizarhotel', $hotel->id) }}">
+                                <input type="submit" class="btn btn-warning" value="Editar">
+                            </form>
+                            <form action="{{ route('admin.deletehotel', $hotel->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <input type="submit" class="btn btn-danger" value="Eliminar">
+                            </form>
+                        </div>
+                    </td>
+
+                </tr>
+                @endforeach
+            </table>
+             <div>
+                {{ $hoteles->links() }}
+            </div>
         </div>
     </div>
-
-
 
     <form method="POST" action="{{ route('admin.logoutAdmin') }}">
         @csrf

@@ -25,7 +25,7 @@ Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.l
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/paneladministracion', [ServicesController::class, 'index'])->name('admin.paneladministracion');
-       Route::get('admin/actualizar-coche/{id}', [CocheController::class, 'edit'])->name('admin.actualizarcoche');
+    Route::get('admin/actualizar-coche/{id}', [CocheController::class, 'edit'])->name('admin.actualizarcoche');
 
 
     Route::get('admin/crear-coche', function () {
@@ -34,18 +34,21 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/crearCoche', [CocheController::class, 'store'])->name('admin.createcoche');
     Route::put('admin/actualizar-coche/{id}', [CocheController::class, 'update'])->name('admin.updatecoche');
     Route::delete('admin/eliminar-coche/{id}', [CocheController::class, 'destroy'])->name('admin.deletecoche');
-    
+
     Route::get('admin/crear-hotel', function () {
         return view('admin.crearhotel');
     })->name('admin.crearhotel');
+    Route::get('admin/actualizar-hotel/{id}', [HotelController::class, 'edit'])->name('admin.actualizarhotel');
     Route::post('/crearHotel', [HotelController::class, 'store'])->name('admin.createhotel');
+    Route::put('admin/actualizar-hotel/{id}', [HotelController::class, 'update'])->name('admin.updatehotel');
+    Route::delete('admin/eliminar-hotel/{id}', [HotelController::class, 'destroy'])->name('admin.deletehotel');
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
 
 
 
 Route::get('/username', function () {
-     $user = Auth::user();
+    $user = Auth::user();
 
     if ($user) {
         return response()->json([
@@ -60,7 +63,7 @@ Route::get('/username', function () {
     }
 });
 
-Route::get('/reservas',[ReservadosController::class,'index'])->name('reservas');
+Route::get('/reservas', [ReservadosController::class, 'index'])->name('reservas');
 Route::delete('reservas/{id}', [CocheReservadoController::class, 'destroy'])->name('cancelarreserva');
 
 Route::get('/dashboard', function () {

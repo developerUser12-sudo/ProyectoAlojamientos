@@ -8,6 +8,7 @@ class ServicesController extends Controller
 {
     public function index(){
         $coches=(new CocheController)->getCochesPaginados();
-        return view('admin.paneladministracion',compact('coches'));
+        $hoteles=(new HotelController)->getHotelesPaginados();
+        return view('admin.paneladministracion',compact('coches','hoteles'));
     }
 }
