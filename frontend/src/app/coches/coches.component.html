@@ -2,12 +2,11 @@
     <h2 class="text-center">Busca los mejores coches</h2>
     <div class="row justify-content-center mt-4">
         <div class="col-md-6  col-10">
-            <h5 class="mb-4 h5">Es necesario introducir un origen y un destino para empezar a buscar</h5>
             <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm">
                 <div class="d-flex flex-column flex-md-row gap-2">
-                    <input type="text" name="origen" [(ngModel)]="origen" class="form-control" placeholder="Origen"
+                    <input type="text" name="origen" [(ngModel)]="origen" class="form-control" placeholder="Origen *"
                         required>
-                    <input type="text" class="form-control" name="destino" [(ngModel)]="destino" placeholder="Destino"
+                    <input type="text" class="form-control" name="destino" [(ngModel)]="destino" placeholder="Destino *"
                         required>
                     <input type="text" class="form-control" name="marca" [(ngModel)]="marca" placeholder="Marca">
                     <input type="text" class="form-control" name="modelo" [(ngModel)]="modelo" placeholder="Modelo">

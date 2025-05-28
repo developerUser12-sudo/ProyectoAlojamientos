@@ -12,11 +12,11 @@ import { NgForm } from '@angular/forms';
   styleUrl: './coches.component.css'
 })
 export class CochesComponent {
-origen = '';
+  origen = '';
   destino = '';
   marca = '';
   modelo = '';
-  cargando:string='';
+  cargando: string = '';
   buscado = false;
   minValue: number = 0;
   maxValue: number = 1000;
@@ -30,17 +30,17 @@ origen = '';
   };
   coches: Coche[] = [];
   filtrar: any = [];
-  constructor(private serviciosService: CochesService, private http: HttpClient) { }
+  constructor(private serviciosService: CochesService) { }
 
   ngOnInit(): void {
-    this.cargando='Cargando...';
+    this.cargando = 'Cargando...';
     setTimeout(() => {
       this.serviciosService.getCoches().subscribe((data) => {
-        this.cargando='';
+        this.cargando = '';
         this.coches = data;
-  
+
       });
-       }, 3000);
+    }, 3000);
   }
   limpiarFormulario(form: NgForm) {
     form.resetForm();

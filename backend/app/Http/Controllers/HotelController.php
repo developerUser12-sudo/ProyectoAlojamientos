@@ -9,11 +9,23 @@ class HotelController extends Controller
 {
     public function index()
     {
-        return Hotel::all();
+        $hoteles = Hotel::all();
+        foreach ($hoteles as $hotel) {
+            $hotel->imagenes = json_decode($hotel->imagenes);
+            $hotel->servicios = json_decode($hotel->servicios);
+
+        }
+        return $hoteles;
     }
     public function getHotelesPaginados()
     {
-        return Hotel::simplePaginate(3);
+        $hoteles = Hotel::simplePaginate(3);
+        foreach ($hoteles as $hotel) {
+            $hotel->imagenes = json_decode($hotel->imagenes);
+            $hotel->servicios = json_decode($hotel->servicios);
+
+        }
+        return $hoteles;
     }
     public function store(Request $request)
     {

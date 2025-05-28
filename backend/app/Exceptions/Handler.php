@@ -47,4 +47,15 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    public function render($request, Throwable $exception)
+    {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404) {
+                return redirect(config('app.frontend_url').'/no-encontrado');
+            }
+        }
+
+        return parent::render($request, $exception);
+    }
+
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('precio_noche', 10, 2);
             $table->integer('capacidad');
             $table->integer('disponibles');
+            $table->integer('total');
             $table->json('imagenes');
             $table->timestamps();
         });

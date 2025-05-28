@@ -5,6 +5,32 @@
 
         <h1>Actualizar Hotel</h1>
 
+        <div id="carouselExampleIndicators" class="carousel slide w-50 m-auto" data-ride="carousel">
+            
+            <div class="carousel-inner">
+                @for ($i = 0; $i < count($hotel->imagenes); $i++)
+                    @if ($i == 0)
+
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"  alt="{{  $hotel->nombre }} slide">
+                        </div>
+                    @else
+
+                        <div class="carousel-item ">
+                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"  alt="{{  $hotel->nombre }} slide">
+                        </div>
+                    @endif
+
+                @endfor
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="color: white;">
+                <span class="carousel-control-next-icon" aria-hidden="true" ></span>
+            </a>
+        </div>
         <form action="{{ route('admin.updatehotel', $hotel->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -83,7 +109,7 @@
                     child.type = 'text';
                     if (index < imagenes.length) {
                         child.value = imagenes[index];
-                    } 
+                    }
 
                     child.name = 'imagenes[]';
                     child.classList.add('form-control', 'mt-2');
@@ -100,9 +126,9 @@
                     let child = document.createElement("input");
                     child.type = 'text';
                     child.name = 'servicios[]';
-                     if (index < servicios.length) {
+                    if (index < servicios.length) {
                         child.value = servicios[index];
-                    } 
+                    }
                     child.classList.add('form-control', 'mt-2');
                     child.placeholder = `Servicio ${index + 1}`;
                     serviciosContainer.appendChild(child);
