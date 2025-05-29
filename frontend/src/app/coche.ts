@@ -5,6 +5,7 @@ export interface Coche {
     marca: string;
     modelo: string;
     precio: string;
+    precio_original: string;
     imagen: string;
     disponibles: number;
     descuento: number;

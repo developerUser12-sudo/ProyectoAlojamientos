@@ -87,17 +87,18 @@ class CocheController extends Controller
             'marca' => 'required|string|max:255',
             'modelo' => 'required|string|max:255',
             'imagen' => 'required|string|max:255',
-            'precio' => 'required|numeric',
+            'precio_original' => 'required|numeric',
             'total' => 'required|numeric',
             'descuento' => 'required|numeric',
         ]);
         if ($validated['descuento'] > 0) {
-            $cantidad = ($validated['precio'] * $validated['descuento']) / 100;
-            $validated['precio'] -= $cantidad;
+            $cantidad = ($validated['precio_original'] * $validated['descuento']) / 100;
+            $precio_final = $validated['precio_original'] - $cantidad;
         } else {
-            $validated['precio'] = $validated['precio'] / (1 - $descuento / 100);
+            $precio_final = $validated['precio_original'];
 
         }
+        $validated['precio'] = $precio_final;
         $coche->update($validated);
 
         return redirect()->route('admin.paneladministracion')->with('cocheActualizado', 'Coche actualizado correctamente');

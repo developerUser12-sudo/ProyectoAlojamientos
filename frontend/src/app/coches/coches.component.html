@@ -25,7 +25,7 @@
         <h3 class="w-100">Échale un vistazo a nuestros mejores coches</h3>
         <p>{{cargando}}</p>
         <div class="d-flex justify-content-center flex-wrap gap-3">
-            <div *ngFor="let coche of coches.slice(0,20)" class="border border-secondary bg-white p-2 rounded cars">
+            <div *ngFor="let coche of coches.slice(0,20)" class=" p-2 rounded cars card">
                 <a [routerLink]="['/detalle-coche', coche.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
                     <img [src]="coche.imagen" alt="Imagen coche" style="width: 200px;height:100px;object-fit: cover;">
@@ -34,8 +34,7 @@
                     <p>Modelo: {{coche.modelo}}</p>
                     <b *ngIf="coche.descuento==0" class="fs-5">{{coche.precio}}€</b>
                     <b *ngIf="coche.descuento>0" class="fs-5"><span
-                            class="text-decoration-line-through text-muted">{{+coche.precio / (1 - coche.descuento /
-                            100)}}€</span><span> {{coche.precio}}€</span></b>
+                            class="text-decoration-line-through text-muted">{{coche.precio_original}}€</span><span> {{coche.precio}}€</span></b>
                 </a>
             </div>
         </div>

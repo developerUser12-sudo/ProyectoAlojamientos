@@ -36,9 +36,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="number" name="precio" class="form-control" required min="1 "
-                    value="{{ old('precio', $coche->precio) }}" >
+                <label for="precio_original" class="form-label">Precio</label>
+                <input type="number" name="precio_original" class="form-control" required min="1 "
+                    value="{{ old('precio_original', $coche->precio_original) }}" >
             </div>
             <div class="mb-3">
                 <label for="total" class="form-label">Total</label>

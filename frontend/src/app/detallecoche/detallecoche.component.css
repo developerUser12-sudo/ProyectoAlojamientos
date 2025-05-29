@@ -2,3 +2,6 @@
     max-width: 400px;
     max-height: 400px;
 }
+.parent div{
+    background-color: #B0C4DE !important;
+}

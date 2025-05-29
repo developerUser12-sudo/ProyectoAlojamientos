@@ -9,19 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-      public function up(): void
+    public function up(): void
     {
-         Schema::create('coches', function (Blueprint $table) {
+        Schema::create('habitaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('origen');
-            $table->string('destino');
-            $table->string('marca');
-            $table->string('modelo');
-            $table->string('imagen');
-            $table->decimal('precio', 10, 2);
+            $table->foreignId('hotel_id')->constrained('hoteles')->onDelete('cascade');
+            $table->string('tipo_habitacion');
+            $table->decimal('precio_noche', 10, 2);
+            $table->decimal('precio_original_noche', 10, 2);
+            $table->integer('capacidad');
             $table->integer('disponibles');
             $table->integer('total');
-            $table->integer('descuento');
+            $table->json('imagenes');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coches');
+        Schema::dropIfExists('habitaciones');
     }
 };

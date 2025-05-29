@@ -18,12 +18,12 @@
             </form>
         </div>
     </div>
-    <div class="w-75 d-flex flex-column gap-3 m-auto">
+    <div class="w-75 d-flex flex-column gap-3 m-auto ">
         <h4 class="mb-5">No se han encontrado resultados</h4>
         <h3 class="w-100">¿Has visto nuestros mejores hoteles?</h3>
         <p>{{cargando}}</p>
         <div class="d-flex justify-content-center flex-wrap gap-3">
-            <div *ngFor="let hotel of hoteles.slice(0,20)" class="border border-secondary bg-white p-2 rounded cars">
+            <div *ngFor="let hotel of hoteles.slice(0,20)" class=" p-2 rounded card">
                 <a [routerLink]="['/detalle-hotel', hotel.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
                     <img [src]="hotel.imagenes[0]" alt="Imagen hotel hotel.nombre"

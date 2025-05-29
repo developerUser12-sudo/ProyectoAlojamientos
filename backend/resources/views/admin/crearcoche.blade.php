@@ -34,8 +34,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="number" id="precio" name="precio" class="form-control" required min="1">
+                <label for="precio_original" class="form-label">Precio</label>
+                <input type="number" id="precio_original" name="precio_original" class="form-control" required min="1">
             </div>
 
             <div class="mb-3">
