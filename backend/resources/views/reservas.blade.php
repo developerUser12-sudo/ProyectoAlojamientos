@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="table-responsive">
-            <table class="table bg-white border rounded border-secondary">
+            <table class="table border rounded border-secondary">
                 <tr>
                     <th>Fecha de reserva</th>
                     <th>Coche</th>
@@ -19,7 +19,7 @@
                         <td>
                             <a href="{{ config('app.frontend_url') }}/detalle-coche/{{ $coches[$i]->id }}"
                                 class="text-decoration-none text-black">
-                                <img src="{{ $coches[$i]->imagen }}" alt="Imagen coche" class="img-fluid w-50"
+                                <img src="{{ $coches[$i]->imagen }}" alt="Imagen coche {{ $coches[$i]->marca }} {{ $coches[$i]->modelo }}" class="img-fluid w-50"
                                     style="max-width:300px;min-width:100px"><br><b>{{ $coches[$i]->marca }}
                                 {{ $coches[$i]->modelo }}</b>
                             </a>

@@ -16,7 +16,7 @@
                     </button>
                 </form>
                 <br>
-                <table class="table" style="background-color: #B0C4DE">
+                <table class="table">
                     <tr>
                         <th>Imagen y precio</th>
                         <th>Origen</th>

@@ -16,7 +16,8 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Correo electrónico') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control  @error('error') is-invalid @enderror" name="email"
+                                    <input id="email" type="email"
+                                        class="form-control  @error('error') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autofocus>
                                 </div>
                             </div>
@@ -28,8 +29,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
-                                        class="form-control @error('error') is-invalid @enderror" name="password"
-                                        required>
+                                        class="form-control @error('error') is-invalid @enderror" name="password" required>
                                     @error('error')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -66,11 +66,19 @@
                             </div>
                         </form>
                         <div class="row mt-5">
-                            <div class="d-flex flex-row gap-4 justify-content-center">
-                                <p>¿No tienes una cuenta?</p>
-                                <form action="{{ config('app.url') }}/register">
-                                    <input type="submit" class="btn btn-primary  justify-content-center" value="Regístrate">
-                                </form>
+                            <div class="d-flex flex-md-row flex-column gap-4 justify-content-center">
+                                <div class="d-flex flex-row justify-content-center gap-1">
+                                    <p>¿No tienes una cuenta?</p>
+                                    <form action="{{ config('app.url') }}/register">
+                                        <input type="submit" class="btn btn-primary  justify-content-center"
+                                            value="Regístrate">
+                                    </form>
+                                </div>
+                                <div>
+                                    <form action="{{ config('app.frontend_url') }}">
+                                        <input type="submit" class="btn btn-secondary ms-3" value="Volver">
+                                    </form>
+                                </div>
                             </div>
 
                         </div>

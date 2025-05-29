@@ -37,7 +37,7 @@ p{
     min-height: 100vh;
     
 }
-.card{
+.card *:not(button):not(input):not(a):not(.alert-success),.table *:not(input),.table{
     background-color: #B0C4DE !important;
 }
 main{
