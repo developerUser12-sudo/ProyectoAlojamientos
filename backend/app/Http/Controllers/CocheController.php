@@ -7,43 +7,44 @@ use Illuminate\Http\Request;
 use App\Models\Coche;
 class CocheController extends Controller
 {
-   public function filtrar(Request $request)
-{
-    $query = Coche::query();
+    public function filtrar(Request $request)
+    {
+        $query = Coche::query();
 
-    if ($request->has('id')) {
-        $query->where('id', 'like', $request->id);
-    } else {
+        if ($request->has('id')) {
+            $query->where('id', 'like', $request->id);
+        } else {
 
-        $query->where('origen', 'like', '%' . $request->origen . '%');
-        $query->where('destino', 'like', '%' . $request->destino . '%');
-        if ($request->has('marca') && !empty($request->marca)) {
-            $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
-        }
-        if ($request->has('modelo') && !empty($request->modelo)) {
-            $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
-        }
-        if ($request->has('precio_min') && !empty($request->precio_min)) {
-            $query->where('precio', '>=', $request->precio_min);
-        }
-        if ($request->has('precio_max') && !empty($request->precio_max)) {
-            $query->where('precio', '<=', $request->precio_max);
+            $query->where('origen', 'like', '%' . $request->origen . '%');
+            $query->where('destino', 'like', '%' . $request->destino . '%');
+            if ($request->has('marca') && !empty($request->marca)) {
+                $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
+            }
+            if ($request->has('modelo') && !empty($request->modelo)) {
+                $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
+            }
+            if ($request->has('precio_min') && !empty($request->precio_min)) {
+                $query->where('precio', '>=', $request->precio_min);
+            }
+            if ($request->has('precio_max') && !empty($request->precio_max)) {
+                $query->where('precio', '<=', $request->precio_max);
+            }
+
         }
 
+        $coches = $query->get();
+
+        return response()->json($coches);
     }
-
-    $coches = $query->get();
-
-    return response()->json($coches);
-}
 
     public function index()
     {
         return Coche::all();
     }
+
     public function getCochesPaginados()
     {
-        return Coche::simplePaginate(3);
+        return Coche::paginate(3, ['*'], 'coches_paginados');
     }
 
     public function store(Request $request)
@@ -54,16 +55,19 @@ class CocheController extends Controller
             'marca' => 'required|string|max:255',
             'modelo' => 'required|string|max:255',
             'imagen' => 'required|string|max:255',
-            'precio' => 'required|numeric',
+            'precio_original' => 'required|numeric',
             'total' => 'required|numeric',
             'descuento' => 'required|numeric',
-
         ]);
-        $validated['disponibles'] = $validated['total'];
         if ($validated['descuento'] > 0) {
-            $cantidad = ($validated['precio'] * $validated['descuento']) / 100;
-            $validated['precio'] -= $cantidad;
+            $cantidad = ($validated['precio_original'] * $validated['descuento']) / 100;
+            $precio_final = $validated['precio_original'] - $cantidad;
+        } else {
+            $precio_final = $validated['precio_original'];
+
         }
+        $validated['precio'] = $precio_final;
+        $validated['disponibles'] = $validated['total'];
         Coche::create($validated);
 
         return redirect()->route('admin.paneladministracion')->with('cocheCreado', 'Coche creado correctamente');
@@ -80,7 +84,6 @@ class CocheController extends Controller
     public function update(Request $request, $id)
     {
         $coche = Coche::find($id);
-        $descuento = $coche->descuento;
         $validated = $request->validate([
             'origen' => 'required|string|max:255',
             'destino' => 'required|string|max:255',

@@ -1,0 +1,48 @@
+.parent div {
+    background-color: #B0C4DE !important;
+}
+
+#carouselExampleControls {
+    max-width: 600px;
+    width: 100%;
+}
+
+img {
+    opacity: 0.80;
+}
+
+.carousel-control-prev {
+    animation: moverIzquierda 1s infinite ease-in-out;
+}
+
+.carousel-control-next {
+    animation: moverDerecha 1s infinite ease-in-out;
+}
+
+@keyframes moverIzquierda {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-7px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes moverDerecha {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(7px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

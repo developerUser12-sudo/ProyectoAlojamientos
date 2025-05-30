@@ -4,11 +4,13 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ServicesController;
+use App\Models\Habitacion;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CocheController;
 use App\Http\Controllers\CocheReservadoController;
 use App\Http\Controllers\ReservadosController;
+use App\Http\Controllers\HabitacionController;
 use App\Models\CocheReservado;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -42,6 +44,12 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/crearHotel', [HotelController::class, 'store'])->name('admin.createhotel');
     Route::put('admin/actualizar-hotel/{id}', [HotelController::class, 'update'])->name('admin.updatehotel');
     Route::delete('admin/eliminar-hotel/{id}', [HotelController::class, 'destroy'])->name('admin.deletehotel');
+    
+    Route::get('admin/crear-habitacion/{id}', [HabitacionController::class, 'create'])->name('admin.crearhabitacion');
+    Route::get('admin/actualizar-habitacion/{id}', [HabitacionController::class, 'edit'])->name('admin.actualizarhabitacion');
+    Route::post('/crearHabitacion', [HabitacionController::class, 'store'])->name('admin.createhabitacion');
+    Route::put('admin/actualizar-habitacion/{id}', [HabitacionController::class, 'update'])->name('admin.updatehabitacion');
+    Route::delete('admin/eliminar-habitacion/{id}', [HabitacionController::class, 'destroy'])->name('admin.deletehabitacion');
     Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logoutAdmin');
 });
 

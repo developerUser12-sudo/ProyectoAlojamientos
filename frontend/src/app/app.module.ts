@@ -11,6 +11,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 import { CochesComponent } from './coches/coches.component';
 import { DetallecocheComponent } from './detallecoche/detallecoche.component';
+import { DetallehotelComponent } from './detallehotel/detallehotel.component';
 @NgModule({
   declarations: [
 
@@ -20,6 +21,7 @@ import { DetallecocheComponent } from './detallecoche/detallecoche.component';
     NoencontradoComponent,
     CochesComponent,
     DetallecocheComponent,
+    DetallehotelComponent,
     
   ],
   imports: [

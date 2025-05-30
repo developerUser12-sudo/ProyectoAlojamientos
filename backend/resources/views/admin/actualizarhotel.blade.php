@@ -6,29 +6,30 @@
         <h1>Actualizar Hotel</h1>
 
         <div id="carouselExampleIndicators" class="carousel slide w-50 m-auto" data-ride="carousel">
-            
+
             <div class="carousel-inner">
                 @for ($i = 0; $i < count($hotel->imagenes); $i++)
                     @if ($i == 0)
 
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"  alt="{{  $hotel->nombre }} slide">
+                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}" alt="{{  $hotel->nombre }} slide">
                         </div>
                     @else
 
                         <div class="carousel-item ">
-                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"  alt="{{  $hotel->nombre }} slide">
+                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}" alt="{{  $hotel->nombre }} slide">
                         </div>
                     @endif
 
                 @endfor
 
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" >
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="color: white;">
-                <span class="carousel-control-next-icon" aria-hidden="true" ></span>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"
+                style="color: white;">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
         </div>
         <form action="{{ route('admin.updatehotel', $hotel->id) }}" method="POST">
@@ -74,6 +75,11 @@
             </div>
             <div id="imagenesContainer" class="mb-3"></div>
             <div class="mb-3">
+                <label for="numComidas" class="form-label">Comidas (Max 3)</label>
+                <input type="number" id="numComidas" class="form-control" min="1" max="3" oninput="aniadirInputComida()" value="{{ count($hotel->comidas) }}">
+            </div>
+            <div id="comidasContainer" class="mb-3"></div>
+            <div class="mb-3">
                 <label for="capacidad" class="form-label">Capacidad</label>
                 <input type="number" name="capacidad" class="form-control" required min="1 "
                     value="{{ old('capacidad', $hotel->capacidad) }}">
@@ -99,8 +105,11 @@
         let imagenesContainer = document.getElementById('imagenesContainer');
         let numServiciosInput = document.getElementById('numServicios');
         let serviciosContainer = document.getElementById('serviciosContainer');
+        let numComidasInput = document.getElementById('numComidas');
+        let comidasContainer = document.getElementById('comidasContainer');
         const servicios = @json($hotel->servicios);
         const imagenes = @json($hotel->imagenes);
+        const comidas = @json($hotel->comidas);
         function aniadirInputImagen() {
             imagenesContainer.innerHTML = '';
             if (numImagenesInput.value <= 10) {
@@ -136,6 +145,21 @@
                 }
             }
         }
+         function aniadirInputComida() {
+           comidasContainer.innerHTML = '';
+            if (numComidasInput.value <= 10) {
+                for (let index = 0; index < numComidasInput.value; index++) {
+                    let child = document.createElement("input");
+                    child.type = 'text';
+                    child.name = 'comidas[]';
+                    child.classList.add('form-control', 'mt-2');
+                    child.placeholder = `Comida ${index + 1}`;
+                     child.required = true;
+                    comidasContainer.appendChild(child);
+
+                }
+            }
+        }
         function aniadirInputsServicios() {
 
             for (let index = 0; index < servicios.length; index++) {
@@ -160,8 +184,21 @@
                 imagenesContainer.appendChild(child);
             }
         }
+        function aniadirInputsComidas() {
+
+            for (let index = 0; index < comidas.length; index++) {
+                let child = document.createElement("input");
+                child.type = 'text';
+                child.name = 'comidas[]';
+                child.value = comidas[index];
+                child.classList.add('form-control', 'mt-2');
+                child.placeholder = `Comida ${index + 1}`;
+                comidaContainer.appendChild(child);
+            }
+        }
         addEventListener('load', aniadirInputsServicios());
         addEventListener('load', aniadirInputsImagenes());
+        addEventListener('load', aniadirInputsComidas());
 
 
     </script>

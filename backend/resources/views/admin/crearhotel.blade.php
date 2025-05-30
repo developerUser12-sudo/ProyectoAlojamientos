@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label for="estrellas" class="form-label">Estrellas</label>
-            <input type="number" id="estrellas" name="estrellas" class="form-control" required min="0" max="5" step="1">
+            <input type="number" id="estrellas" name="estrellas" class="form-control" required min="1" max="5" >
         </div>
 
         <div class="mb-3">
@@ -38,6 +38,11 @@
             <input type="number" id="numImagenes" class="form-control" min="1" max="10" oninput="aniadirInputImagen()">
         </div>
         <div id="imagenesContainer" class="mb-3"></div>
+        <div class="mb-3">
+            <label for="numComidas" class="form-label">Comidas (Max 3)</label>
+            <input type="number" id="numComidas" class="form-control" min="1" max="3" oninput="aniadirInputComida()">
+        </div>
+        <div id="comidasContainer" class="mb-3"></div>
 
         <div class="mb-3">
             <label for="capacidad" class="form-label">Capacidad</label>
@@ -69,6 +74,8 @@
         let imagenesContainer = document.getElementById('imagenesContainer');
         let numServiciosInput = document.getElementById('numServicios');
         let serviciosContainer = document.getElementById('serviciosContainer');
+        let numComidasInput = document.getElementById('numComidas');
+        let comidasContainer = document.getElementById('comidasContainer');
         function aniadirInputImagen() {
             imagenesContainer.innerHTML = '';
             if (numImagenesInput.value <= 10) {
@@ -95,6 +102,21 @@
                     child.placeholder = `Servicio ${index + 1}`;
                      child.required = true;
                     serviciosContainer.appendChild(child);
+
+                }
+            }
+        }
+        function aniadirInputComida() {
+           comidasContainer.innerHTML = '';
+            if (numComidasInput.value <= 10) {
+                for (let index = 0; index < numComidasInput.value; index++) {
+                    let child = document.createElement("input");
+                    child.type = 'text';
+                    child.name = 'comidas[]';
+                    child.classList.add('form-control', 'mt-2');
+                    child.placeholder = `Comida ${index + 1}`;
+                     child.required = true;
+                    comidasContainer.appendChild(child);
 
                 }
             }

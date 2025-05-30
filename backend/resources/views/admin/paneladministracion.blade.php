@@ -75,8 +75,9 @@
                         </tr>
                     @endforeach
                 </table>
-                <div>
+                <div class="paginate">
                     {{ $coches->links() }}
+
                 </div>
 
             </div>
@@ -127,13 +128,14 @@
                         <th>Direccion</th>
                         <th>Estrellas</th>
                         <th>Servicios</th>
+                        <th>Comidas</th>
                         <th>Capacidad</th>
 
                     </tr>
                     @foreach ($hoteles as $hotel)
                         <tr>
                             <td><img src="{{ $hotel->imagenes[0] }}" alt="Imagen hotel {{ $hotel->nombre }}"
-                                    class="img-fluid w-50" style="min-width:130px;"><br><b class="text-center"> </b></td>
+                                    class="img-fluid w-100" style="min-width:130px;"><br><b class="text-center"> </b></td>
                             <td>
                                 <p> {{ $hotel->nombre }}</p>
                             </td>
@@ -151,7 +153,17 @@
                                     @foreach ($hotel->servicios as $servicio)
                                         {{ $servicio}}
                                         @if (!$loop->last)
-                                        ,
+                                            ,
+                                        @endif
+                                    @endforeach
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @foreach ($hotel->comidas as $comidas)
+                                        {{ $comidas}}
+                                        @if (!$loop->last)
+                                            ,
                                         @endif
                                     @endforeach
                                 </p>
@@ -161,6 +173,11 @@
                             </td>
                             <td>
                                 <div class="ms-auto d-flex flex-md-row flex-column gap-2">
+                                    <form method="GET" action="{{ route('admin.crearhabitacion', $hotel->id) }}">
+                                        @csrf
+                                        <input value="Crear habitacion" type="submit" class="btn btn-primary">
+                                            
+                                    </form>
                                     <form action="{{ route('admin.actualizarhotel', $hotel->id) }}">
                                         <input type="submit" class="btn btn-warning" value="Editar">
                                     </form>
@@ -176,11 +193,40 @@
                         </tr>
                     @endforeach
                 </table>
-                <div>
+                <div class="paginate">
                     {{ $hoteles->links() }}
+
                 </div>
+
             </div>
         </div>
+        @if(session('hotelCreado'))
+            <div id="hotelCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
+                {{ session('hotelCreado') }}
+                <button onclick="document.getElementById('hotelCreado').remove()"
+                    style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
+                    ×
+                </button>
+            </div>
+        @endif
+        @if(session('hotelActualizado'))
+            <div id="hotelCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
+                {{ session('hotelActualizado') }}
+                <button onclick="document.getElementById('hotelCreado').remove()"
+                    style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
+                    ×
+                </button>
+            </div>
+        @endif
+        @if(session('hotelBorrado'))
+            <div id="hotelCreado" class="alert alert-success" style="position: relative; padding-right: 40px;">
+                {{ session('hotelBorrado') }}
+                <button onclick="document.getElementById('hotelCreado').remove()"
+                    style="position:absolute;right:15px; background: none; border: none; font-weight: bold; font-size: 17px; cursor: pointer;">
+                    ×
+                </button>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('admin.logoutAdmin') }}">
             @csrf

@@ -34,4 +34,7 @@ export class HotelesComponent {
       });
     }, 3000);
   }
+  stars(n:number): any[]{
+    return Array(n);
+  }
 }

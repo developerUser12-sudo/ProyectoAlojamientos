@@ -1,0 +1,83 @@
+<div *ngIf="hotel" class="container">
+
+    <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start gap-3 p-4 parent">
+
+        <div class="d-flex flex-column rounded gap-2 p-3 border border-secondary">
+
+            <div class="d-flex  flex-column gap-3">
+                <div>
+                    <ng-container *ngFor="let star of stars(hotel.estrellas)">
+                        ⭐
+                    </ng-container>
+                </div>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a [href]="hotel.imagenes[0]" data-lightbox="gallery">
+
+                                <img class="d-block w-100 rounded" [src]="hotel.imagenes[0]" alt="Carrousel slide">
+                            </a>
+                        </div>
+                        <div *ngFor="let image of hotel.imagenes.slice(1)" class="carousel-item">
+                            <a [href]="image" data-lightbox="gallery">
+
+                                <img class="d-block w-100 rounded" [src]="image" alt="Carrousel slide">
+                            </a>
+                        </div>
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+
+                </div>
+                <div class="d-flex flex-row gap-5 justify-content-around mt-2">
+                    <p><b>{{hotel.nombre}}</b></p>
+
+                    <p>{{hotel.direccion}}, {{hotel.localizacion}}</p>
+                    <p>Capacidad: {{hotel.capacidad}}</p>
+                </div>
+                <div>
+                    <h5 class="fw-bold">Servicios</h5>
+                    <div class="d-flex flex-row flex-wrap gap-2">
+                        <span *ngFor="let servicio of hotel.servicios" class="p-2 border rounded bg-body-secondary">
+                            {{ servicio }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="border border-secondary rounded h-100" style="width: 300px;">
+            <form  class="d-flex flex-column gap-2 w-100 p-3">
+                <!-- <label for="fechaInicio" class="form-label">Día de entrada: </label>
+                <input type="date" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-100" required
+                    id="fechaInicio">
+                    (ngSubmit)="onSubmit()" 
+                <label for="fechaFin" class="form-label">Día de salida: </label>
+                <input type="date" name="fechaFin" [(ngModel)]="fechaFin" class="form-control w-100" required
+                    id="fechaFin"> -->
+                <label class="form-label" for="comida">Comida: </label>
+                <select name="comida" id="comida" class="form-select">
+                    <option [value]="comida" *ngFor="let comida of hotel.comidas">
+                        {{comida}}
+                    </option>
+                </select>
+                <!-- <input type="hidden" [value]="coche.precio" name="precio">
+                <button *ngIf="coche.disponibles>0" class="btn btn-primary w-100" type="submit">Reservar</button>
+                <button *ngIf="coche.disponibles==0" class="btn btn-primary w-100" type="submit"
+                    disabled>Agotado</button>
+
+                <p class="text-danger" *ngIf="diaIncorrecto">Día de salida incorrecto</p>
+                <p class="text-danger" *ngIf="faltaLugar">Selecciona el lugar de salida</p>
+                <p class="text-success" *ngIf="reservado">Has reservado el coche. Revista tu correo electrónico para ver
+                    los detalles </p> -->
+            </form>
+        </div>
+    </div>
+
+</div>

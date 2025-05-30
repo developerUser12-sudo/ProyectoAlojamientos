@@ -7,23 +7,53 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
+    public function filtrar(Request $request)
+    {
+        $query = Hotel::query();
+
+        if ($request->has('id')) {
+            $query->where('id', 'like', $request->id);
+        }
+        // else {
+        //     $query->where('origen', 'like', '%' . $request->origen . '%');
+        //     $query->where('destino', 'like', '%' . $request->destino . '%');
+        //     if ($request->has('marca') && !empty($request->marca)) {
+        //         $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
+        //     }
+        //     if ($request->has('modelo') && !empty($request->modelo)) {
+        //         $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
+        //     }
+        //     if ($request->has('precio_min') && !empty($request->precio_min)) {
+        //         $query->where('precio', '>=', $request->precio_min);
+        //     }
+        //     if ($request->has('precio_max') && !empty($request->precio_max)) {
+        //         $query->where('precio', '<=', $request->precio_max);
+        //     }
+
+        // }
+
+        $coches = $query->get();
+
+        return response()->json($coches);
+    }
     public function index()
     {
         $hoteles = Hotel::all();
         foreach ($hoteles as $hotel) {
             $hotel->imagenes = json_decode($hotel->imagenes);
             $hotel->servicios = json_decode($hotel->servicios);
+            $hotel->comidas = json_decode($hotel->comidas);
 
         }
         return $hoteles;
     }
     public function getHotelesPaginados()
     {
-        $hoteles = Hotel::simplePaginate(3);
+        $hoteles = Hotel::paginate(3, ['*'], 'hoteles_paginados');
         foreach ($hoteles as $hotel) {
             $hotel->imagenes = json_decode($hotel->imagenes);
             $hotel->servicios = json_decode($hotel->servicios);
-
+            $hotel->comidas = json_decode($hotel->comidas);
         }
         return $hoteles;
     }
@@ -33,17 +63,20 @@ class HotelController extends Controller
             'nombre' => 'required|string|max:255',
             'localizacion' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
-            'estrellas' => 'required|integer|min:0|max:5',
+            'estrellas' => 'required|integer|min:1|max:5',
             'servicios' => 'required|array|max:10',
             'servicios.*' => 'string|max:255',
             'imagenes' => 'required|array|max:10',
             'imagenes.*' => 'string|max:255',
+            'comidas' => 'required|array|max:10',
+            'comidas.*' => 'string|max:255',
             'capacidad' => 'required|integer|min:1',
             'hora_apertura' => 'required|date_format:H:i',
             'hora_cierre' => 'required|date_format:H:i',
         ]);
         $validated['servicios'] = json_encode($validated['servicios']);
         $validated['imagenes'] = json_encode($validated['imagenes']);
+        $validated['comidas'] = json_encode($validated['comidas']);
 
         Hotel::create($validated);
 
@@ -54,6 +87,7 @@ class HotelController extends Controller
         $hotel = Hotel::find($id);
         $hotel->servicios = json_decode($hotel->servicios);
         $hotel->imagenes = json_decode($hotel->imagenes);
+        $hotel->comidas = json_decode($hotel->comidas);
         return view('admin.actualizarhotel', compact('hotel'));
     }
     public function update(Request $request, $id)
@@ -68,6 +102,8 @@ class HotelController extends Controller
             'servicios.*' => 'string|max:255',
             'imagenes' => 'required|array|max:10',
             'imagenes.*' => 'string|max:255',
+            'comidas' => 'required|array|max:10',
+            'comidas.*' => 'string|max:255',
             'capacidad' => 'required|integer|min:1',
             'hora_apertura' => 'required|date_format:H:i:s',
             'hora_cierre' => 'required|date_format:H:i:s',
@@ -75,6 +111,7 @@ class HotelController extends Controller
 
         $validated['servicios'] = json_encode($validated['servicios']);
         $validated['imagenes'] = json_encode($validated['imagenes']);
+        $validated['comidas'] = json_encode($validated['comidas']);
 
 
         $hotel = Hotel::find($id);
@@ -87,6 +124,7 @@ class HotelController extends Controller
         $hotel->hora_cierre = $validated['hora_cierre'];
         $hotel->servicios = $validated['servicios'];
         $hotel->imagenes = $validated['imagenes'];
+        $hotel->comidas = $validated['comidas'];
         $hotel->save();
 
 

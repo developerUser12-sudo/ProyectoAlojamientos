@@ -28,20 +28,24 @@
                     class="text-decoration-none text-black">
                     <img [src]="hotel.imagenes[0]" alt="Imagen hotel hotel.nombre"
                         style="width: 300px;height:200px;object-fit: cover;">
+                    <div class="d-flex flex-row gap-5 mt-2">
                         <p><b>{{hotel.nombre}}</b></p>
-                    <div class="d-flex flex-row justify-content-between w-75">
-                        <ng-container *ngFor="let star of [].constructor(hotel.estrellas)">
+                        <ng-container *ngFor="let star of stars(hotel.estrellas)">
                             ⭐
                         </ng-container>
-                        <p><i class="bi bi-geo-alt-fill"></i> {{hotel.localizacion}}</p>
                     </div>
+                    <div class="d-flex flex-row justify-content-between w-75">
+                        <p><i class="bi bi-geo-alt-fill"></i> {{hotel.localizacion}}</p>
+                        <p>Capacidad total: {{hotel.capacidad}}</p>
+                    </div>
+                    <!-- <div class="d-flex flex-row flex-wrap justify-content-evenly">
+                        <p *ngFor="let servicio of hotel.servicios">
+                            {{ servicio }}
+                        </p>
+                    </div> -->
 
-                    <!-- <p>Marca: {{coche.marca}}</p>
-                    <p>Modelo: {{coche.modelo}}</p>
-                    <b *ngIf="coche.descuento==0" class="fs-5">{{coche.precio}}€</b>
-                    <b *ngIf="coche.descuento>0" class="fs-5"><span
-                            class="text-decoration-line-through text-muted">{{+coche.precio / (1 - coche.descuento /
-                            100)}}€</span><span> {{coche.precio}}€</span></b> -->
+
+
                 </a>
             </div>
         </div>

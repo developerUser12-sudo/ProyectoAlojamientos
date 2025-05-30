@@ -1,5 +1,5 @@
 <div class="container-fluid py-5 d-flex flex-column gap-5">
-    <h2 class="text-center">Busca los mejores coches</h2>
+    <h2 class="text-center">Encuentra el coche ideal para llevarte a donde quieras</h2>
     <div class="row justify-content-center mt-4">
         <div class="col-md-6  col-10">
             <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm">
@@ -42,7 +42,7 @@
     <div class="w-75 d-flex flex-wrap gap-3 m-auto" *ngIf="buscado&&filtrar.length>0">
         <h3 class="w-100">Tus resultados</h3>
         <div class="d-flex justify-content-center flex-wrap gap-3">
-            <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded cars">
+            <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded cars card">
                 <a [routerLink]="['/detalle-coche', filtra.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
                     <img [src]="filtra.imagen" alt="Imagen coche filtra.marca filtra.modelo" style="width: 200px;height:100px;object-fit: cover;">

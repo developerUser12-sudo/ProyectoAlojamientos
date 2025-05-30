@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+   public function up(): void
     {
         Schema::create('habitaciones', function (Blueprint $table) {
             $table->id();
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('capacidad');
             $table->integer('disponibles');
             $table->integer('total');
+            $table->integer('descuento');
             $table->json('imagenes');
             $table->timestamps();
         });

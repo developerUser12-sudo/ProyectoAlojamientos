@@ -50,6 +50,8 @@ export class CochesComponent {
     this.modelo = '';
     this.minValue = 0;
     this.maxValue = 1000;
+    this.buscado=false;
+    this.filtrar=[];
   }
   onSubmit() {
     this.buscado = true;

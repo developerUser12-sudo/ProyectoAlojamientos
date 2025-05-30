@@ -9,6 +9,7 @@ Route::apiResource('coches', CocheController::class)->except(['show']);
 Route::apiResource('hoteles', HotelController::class)->except(['show']);
 Route::apiResource('coches-reservados', CocheReservadoController::class)->except(['show']);
 Route::get('/coches/filtrar', [CocheController::class, 'filtrar']);
+Route::get('/hoteles/filtrar', [HotelController::class, 'filtrar']);
 Route::post('/coches-reservados', [CocheReservadoController::class, 'store']);
 
 

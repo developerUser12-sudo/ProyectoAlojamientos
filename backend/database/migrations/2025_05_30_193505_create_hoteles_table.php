@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
+    public function up()
     {
         Schema::create('hoteles', function (Blueprint $table) {
             $table->id();
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('estrellas');
             $table->json('servicios');
             $table->json('imagenes');
+            $table->json('comidas');
             $table->integer('capacidad');
             $table->time('hora_apertura');
             $table->time('hora_cierre');
@@ -26,6 +27,7 @@ return new class extends Migration
         });
         
     }
+
     /**
      * Reverse the migrations.
      */

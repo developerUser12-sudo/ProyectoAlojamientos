@@ -9,6 +9,7 @@ export interface Hotel {
   servicios: string[]; 
   imagenes: string[]; 
   capacidad: number;
+  comidas:string[];
   hora_apertura: string;
   hora_cierre: string;  
 }

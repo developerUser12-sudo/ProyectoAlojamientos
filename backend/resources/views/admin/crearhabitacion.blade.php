@@ -16,28 +16,31 @@
             </div>
 
             <div class="mb-3">
-                <label for="precio_noche" class="form-label">Precio por noche</label>
-                <input type="number" id="precio_noche" name="precio_noche" class="form-control" required>
+                <label for="precio_original_noche" class="form-label">Precio por noche</label>
+                <input type="number" id="precio_original_noche" name="precio_original_noche" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label for="capacidad" class="form-label">Capacidad</label>
                 <input type="number" id="capacidad" name="capacidad" class="form-control" required>
             </div>
-
+             <div class="mb-3">
+                <label for="descuento" class="form-label">Descuento</label>
+                <input type="number" id="descuento" name="descuento" class="form-control" required >
+            </div>
             <div class="mb-3">
-                <label for="disponibles" class="form-label">Disponibles</label>
-                <input type="text" id="disponibles" name="disponibles" class="form-control" required>
+                <label for="total" class="form-label">Total</label>
+                <input type="text" id="total" name="total" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="numImagenes" class="form-label">Imágenes (Max 10)</label>
-                <input type="number" id="numImagenes" class="form-control" min="1" max="10" oninput="aniadirInputImagen()">
+                <label for="numImagenes" class="form-label">Imágenes (Max 3)</label>
+                <input type="number" id="numImagenes" class="form-control" min="1" max="3" oninput="aniadirInputImagen()">
             </div>
             <div id="imagenesContainer" class="mb-3"></div>
 
 
-            <button type="submit" class="btn btn-primary">Crear Coche</button>
+            <button type="submit" class="btn btn-primary">Crear Habitacion</button>
         </form>
         <form action="{{ route('admin.paneladministracion') }}">
             <input type="submit" value="Volver" class="btn btn-secondary">

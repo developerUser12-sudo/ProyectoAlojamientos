@@ -5,6 +5,7 @@ import { HotelesComponent } from './hoteles/hoteles.component';
 import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 import { CochesComponent } from './coches/coches.component';
 import { DetallecocheComponent } from './detallecoche/detallecoche.component';
+import { DetallehotelComponent } from './detallehotel/detallehotel.component';
 
 const routes: Routes = [
   {path:'',component:BienvenidaComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'hoteles',component:HotelesComponent},
   {path:'coches',component:CochesComponent},
   {path:'detalle-coche/:id',component:DetallecocheComponent},
+  {path:'detalle-hotel/:id',component:DetallehotelComponent},
   {path:'**',component:NoencontradoComponent},
 
 ];
