@@ -5,33 +5,7 @@
 
         <h1>Actualizar Hotel</h1>
 
-        <div id="carouselExampleIndicators" class="carousel slide w-50 m-auto" data-ride="carousel">
 
-            <div class="carousel-inner">
-                @for ($i = 0; $i < count($hotel->imagenes); $i++)
-                    @if ($i == 0)
-
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}" alt="{{  $hotel->nombre }} slide">
-                        </div>
-                    @else
-
-                        <div class="carousel-item ">
-                            <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}" alt="{{  $hotel->nombre }} slide">
-                        </div>
-                    @endif
-
-                @endfor
-
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"
-                style="color: white;">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
-        </div>
         <form action="{{ route('admin.updatehotel', $hotel->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -76,7 +50,8 @@
             <div id="imagenesContainer" class="mb-3"></div>
             <div class="mb-3">
                 <label for="numComidas" class="form-label">Comidas (Max 3)</label>
-                <input type="number" id="numComidas" class="form-control" min="1" max="3" oninput="aniadirInputComida()" value="{{ count($hotel->comidas) }}">
+                <input type="number" id="numComidas" class="form-control" min="1" max="3" oninput="aniadirInputComida()"
+                    value="{{ count($hotel->comidas) }}" required>
             </div>
             <div id="comidasContainer" class="mb-3"></div>
             <div class="mb-3">
@@ -107,9 +82,9 @@
         let serviciosContainer = document.getElementById('serviciosContainer');
         let numComidasInput = document.getElementById('numComidas');
         let comidasContainer = document.getElementById('comidasContainer');
-        const servicios = @json($hotel->servicios);
-        const imagenes = @json($hotel->imagenes);
-        const comidas = @json($hotel->comidas);
+        let servicios = @json($hotel->servicios);
+        let imagenes = @json($hotel->imagenes);
+        let comidas = @json($hotel->comidas);
         function aniadirInputImagen() {
             imagenesContainer.innerHTML = '';
             if (numImagenesInput.value <= 10) {
@@ -121,6 +96,7 @@
                     }
 
                     child.name = 'imagenes[]';
+                    child.required = true;
                     child.classList.add('form-control', 'mt-2');
                     child.placeholder = `URL de la imagen ${index + 1}`;
                     imagenesContainer.appendChild(child);
@@ -139,22 +115,26 @@
                         child.value = servicios[index];
                     }
                     child.classList.add('form-control', 'mt-2');
+                    child.required = true;
                     child.placeholder = `Servicio ${index + 1}`;
                     serviciosContainer.appendChild(child);
 
                 }
             }
         }
-         function aniadirInputComida() {
-           comidasContainer.innerHTML = '';
-            if (numComidasInput.value <= 10) {
+        function aniadirInputComida() {
+            comidasContainer.innerHTML = '';
+            if (numComidasInput.value <= 3) {
                 for (let index = 0; index < numComidasInput.value; index++) {
                     let child = document.createElement("input");
                     child.type = 'text';
                     child.name = 'comidas[]';
+                    if (index < comidas.length) {
+                        child.value = comidas[index];
+                    }
                     child.classList.add('form-control', 'mt-2');
                     child.placeholder = `Comida ${index + 1}`;
-                     child.required = true;
+                    child.required = true;
                     comidasContainer.appendChild(child);
 
                 }
@@ -167,6 +147,7 @@
                 child.type = 'text';
                 child.name = 'servicios[]';
                 child.value = servicios[index];
+                 child.required = true;
                 child.classList.add('form-control', 'mt-2');
                 child.placeholder = `Servicio ${index + 1}`;
                 serviciosContainer.appendChild(child);
@@ -179,26 +160,29 @@
                 child.type = 'text';
                 child.name = 'imagenes[]';
                 child.value = imagenes[index];
+                 child.required = true;
                 child.classList.add('form-control', 'mt-2');
                 child.placeholder = `URL de la imagen ${index + 1}`;
                 imagenesContainer.appendChild(child);
             }
         }
         function aniadirInputsComidas() {
-
+            comidasContainer.innerHTML = '';
             for (let index = 0; index < comidas.length; index++) {
                 let child = document.createElement("input");
                 child.type = 'text';
                 child.name = 'comidas[]';
                 child.value = comidas[index];
+                 child.required = true;
                 child.classList.add('form-control', 'mt-2');
                 child.placeholder = `Comida ${index + 1}`;
-                comidaContainer.appendChild(child);
+                comidasContainer.appendChild(child);
             }
         }
-        addEventListener('load', aniadirInputsServicios());
-        addEventListener('load', aniadirInputsImagenes());
-        addEventListener('load', aniadirInputsComidas());
+
+        addEventListener('load', aniadirInputsServicios);
+        addEventListener('load', aniadirInputsImagenes);
+        addEventListener('load', aniadirInputsComidas);
 
 
     </script>

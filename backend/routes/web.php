@@ -46,6 +46,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::delete('admin/eliminar-hotel/{id}', [HotelController::class, 'destroy'])->name('admin.deletehotel');
     
     Route::get('admin/crear-habitacion/{id}', [HabitacionController::class, 'create'])->name('admin.crearhabitacion');
+    Route::get('admin/habitacioneshotel/{id}', [HabitacionController::class, 'getHabitacionesPaginadas'])->name('admin.habitacioneshotel');
     Route::get('admin/actualizar-habitacion/{id}', [HabitacionController::class, 'edit'])->name('admin.actualizarhabitacion');
     Route::post('/crearHabitacion', [HabitacionController::class, 'store'])->name('admin.createhabitacion');
     Route::put('admin/actualizar-habitacion/{id}', [HabitacionController::class, 'update'])->name('admin.updatehabitacion');

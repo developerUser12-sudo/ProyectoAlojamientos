@@ -101,6 +101,12 @@ class CocheController extends Controller
             $precio_final = $validated['precio_original'];
 
         }
+         if ($validated['total']>$coche->total) {
+            $coche->disponibles+=$validated['total']-$coche->total;
+        }else {
+            $coche->disponibles-=$coche->total-$validated['total'];
+            
+        }
         $validated['precio'] = $precio_final;
         $coche->update($validated);
 

@@ -122,7 +122,7 @@
                 <br>
                 <table class="table">
                     <tr>
-                        <th>Imagen y precio por noche</th>
+                        <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Localizacion</th>
                         <th>Direccion</th>
@@ -134,8 +134,44 @@
                     </tr>
                     @foreach ($hoteles as $hotel)
                         <tr>
-                            <td><img src="{{ $hotel->imagenes[0] }}" alt="Imagen hotel {{ $hotel->nombre }}"
-                                    class="img-fluid w-100" style="min-width:130px;"><br><b class="text-center"> </b></td>
+                            <td>
+                                <div id="carouselExampleIndicators" class="carousel slide w-100 m-auto" data-ride="carousel">
+
+                                    <div class="carousel-inner">
+                                        @for ($i = 0; $i < count($hotel->imagenes); $i++)
+                                            @if ($i == 0)
+
+                                                <div class="carousel-item active">
+                                                    <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery">
+
+                                                        <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"
+                                                            alt="{{  $hotel->nombre }} slide">
+                                                    </a>
+                                                </div>
+                                            @else
+
+                                                <div class="carousel-item ">
+                                                    <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery">
+                                                        
+                                                        <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"
+                                                            alt="{{  $hotel->nombre }} slide">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                        @endfor
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next" style="color: white;">
+                                        <span class="carousel-control-next-icon"  aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </td>
                             <td>
                                 <p> {{ $hotel->nombre }}</p>
                             </td>
@@ -173,10 +209,10 @@
                             </td>
                             <td>
                                 <div class="ms-auto d-flex flex-md-row flex-column gap-2">
-                                    <form method="GET" action="{{ route('admin.crearhabitacion', $hotel->id) }}">
+                                    <form method="GET" action="{{ route('admin.habitacioneshotel', $hotel->id) }}">
                                         @csrf
-                                        <input value="Crear habitacion" type="submit" class="btn btn-primary">
-                                            
+                                        <input value="Habitaciones" type="submit" class="btn btn-primary">
+
                                     </form>
                                     <form action="{{ route('admin.actualizarhotel', $hotel->id) }}">
                                         <input type="submit" class="btn btn-warning" value="Editar">

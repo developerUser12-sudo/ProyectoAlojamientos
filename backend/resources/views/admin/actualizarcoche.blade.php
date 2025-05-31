@@ -13,7 +13,7 @@
                 <label for="origen" class="form-label">Origen</label>
                 <input type="text" name="origen" class="form-control" required value="{{ old('origen', $coche->origen) }}">
             </div>
-
+            <input type="hidden" name="disponibles" value="{{ old('disponibles', $coche->disponibles) }}">
             <div class="mb-3">
                 <label for="destino" class="form-label">Destino</label>
                 <input type="text" name="destino" class="form-control" required

@@ -8,9 +8,12 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>HolidaysNow</title>
-    @vite(['resources/css/app.css','resources/css/custom.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/custom.css', 'resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox-plus-jquery.min.js"></script>
 
 </head>
 
