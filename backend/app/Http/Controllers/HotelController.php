@@ -32,9 +32,9 @@ class HotelController extends Controller
 
         // }
 
-        $coches = $query->get();
+        $hoteles = $query->get();
 
-        return response()->json($coches);
+        return response()->json($hoteles);
     }
     public function index()
     {

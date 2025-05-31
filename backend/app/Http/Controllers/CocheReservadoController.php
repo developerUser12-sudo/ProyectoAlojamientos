@@ -48,6 +48,7 @@ class CocheReservadoController extends Controller
             $coche->disponibles -= 1;
             $coche->save();
         }
+        $validated['pagado']= $coche->precio;
         CocheReservado::create($validated);
         $usuario = User::find($validated['id_usuario']);
         if ($usuario) {

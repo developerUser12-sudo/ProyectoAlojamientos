@@ -20,7 +20,7 @@
     </div>
     <div class="w-75 d-flex flex-column gap-3 m-auto ">
         <h4 class="mb-5">No se han encontrado resultados</h4>
-        <h3 class="w-100">¿Has visto nuestros mejores hoteles?</h3>
+        <h3 class="w-100">¿Te has fijado en nuestros mejores hoteles?</h3>
         <p>{{cargando}}</p>
         <div class="d-flex justify-content-center flex-wrap gap-3">
             <div *ngFor="let hotel of hoteles.slice(0,20)" class=" p-2 rounded card">
@@ -34,18 +34,14 @@
                             ⭐
                         </ng-container>
                     </div>
-                    <div class="d-flex flex-row justify-content-between w-75">
-                        <p><i class="bi bi-geo-alt-fill"></i> {{hotel.localizacion}}</p>
+                   
+                        <p><i class="bi bi-geo-alt-fill"></i>{{hotel.direccion}}, {{hotel.localizacion}}</p>
+                    
+                    <div class="d-flex flex-row  gap-5">
                         <p>Capacidad total: {{hotel.capacidad}}</p>
+                        <p><b>{{precioHabitacion(hotel.id)}}€</b></p>
                     </div>
-                    <!-- <div class="d-flex flex-row flex-wrap justify-content-evenly">
-                        <p *ngFor="let servicio of hotel.servicios">
-                            {{ servicio }}
-                        </p>
-                    </div> -->
-
-
-
+                
                 </a>
             </div>
         </div>

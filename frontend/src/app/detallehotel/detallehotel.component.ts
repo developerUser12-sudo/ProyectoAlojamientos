@@ -3,6 +3,8 @@ import { Hotel } from '../hotel';
 import { ActivatedRoute } from '@angular/router';
 import { HotelesService } from '../hoteles.service';
 import { UsuarioService } from '../usuario.service';
+import { HabitacionesService } from '../habitaciones.service';
+import { Habitacion } from '../habitacion';
 
 @Component({
   selector: 'app-detallehotel',
@@ -12,9 +14,22 @@ import { UsuarioService } from '../usuario.service';
 })
 export class DetallehotelComponent {
   hotel: Hotel | null = null;
-  constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private usuario: UsuarioService) { }
+  habitaciones: Habitacion[] = [];
+  habitacionSeleccionada: Habitacion | null = null;
+  fecha_salida: Date = new Date();
+  fecha_entrada: Date = new Date();
+  comida: string = '';
+  rangoIncorrecto: boolean = false;
+  reservado: boolean = false;
+  diaSalidaIncorrecto: boolean = false;
+  idHabitacion: number = 0;
+  constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService) { }
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
+    this.habitacionService.getHabitacionesById(id).subscribe((data) => {
+      this.habitaciones = data;
+
+    })
     if (id) {
       this.hotelDetalle.getHotel(id).subscribe((data) => {
         this.hotel = data[0];
@@ -26,7 +41,7 @@ export class DetallehotelComponent {
           if (typeof this.hotel.servicios === 'string') {
             this.hotel.servicios = JSON.parse(this.hotel.servicios);
           }
-          
+
           if (typeof this.hotel.comidas === 'string') {
             this.hotel.comidas = JSON.parse(this.hotel.comidas);
           }
@@ -39,4 +54,30 @@ export class DetallehotelComponent {
   stars(n: number): any[] {
     return Array(n);
   }
+  onSubmit() {
+    this.diaSalidaIncorrecto = false;
+    this.rangoIncorrecto = false;
+    let hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    let entrada = new Date(this.fecha_entrada);
+    entrada.setHours(0, 0, 0, 0);
+    if (this.fecha_entrada == this.fecha_salida || this.fecha_salida < this.fecha_entrada) {
+      this.rangoIncorrecto = true;
+    }
+    else if (entrada <= hoy) {
+      this.diaSalidaIncorrecto = true;
+    }
+    else {
+      this.usuario.getUsuario().subscribe((dataUsuario) => {
+        if (this.habitacionSeleccionada) {
+          this.habitacionService.reservarHabitacion(this.habitacionSeleccionada.id, dataUsuario.id, this.fecha_entrada, this.fecha_salida, this.comida)
+            .subscribe(() => {
+              this.reservado = true;
+            });
+
+        }
+      });
+    }
+  }
+
 }

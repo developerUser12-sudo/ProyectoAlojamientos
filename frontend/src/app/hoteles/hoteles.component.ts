@@ -3,6 +3,8 @@ import { BienvenidaComponent } from '../bienvenida/bienvenida.component';
 import { Options } from '@angular-slider/ngx-slider';
 import { HotelesService } from '../hoteles.service';
 import { Hotel } from '../hotel';
+import { HabitacionesService } from '../habitaciones.service';
+import { Habitacion } from '../habitacion';
 
 @Component({
   selector: 'app-hoteles',
@@ -23,9 +25,14 @@ export class HotelesComponent {
     }
   };
   hoteles: Hotel[] = [];
-  constructor(private serviciosService: HotelesService) { }
+  habitaciones:Habitacion[]=[];
+  constructor(private serviciosService: HotelesService,private habitacionService: HabitacionesService) { }
   ngOnInit(): void {
     this.cargando = 'Cargando...';
+    this.habitacionService.getHabitaciones().subscribe((data)=>{
+      this.habitaciones=data;
+      
+    });
     setTimeout(() => {
       this.serviciosService.getHoteles().subscribe((data) => {
         this.cargando = '';
@@ -36,5 +43,16 @@ export class HotelesComponent {
   }
   stars(n:number): any[]{
     return Array(n);
+  }
+  precioHabitacion(id:number){
+    let precios:number[]=[];
+    
+    for (let index = 0; index < this.habitaciones.length; index++) {
+      if (this.habitaciones[index].hotel_id==id) {
+        precios.push(this.habitaciones[index].precio_noche);        
+      }
+    }
+    
+    return Math.min(...precios); 
   }
 }

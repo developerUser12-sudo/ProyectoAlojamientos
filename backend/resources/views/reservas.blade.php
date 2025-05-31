@@ -26,7 +26,7 @@
                         </td>
                         <td>{{ $coches[$i]->origen }}</td>
                         <td>{{ $coches[$i]->destino }}</td>
-                        <td>{{ $coches[$i]->precio }}</td>
+                        <td>{{ $cochesUsuario[$i]->pagado }}</td>
                         <td>
                             <span class="fw-bold">Día:</span>
                             {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_salida)->format('d/m/Y') }}<br>

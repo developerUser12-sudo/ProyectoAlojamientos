@@ -10,21 +10,18 @@
                         ⭐
                     </ng-container>
                 </div>
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <a [href]="hotel.imagenes[0]" data-lightbox="gallery">
-
                                 <img class="d-block w-100 rounded" [src]="hotel.imagenes[0]" alt="Carrousel slide">
                             </a>
                         </div>
                         <div *ngFor="let image of hotel.imagenes.slice(1)" class="carousel-item">
                             <a [href]="image" data-lightbox="gallery">
-
                                 <img class="d-block w-100 rounded" [src]="image" alt="Carrousel slide">
                             </a>
                         </div>
-
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -32,8 +29,8 @@
                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     </a>
-
                 </div>
+
                 <div class="d-flex flex-row gap-5 justify-content-around mt-2">
                     <p><b>{{hotel.nombre}}</b></p>
 
@@ -53,29 +50,45 @@
 
         </div>
         <div class="border border-secondary rounded h-100" style="width: 300px;">
-            <form  class="d-flex flex-column gap-2 w-100 p-3">
-                <!-- <label for="fechaInicio" class="form-label">Día de entrada: </label>
-                <input type="date" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-100" required
-                    id="fechaInicio">
-                    (ngSubmit)="onSubmit()" 
-                <label for="fechaFin" class="form-label">Día de salida: </label>
-                <input type="date" name="fechaFin" [(ngModel)]="fechaFin" class="form-control w-100" required
-                    id="fechaFin"> -->
+            <form (ngSubmit)="onSubmit()" class="d-flex flex-column gap-2 w-100 p-3">
+                <label for="fecha_entrada" class="form-label">Día de entrada: </label>
+                <input type="date" name="fecha_entrada" [(ngModel)]="fecha_entrada" class="form-control w-100" required
+                    id="fecha_entrada">
+
+                <label for="fecha_salida" class="form-label">Día de salida: </label>
+                <input type="date" name="fecha_salida" [(ngModel)]="fecha_salida" class="form-control w-100" required
+                    id="fecha_salida">
                 <label class="form-label" for="comida">Comida: </label>
-                <select name="comida" id="comida" class="form-select">
+                <select name="comida" id="comida" class="form-select" [(ngModel)]="comida">
+                    <option value="" disabled selected>Selecciona una opción</option>
                     <option [value]="comida" *ngFor="let comida of hotel.comidas">
                         {{comida}}
                     </option>
                 </select>
-                <!-- <input type="hidden" [value]="coche.precio" name="precio">
-                <button *ngIf="coche.disponibles>0" class="btn btn-primary w-100" type="submit">Reservar</button>
-                <button *ngIf="coche.disponibles==0" class="btn btn-primary w-100" type="submit"
-                    disabled>Agotado</button>
 
-                <p class="text-danger" *ngIf="diaIncorrecto">Día de salida incorrecto</p>
-                <p class="text-danger" *ngIf="faltaLugar">Selecciona el lugar de salida</p>
-                <p class="text-success" *ngIf="reservado">Has reservado el coche. Revista tu correo electrónico para ver
-                    los detalles </p> -->
+                <label class="form-label" for="habitacion">Selecciona habitación: </label>
+                <select name="habitacion" id="habitacion" class="form-select" [(ngModel)]="habitacionSeleccionada">
+                    <option [ngValue]="null" disabled selected>Selecciona una opción</option>
+                    <option [ngValue]="habitacion" *ngFor="let habitacion of habitaciones">
+                        {{habitacion.tipo_habitacion}}: {{habitacion.precio_noche}}€
+                        <span *ngIf="habitacion.disponibles==0">Agotado</span>
+                    </option>
+                </select>
+
+                <button *ngIf="habitacionSeleccionada!=null&&habitacionSeleccionada.disponibles>0"
+                    class="btn btn-primary w-100" type="submit">Reservar</button>
+                <button *ngIf="habitacionSeleccionada==null" class="btn btn-primary w-100" type="submit"
+                    disabled>Reservar</button>
+                <button *ngIf="habitacionSeleccionada!=null&&habitacionSeleccionada.disponibles==0"
+                    class="btn btn-primary w-100" type="submit" disabled>Agotado</button>
+
+                <p class="text-danger" *ngIf="rangoIncorrecto">El día de salida no puede ser menor o igual al de entrada
+                </p>
+                <p class="text-danger" *ngIf="diaSalidaIncorrecto">El día de salida no puede ser menor o igual al dia
+                    actual</p>
+                <p class="text-success" *ngIf="reservado">Has reservado la habitación. Revista tu correo electrónico
+                    para ver
+                    los detalles </p>
             </form>
         </div>
     </div>

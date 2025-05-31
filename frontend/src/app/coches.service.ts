@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 })
 export class CochesService {
 private apiCochesUrl = environment.apiUrl;
-private apiCochesReservadosUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
    getCoches(): Observable<any> {
     return this.http.get(`${this.apiCochesUrl}/api/coches`);
@@ -44,9 +44,8 @@ private apiCochesReservadosUrl = environment.apiUrl;
     let datos=
       {id_coche:Number(idCoche),id_usuario:idUsuario,fecha_salida:fechaSalida.toISOString().substring(0, 10)}
     ;
-      console.log(datos);
       
-    return this.http.post(`${this.apiCochesReservadosUrl}/api/coches-reservados`,datos);
+    return this.http.post(`${this.apiCochesUrl}/api/coches-reservados`,datos);
   }
 
 

@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class HotelesService {
   private apiHotelesUrl = environment.apiUrl;
-  private apiCochesReservadosUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
   getHoteles(): Observable<any> {
     return this.http.get(`${this.apiHotelesUrl}/api/hoteles`);
