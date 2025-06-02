@@ -15,8 +15,13 @@ class CocheController extends Controller
             $query->where('id', 'like', $request->id);
         } else {
 
-            $query->where('origen', 'like', '%' . $request->origen . '%');
-            $query->where('destino', 'like', '%' . $request->destino . '%');
+            if ($request->has('origen') && !empty($request->origen)) {
+                $query->whereRaw('LOWER(TRIM(origen)) LIKE ?', ['%' . strtolower(trim($request->origen)) . '%']);
+            }
+            if ($request->has('destino') && !empty($request->destino)) {
+                $query->whereRaw('LOWER(TRIM(destino)) LIKE ?', ['%' . strtolower(trim($request->destino)) . '%']);
+            }
+
             if ($request->has('marca') && !empty($request->marca)) {
                 $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
             }
@@ -24,10 +29,7 @@ class CocheController extends Controller
                 $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
             }
             if ($request->has('precio_min') && !empty($request->precio_min)) {
-                $query->where('precio', '>=', $request->precio_min);
-            }
-            if ($request->has('precio_max') && !empty($request->precio_max)) {
-                $query->where('precio', '<=', $request->precio_max);
+                $query->whereBetween('precio', [$request->precio_min, $request->precio_max]);
             }
 
         }
@@ -101,11 +103,11 @@ class CocheController extends Controller
             $precio_final = $validated['precio_original'];
 
         }
-         if ($validated['total']>$coche->total) {
-            $coche->disponibles+=$validated['total']-$coche->total;
-        }else {
-            $coche->disponibles-=$coche->total-$validated['total'];
-            
+        if ($validated['total'] > $coche->total) {
+            $coche->disponibles += $validated['total'] - $coche->total;
+        } else {
+            $coche->disponibles -= $coche->total - $validated['total'];
+
         }
         $validated['precio'] = $precio_final;
         $coche->update($validated);

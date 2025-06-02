@@ -14,9 +14,9 @@ class AccountController extends Controller
         ]);
 
         $user = auth()->user();
-        $user->name = $request->username;
+        $user->name = ucwords(strtolower($request->username));
         $user->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('nombreActualizado', 'Nombre de usuario actualizado correctamente');
     }
 }

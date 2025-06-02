@@ -12,6 +12,16 @@ import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 import { CochesComponent } from './coches/coches.component';
 import { DetallecocheComponent } from './detallecoche/detallecoche.component';
 import { DetallehotelComponent } from './detallehotel/detallehotel.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { PreguntasfrecuentesComponent } from './preguntasfrecuentes/preguntasfrecuentes.component';
+import { PoliticadecookiesComponent } from './politicadecookies/politicadecookies.component';
+import { TerminosdeservicioComponent } from './terminosdeservicio/terminosdeservicio.component';
+import { PoliticadeprivacidadComponent } from './politicadeprivacidad/politicadeprivacidad.component';
+import { SobrenosotrosComponent } from './sobrenosotros/sobrenosotros.component';
+import { InformaciondelaempresaComponent } from './informaciondelaempresa/informaciondelaempresa.component';
+import { SoporteComponent } from './soporte/soporte.component';
+
 @NgModule({
   declarations: [
 
@@ -22,6 +32,13 @@ import { DetallehotelComponent } from './detallehotel/detallehotel.component';
     CochesComponent,
     DetallecocheComponent,
     DetallehotelComponent,
+    PreguntasfrecuentesComponent,
+    PoliticadecookiesComponent,
+    TerminosdeservicioComponent,
+    PoliticadeprivacidadComponent,
+    SobrenosotrosComponent,
+    InformaciondelaempresaComponent,
+    SoporteComponent,
     
   ],
   imports: [
@@ -30,7 +47,9 @@ import { DetallehotelComponent } from './detallehotel/detallehotel.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule ,
-    FormsModule    
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

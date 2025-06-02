@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 
 class RestablecerContrasenaNotification extends Notification
 {
-     public $token;
+    public $token;
 
     public function __construct($token)
     {
@@ -23,14 +23,17 @@ class RestablecerContrasenaNotification extends Notification
 
     public function toMail($notifiable)
     {
-        $resetUrl = url(config('app.url').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false));
+        $resetUrl = url(config('app.url') . route('password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+        ], false));
 
         return (new MailMessage)
             ->subject('Restablecer Contraseña')
-            ->greeting('¡Hola!')
-            ->line('Recibes este correo porque solicitaste restablecer tu contraseña.')
-            ->action('Restablecer contraseña', $resetUrl)
-            ->line('Si no solicitaste este cambio, no hagas nada.')
-            ->salutation('Saludos, HolidaysNow');   
+            ->markdown('emails.restablecer-contrasena', [
+                'url' => $resetUrl,
+                'user' => $notifiable,
+            ]);
     }
+
 }

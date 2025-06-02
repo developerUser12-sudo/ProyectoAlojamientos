@@ -45,6 +45,13 @@
                         </span>
                     </div>
                 </div>
+                <div class="mt-2">
+                    <h5 class="fw-bold">Hora de llegada e ida</h5>
+                    <div>
+                        <p>{{ hotel.hora_apertura.slice(0, -3) }} - {{ hotel.hora_cierre.slice(0, -3) }}</p>
+                    </div>
+                    
+                </div>
 
             </div>
 
@@ -86,6 +93,7 @@
                 </p>
                 <p class="text-danger" *ngIf="diaSalidaIncorrecto">El día de salida no puede ser menor o igual al dia
                     actual</p>
+                <p class="text-danger" *ngIf="faltaComida">Debes seleccionar el servicio de comida</p>
                 <p class="text-success" *ngIf="reservado">Has reservado la habitación. Revista tu correo electrónico
                     para ver
                     los detalles </p>

@@ -15,7 +15,7 @@ return [
 
     'reset' => 'Your password has been reset!',
     'sent' => 'Te hemos enviado un enlace a tu correo electrónico para recuperar tu contraseña',
-    'throttled' => 'Please wait before retrying.',
+    'throttled' => 'Por favor, espera un momento antes de reintentarlo',
     'token' => 'This password reset token is invalid.',
     'user' => "Usuario no encontrado",
 

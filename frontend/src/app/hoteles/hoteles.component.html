@@ -1,50 +1,116 @@
 <div class="container-fluid py-5 d-flex flex-column gap-5">
     <h2 class="text-center">¡Tus vacaciones están a punto de empezar!</h2>
     <div class="row justify-content-center mt-4">
-        <div class="col-md-8">
-            <form>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Ubicación">
-                    <select name="estrellas" id="">
-                        <option value="1">⭐</option>
-                        <option value="2">⭐⭐</option>
-                        <option value="3">⭐⭐⭐</option>
-                        <option value="4">⭐⭐⭐⭐</option>
-                        <option value="5">⭐⭐⭐⭐⭐</option>
-                    </select>
-                    <input class="form-control" type="number" placeholder="Num personas" name="personas">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
+        <div class="col-md-6  col-10">
+            <form (ngSubmit)="onSubmit()" #formBusqueda="ngForm" class="d-flex flex-column gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <input type="text" name="nombre" [(ngModel)]="nombre" class="form-control" placeholder="Nombre">
+                    <input type="text" class="form-control" name="localizacion" [(ngModel)]="localizacion"
+                        placeholder="Localizacion">
+                    <input type="number" class="form-control" name="estrellas" [(ngModel)]="estrellas"
+                        placeholder="Estrellas" min="1" max="5">
+
+                </div>
+                <div class="d-flex flex-column flex-md-row  justify-content-evenly">
+                    <div class="d-flex flex-row">
+                        <label for="hora_apertura" class="form-label">Hora de entrada:</label>
+                        <input id="hora_apertura" type="time" class="form-control" name="hora_apertura"
+                            [(ngModel)]="hora_apertura" placeholder="Hora de entrada">
+                    </div>
+                    <div class="d-flex flex-row">
+
+                        <label class="form-label" for="hora_cierre">Hora de salida:</label>
+                        <input type="time" id="hora_cierre" class="form-control" name="hora_cierre"
+                            [(ngModel)]="hora_cierre" placeholder="Hora de salida">
+                    </div>
+
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Selecciona opciones</mat-label>
+                        <mat-select [(value)]="opcionesSeleccionadas" multiple>
+                            <mat-option value="Todo incluido">
+                                Todo incluido
+                            </mat-option>
+                            <mat-option value="Desayuno incluido">
+                                Desayuno incluido
+                            </mat-option>
+                            <mat-option value="Desayuno y Cena incluidos">
+                                Desayuno y Cena incluidos
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <p>Opciones seleccionadas: {{ opcionesSeleccionadas }}</p>
+                </div>
+                <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options">
+                </ngx-slider>
+                <div class="d-flex flex-row gap-3 mt-3">
+                    <button class="btn btn-secondary" type="button"
+                        (click)="limpiarFormulario(formBusqueda)">Limpiar</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="formBusqueda.invalid">Buscar</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="w-75 d-flex flex-column gap-3 m-auto ">
-        <h4 class="mb-5">No se han encontrado resultados</h4>
+    <div class="w-75 d-flex flex-wrap gap-3 m-auto" *ngIf="buscado&&filtrar.length>0">
+        <h3 class="w-100">Tus resultados</h3>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+            <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded card">
+                <a [routerLink]="['/detalle-hotel', filtra.id]" routerLinkActive="active"
+                    class="text-decoration-none text-black">
+                    <ng-container *ngFor="let star of stars(filtra.estrellas)">
+                        ⭐
+                    </ng-container>
+                    <img [src]="filtra.imagenes[0]" alt="Imagen hotel filtra.nombre"
+                        style="width: 300px;height:200px;object-fit: cover;" class="img-fluid">
+                    <div class="d-flex flex-row gap-5 mt-2">
+                        <p><b>{{filtra.nombre}}</b></p>
+                        <ng-container *ngFor="let star of stars(filtra.estrellas)">
+                            ⭐
+                        </ng-container>
+                    </div>
+
+                    <p><i class="bi bi-geo-alt-fill"></i>{{filtra.direccion}}, {{filtra.localizacion}}</p>
+
+                    <div class="d-flex flex-row  gap-5">
+                        <p>Capacidad total: {{filtra.capacidad}}</p>
+                        <p><b>{{precioHabitacion(filtra.id)}}€</b></p>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="w-75 d-flex flex-column gap-3 m-auto" *ngIf="!buscado||filtrar.length==0">
+        <h4 class="mb-5" *ngIf="buscado&&filtrar.length==0">No se han encontrado resultados</h4>
         <h3 class="w-100">¿Te has fijado en nuestros mejores hoteles?</h3>
         <p>{{cargando}}</p>
         <div class="d-flex justify-content-center flex-wrap gap-3">
             <div *ngFor="let hotel of hoteles.slice(0,20)" class=" p-2 rounded card">
                 <a [routerLink]="['/detalle-hotel', hotel.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
+                    <ng-container *ngFor="let star of stars(hotel.estrellas)">
+                        ⭐
+                    </ng-container>
                     <img [src]="hotel.imagenes[0]" alt="Imagen hotel hotel.nombre"
-                        style="width: 300px;height:200px;object-fit: cover;">
+                        style="width: 300px;height:200px;object-fit: cover;" class="img-fluid">
                     <div class="d-flex flex-row gap-5 mt-2">
                         <p><b>{{hotel.nombre}}</b></p>
-                        <ng-container *ngFor="let star of stars(hotel.estrellas)">
-                            ⭐
-                        </ng-container>
+
                     </div>
-                   
-                        <p><i class="bi bi-geo-alt-fill"></i>{{hotel.direccion}}, {{hotel.localizacion}}</p>
-                    
+
+                    <p><i class="bi bi-geo-alt-fill"></i>{{hotel.direccion}}, {{hotel.localizacion}}</p>
+
                     <div class="d-flex flex-row  gap-5">
                         <p>Capacidad total: {{hotel.capacidad}}</p>
                         <p><b>{{precioHabitacion(hotel.id)}}€</b></p>
                     </div>
-                
+
                 </a>
             </div>
         </div>
     </div>
+
 
 </div>

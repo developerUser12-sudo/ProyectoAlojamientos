@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Habitacion;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 
@@ -9,31 +10,42 @@ class HotelController extends Controller
 {
     public function filtrar(Request $request)
     {
-        $query = Hotel::query();
-
+        $queryHotel = Hotel::query();
         if ($request->has('id')) {
-            $query->where('id', 'like', $request->id);
+            $queryHotel->where('id', 'like', $request->id);
+        } else {
+            if ($request->has('nombre') && !empty($request->nombre)) {
+                $queryHotel->whereRaw('LOWER(TRIM(nombre)) like ?', ['%' . strtolower(trim($request->nombre)) . '%']);
+            }
+            if ($request->has('localizacion') && !empty($request->localizacion)) {
+                $queryHotel->whereRaw('LOWER(TRIM(localizacion)) like ?', ['%' . strtolower(trim($request->localizacion)) . '%']);
+            }
+            if ($request->has('estrellas') && !empty($request->estrellas)) {
+                $queryHotel->whereRaw('estrellas like ?', ['%' . $request->estrellas . '%']);
+            }
+            if ($request->has('hora_apertura') && !empty($request->hora_apertura)) {
+                $queryHotel->whereRaw('hora_apertura like ?', ['%' . $request->hora_apertura . '%']);
+            }
+            if ($request->has('hora_cierre') && !empty($request->hora_cierre)) {
+                $queryHotel->whereRaw('hora_cierre like ?', ['%' . $request->hora_cierre . '%']);
+            }
+            if ($request->has('comidas') && !empty($request->comidass)) {
+                $queryHotel->whereJsonContains('comidas', $request->comidas);
+            }
+            if ($request->has('precio_min') || $request->has('precio_max')) {
+                $precioMin = $request->precio_min ?? 0;
+                $precioMax = $request->precio_max ?? 1000;
+
+                $queryHotel->whereHas('habitaciones', function ($query) use ($precioMin, $precioMax) {
+                    $query->whereBetween('precio_noche', [$precioMin, $precioMax]);
+                });
+            }
+
         }
-        // else {
-        //     $query->where('origen', 'like', '%' . $request->origen . '%');
-        //     $query->where('destino', 'like', '%' . $request->destino . '%');
-        //     if ($request->has('marca') && !empty($request->marca)) {
-        //         $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
-        //     }
-        //     if ($request->has('modelo') && !empty($request->modelo)) {
-        //         $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
-        //     }
-        //     if ($request->has('precio_min') && !empty($request->precio_min)) {
-        //         $query->where('precio', '>=', $request->precio_min);
-        //     }
-        //     if ($request->has('precio_max') && !empty($request->precio_max)) {
-        //         $query->where('precio', '<=', $request->precio_max);
-        //     }
-
-        // }
-
-        $hoteles = $query->get();
-
+        $hoteles = $queryHotel->get();
+        foreach ($hoteles as $hotel) {
+            $hotel->imagenes = json_decode($hotel->imagenes);
+        }
         return response()->json($hoteles);
     }
     public function index()

@@ -46,7 +46,7 @@
                 <a [routerLink]="['/detalle-coche', filtra.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
                     <img [src]="filtra.imagen" alt="Imagen coche filtra.marca filtra.modelo" style="width: 200px;height:100px;object-fit: cover;">
-                    <p>Trayecto: {{filtra.origen}} - {{filtra.destino}}</p>
+                    <p><i class="bi bi-geo-alt-fill"></i> {{filtra.origen}} - {{filtra.destino}}</p>
                     <p>Marca: {{filtra.marca}}</p>
                     <p>Modelo: {{filtra.modelo}}</p>
                     <b *ngIf="filtra.descuento==0" class="fs-5">{{filtra.precio}}€</b>

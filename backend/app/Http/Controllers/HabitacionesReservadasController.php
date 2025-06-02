@@ -31,6 +31,17 @@ class HabitacionesReservadasController extends Controller
         }
         return $habitaciones;
     }
+    public function getHotelesById()
+    {
+        $habitacionIds = HabitacionesReservadas::where('id_usuario', Auth::id())->pluck('habitacion_id');
+        $hotelIds = Habitacion::whereIn('id', $habitacionIds)->pluck('hotel_id');
+        $hoteles = Hotel::whereIn('id', $hotelIds)->get();
+        foreach ($hoteles as $hotel) {
+            $hotel->imagenes = json_decode($hotel->imagenes);
+        }
+        return $hoteles;
+    }
+
 
     public function getPrecioById()
     {
@@ -46,19 +57,19 @@ class HabitacionesReservadasController extends Controller
             'fecha_entrada' => 'required|date',
             'comida' => 'required|string',
         ]);
-        
+
         $habitacion = Habitacion::find($validated['habitacion_id']);
         if ($habitacion) {
             $habitacion->disponibles -= 1;
             $habitacion->save();
         }
-        $validated['pagado']= $habitacion->precio_noche;
-        $hotel= Hotel::find($habitacion->hotel_id);
+        $validated['pagado'] = $habitacion->precio_noche;
+        $hotel = Hotel::find($habitacion->hotel_id);
         HabitacionesReservadas::create($validated);
         $usuario = User::find($validated['id_usuario']);
         if ($usuario) {
-            
-            Mail::to($usuario->email)->send(new CorreoHabitacion($usuario,$habitacion,$hotel));
+
+            Mail::to($usuario->email)->send(new CorreoHabitacion($usuario, $habitacion, $hotel));
         }
 
 

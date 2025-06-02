@@ -5,6 +5,7 @@ import { HotelesService } from '../hoteles.service';
 import { UsuarioService } from '../usuario.service';
 import { HabitacionesService } from '../habitaciones.service';
 import { Habitacion } from '../habitacion';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-detallehotel',
@@ -23,6 +24,7 @@ export class DetallehotelComponent {
   reservado: boolean = false;
   diaSalidaIncorrecto: boolean = false;
   idHabitacion: number = 0;
+  faltaComida: boolean = false;
   constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService) { }
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
@@ -67,14 +69,37 @@ export class DetallehotelComponent {
     else if (entrada <= hoy) {
       this.diaSalidaIncorrecto = true;
     }
+    else if (this.comida == '') {
+      this.faltaComida = true;
+    }
     else {
       this.usuario.getUsuario().subscribe((dataUsuario) => {
-        if (this.habitacionSeleccionada) {
-          this.habitacionService.reservarHabitacion(this.habitacionSeleccionada.id, dataUsuario.id, this.fecha_entrada, this.fecha_salida, this.comida)
-            .subscribe(() => {
-              this.reservado = true;
+        if (dataUsuario.username == 'invitado') {
+          window.location.href = environment.apiUrl;
+        }
+        else {
+          if (this.habitacionSeleccionada) {
+            const entradaDate = new Date(this.fecha_entrada);
+            const salidaDate = new Date(this.fecha_salida);
+
+            const fechaEntradaStr = entradaDate.toISOString().slice(0, 10);
+            const fechaSalidaStr = salidaDate.toISOString().slice(0, 10);
+
+            this.habitacionService.reservarHabitacion(
+              this.habitacionSeleccionada.id,
+              dataUsuario.id,
+              fechaEntradaStr,
+              fechaSalidaStr,
+              this.comida
+            ).subscribe({
+              next: () => {
+                this.reservado = true;
+              }
             });
 
+
+
+          }
         }
       });
     }

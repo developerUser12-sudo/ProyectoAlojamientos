@@ -6,6 +6,13 @@ import { NoencontradoComponent } from './noencontrado/noencontrado.component';
 import { CochesComponent } from './coches/coches.component';
 import { DetallecocheComponent } from './detallecoche/detallecoche.component';
 import { DetallehotelComponent } from './detallehotel/detallehotel.component';
+import { SobrenosotrosComponent } from './sobrenosotros/sobrenosotros.component';
+import { TerminosdeservicioComponent } from './terminosdeservicio/terminosdeservicio.component';
+import { PreguntasfrecuentesComponent } from './preguntasfrecuentes/preguntasfrecuentes.component';
+import { PoliticadeprivacidadComponent } from './politicadeprivacidad/politicadeprivacidad.component';
+import { PoliticadecookiesComponent } from './politicadecookies/politicadecookies.component';
+import { InformaciondelaempresaComponent } from './informaciondelaempresa/informaciondelaempresa.component';
+import { SoporteComponent } from './soporte/soporte.component';
 
 const routes: Routes = [
   {path:'',component:BienvenidaComponent},
@@ -14,6 +21,14 @@ const routes: Routes = [
   {path:'coches',component:CochesComponent},
   {path:'detalle-coche/:id',component:DetallecocheComponent},
   {path:'detalle-hotel/:id',component:DetallehotelComponent},
+  {path:'sobre-nosotros',component:SobrenosotrosComponent},
+  {path:'terminos-de-servicio',component:TerminosdeservicioComponent},
+  {path:'preguntas-frecuentes',component:PreguntasfrecuentesComponent},
+  {path:'politica-de-privacidad',component:PoliticadeprivacidadComponent},
+  {path:'politica-de-cookies',component:PoliticadecookiesComponent},
+  {path:'informacion-de-la-empresa',component:InformaciondelaempresaComponent},
+  {path:'soporte',component:SoporteComponent},
+
   {path:'**',component:NoencontradoComponent},
 
 ];
