@@ -28,7 +28,7 @@
                     @foreach ($habitaciones as $habitacion)
                         <tr>
                             <td>
-                                <div id="carouselExampleIndicators" class="carousel slide w-100 m-auto" data-ride="carousel">
+                                <div id="carouselExampleIndicators" data-interval="false" class="carousel slide w-100 m-auto" data-ride="carousel">
 
                                     <div class="carousel-inner">
                                         @for ($i = 0; $i < count($habitacion->imagenes); $i++)
@@ -37,7 +37,7 @@
                                                 <div class="carousel-item active">
                                                     <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery">
 
-                                                        <img class="d-block w-100" src="{{ $habitacion->imagenes[$i] }}"
+                                                        <img class="d-block" style="width:300px; height: 200px;" src="{{ $habitacion->imagenes[$i] }}"
                                                             alt="{{  $habitacion->tipo_habitacion }} slide">
                                                     </a>
                                                 </div>
@@ -46,7 +46,7 @@
                                                 <div class="carousel-item ">
                                                     <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery">
 
-                                                        <img class="d-block w-100" src="{{ $habitacion->imagenes[$i] }}"
+                                                        <img class="d-block"  style="width:300px; height: 200px;" src="{{ $habitacion->imagenes[$i] }}"
                                                             alt="{{  $habitacion->tipo_habitacion }} slide">
                                                     </a>
                                                 </div>
@@ -108,5 +108,8 @@
 
             </div>
         </div>
+        <form action="{{ route('admin.paneladministracion') }}">
+            <input type="submit" value="Volver" class="btn btn-secondary mt-3">
+        </form>
     </div>
 @endsection

@@ -135,7 +135,7 @@
                     @foreach ($hoteles as $hotel)
                         <tr>
                             <td>
-                                <div id="carouselExampleIndicators" class="carousel slide w-100 m-auto" data-ride="carousel">
+                                <div id="carouselExampleIndicators{{ $hotel->id }}" data-interval="false" class="carousel slide w-100 m-auto" data-ride="carousel">
 
                                     <div class="carousel-inner">
                                         @for ($i = 0; $i < count($hotel->imagenes); $i++)
@@ -144,7 +144,7 @@
                                                 <div class="carousel-item active">
                                                     <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery">
 
-                                                        <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"
+                                                        <img class="d-block" style="width: 300px; height: 200px;" src="{{ $hotel->imagenes[$i] }}"
                                                             alt="{{  $hotel->nombre }} slide">
                                                     </a>
                                                 </div>
@@ -153,7 +153,7 @@
                                                 <div class="carousel-item ">
                                                     <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery">
                                                         
-                                                        <img class="d-block w-100" src="{{ $hotel->imagenes[$i] }}"
+                                                        <img class="d-block" style="width: 300px; height: 200px;" src="{{ $hotel->imagenes[$i] }}"
                                                             alt="{{  $hotel->nombre }} slide">
                                                     </a>
                                                 </div>
@@ -162,11 +162,11 @@
                                         @endfor
 
                                     </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators{{ $hotel->id }}" role="button"
                                         data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators{{ $hotel->id }}" role="button"
                                         data-slide="next" style="color: white;">
                                         <span class="carousel-control-next-icon"  aria-hidden="true"></span>
                                     </a>

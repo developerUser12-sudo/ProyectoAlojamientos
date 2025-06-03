@@ -41,7 +41,10 @@
                 <input type="date" name="fechaInicio" [(ngModel)]="fechaInicio" class="form-control w-100" required
                     id="fechaInicio">
                 <input type="hidden" [value]="coche.precio" name="precio">
-                <button *ngIf="coche.disponibles>0" class="btn btn-primary w-100" type="submit">Reservar</button>
+                <button *ngIf="coche.disponibles>0" class="btn btn-primary w-100" type="submit" [disabled]="!isFormValid()">
+                    Reservar
+                </button>
+
                 <button *ngIf="coche.disponibles==0" class="btn btn-primary w-100" type="submit"
                     disabled>Agotado</button>
 

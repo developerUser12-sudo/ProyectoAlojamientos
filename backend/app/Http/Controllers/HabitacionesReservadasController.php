@@ -20,34 +20,19 @@ class HabitacionesReservadasController extends Controller
 
     public function getHabitacionesById()
     {
-        $habitacionesUsuario = HabitacionesReservadas::where('id_usuario', Auth::id())->get();
-        $idHabitacion = $habitacionesUsuario->pluck('habitacion_id')->toArray();
-        $habitaciones = collect();
-        for ($i = 0; $i < count($idHabitacion); $i++) {
-            $habitacion = Habitacion::find($idHabitacion[$i]);
-            if ($habitacion) {
-                $habitaciones->push($habitacion);
-            }
-        }
-        return $habitaciones;
-    }
-    public function getHotelesById()
-    {
-        $habitacionIds = HabitacionesReservadas::where('id_usuario', Auth::id())->pluck('habitacion_id');
-        $hotelIds = Habitacion::whereIn('id', $habitacionIds)->pluck('hotel_id');
-        $hoteles = Hotel::whereIn('id', $hotelIds)->get();
-        foreach ($hoteles as $hotel) {
+        $reservas = HabitacionesReservadas::where('id_usuario', Auth::id())->get();
+
+        foreach ($reservas as $reserva) {
+            $habitacion = Habitacion::find($reserva->habitacion_id);
+            $hotel = Hotel::find($habitacion->hotel_id);
             $hotel->imagenes = json_decode($hotel->imagenes);
+            $reserva->habitacion = $habitacion;
+            $reserva->hotel = $hotel;
         }
-        return $hoteles;
-    }
+        return $reservas;
 
-
-    public function getPrecioById()
-    {
-        $habitacionesUsuario = HabitacionesReservadas::where('id_usuario', Auth::id())->get();
-        return $habitacionesUsuario;
     }
+    
     public function store(Request $request)
     {
         $validated = $request->validate([

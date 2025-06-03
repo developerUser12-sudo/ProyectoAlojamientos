@@ -47,3 +47,9 @@ main{
 .hidden{
     display: none;
 }
+.lb-image {
+  max-width: 800px !important;
+  max-height: 600px !important;
+  object-fit: contain; 
+}
+

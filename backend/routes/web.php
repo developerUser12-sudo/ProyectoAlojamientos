@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HabitacionesReservadasController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuthController;
@@ -73,7 +74,8 @@ Route::get('/username', function () {
 });
 
 Route::get('/reservas', [ReservadosController::class, 'index'])->name('reservas');
-Route::delete('reservas/{id}', [CocheReservadoController::class, 'destroy'])->name('cancelarreserva');
+Route::delete('reservas/coches/{id}', [CocheReservadoController::class, 'destroy'])->name('cancelarreservacoche');
+Route::delete('reservas/hoteles/{id}', [HabitacionesReservadasController::class, 'destroy'])->name('cancelarreservahotel');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

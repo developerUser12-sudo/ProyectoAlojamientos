@@ -12,7 +12,7 @@ import { Coche } from '../coche';
 })
 export class DetallecocheComponent {
   coche: Coche | null = null;
-  fechaInicio: Date = new Date();
+  fechaInicio: string='';
   coches: Coche[] = [];
   id: number = 0;
   precio: number = 0;
@@ -29,11 +29,15 @@ export class DetallecocheComponent {
       });
     }
   }
-
+  isFormValid(): boolean {
+    return !!(
+      this.fechaInicio
+    );
+  }
   onSubmit() {
     this.reservado = false;
     this.diaIncorrecto = false;
-    this.faltaLugar = false;  
+    this.faltaLugar = false;
     this.usuario.getUsuario().subscribe((dataUsuario) => {
       if (dataUsuario.username == 'invitado') {
         window.location.href = environment.apiUrl;

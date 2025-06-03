@@ -5,7 +5,7 @@ export interface Habitacion {
     capacidad:string;
     disponibles:number;
     total:string;
-    descuento:string;
+    descuento:number;
     imagenes: string[]; 
     hotel_id:number;
     id:string;

@@ -17,8 +17,8 @@ export class DetallehotelComponent {
   hotel: Hotel | null = null;
   habitaciones: Habitacion[] = [];
   habitacionSeleccionada: Habitacion | null = null;
-  fecha_salida: Date = new Date();
-  fecha_entrada: Date = new Date();
+  fecha_salida: string = '';
+  fecha_entrada: string = '';
   comida: string = '';
   rangoIncorrecto: boolean = false;
   reservado: boolean = false;
@@ -30,6 +30,12 @@ export class DetallehotelComponent {
     let id = this.route.snapshot.paramMap.get('id');
     this.habitacionService.getHabitacionesById(id).subscribe((data) => {
       this.habitaciones = data;
+      for (let habitacion of this.habitaciones) {
+        if (typeof habitacion.imagenes === 'string') {
+          habitacion.imagenes = JSON.parse(habitacion.imagenes);
+
+        }
+      }
 
     })
     if (id) {
@@ -56,6 +62,16 @@ export class DetallehotelComponent {
   stars(n: number): any[] {
     return Array(n);
   }
+  isFormValid(): boolean {
+    return !!(
+      this.fecha_entrada &&
+      this.fecha_salida &&
+      this.fecha_salida > this.fecha_entrada &&
+      this.comida &&
+      this.habitacionSeleccionada
+    );
+  }
+
   onSubmit() {
     this.diaSalidaIncorrecto = false;
     this.rangoIncorrecto = false;
@@ -79,26 +95,19 @@ export class DetallehotelComponent {
         }
         else {
           if (this.habitacionSeleccionada) {
-            const entradaDate = new Date(this.fecha_entrada);
-            const salidaDate = new Date(this.fecha_salida);
 
-            const fechaEntradaStr = entradaDate.toISOString().slice(0, 10);
-            const fechaSalidaStr = salidaDate.toISOString().slice(0, 10);
 
             this.habitacionService.reservarHabitacion(
               this.habitacionSeleccionada.id,
               dataUsuario.id,
-              fechaEntradaStr,
-              fechaSalidaStr,
+              this.fecha_entrada,
+              this.fecha_salida,
               this.comida
             ).subscribe({
               next: () => {
                 this.reservado = true;
               }
             });
-
-
-
           }
         }
       });

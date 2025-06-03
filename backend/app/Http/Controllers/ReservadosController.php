@@ -11,10 +11,9 @@ class ReservadosController extends Controller
     {
         $coches = (new CocheReservadoController)->getCochesById();
         $cochesUsuario = (new CocheReservadoController)->getPrecioById();
-        $habitaciones = (new HabitacionesReservadasController)->getHabitacionesById();
-        $hoteles = (new HabitacionesReservadasController)->getHotelesById();
-        $habitacionesUsuario=(new HabitacionesReservadasController)->getPrecioById();
-        return view('reservas', compact('coches', 'cochesUsuario', 'habitaciones', 'hoteles','habitacionesUsuario'));
+        $reservas = (new HabitacionesReservadasController)->getHabitacionesById();
+      
+        return view('reservas', compact('coches', 'cochesUsuario', 'reservas'));
     }
 }
 

@@ -45,13 +45,13 @@
                                 <td>{{ $coches[$i]->destino }}</td>
                                 <td>{{ $cochesUsuario[$i]->pagado }}</td>
                                 <td>
-                                   
+
                                     {{ \Carbon\Carbon::parse($cochesUsuario[$i]->fecha_salida)->format('d/m/Y') }}
 
                                 </td>
 
                                 <td>
-                                    <form action="{{ route('cancelarreserva', $cochesUsuario[$i]->id) }}" method="POST">
+                                    <form action="{{ route('cancelarreservacoche', $cochesUsuario[$i]->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         @if (\Carbon\Carbon::now()->diffInDays($cochesUsuario[$i]->fecha_salida, false) < 1)
@@ -73,42 +73,36 @@
                         <tr>
                             <th>Fecha de reserva</th>
                             <th>Nombre</th>
+                            <th>Habitacion</th>
                             <th>Direccion</th>
                             <th>Precio por noche</th>
                             <th>Servicio de comida</th>
                             <th>Dia de entrada</th>
                             <th>Dia de salida</th>
                         </tr>
-                        @for ($i = 0; $i < count($hoteles); $i++)
+                        @foreach ($reservas as $reserva)
                             <tr>
-                                <td>{{\Carbon\Carbon::parse($habitacionesUsuario[$i]->created_at)->format('d/m/Y H:i') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($reserva->created_at)->format('d/m/Y H:i') }}</td>
                                 <td>
-                                    <a href="{{ config('app.frontend_url') }}/detalle-hotel/{{ $hoteles[$i]->id }}"
+                                    <a href="{{ config('app.frontend_url') }}/detalle-hotel/{{ $reserva->hotel->id }}"
                                         class="text-decoration-none text-black">
-                                        <img src="{{ $hoteles[$i]->imagenes[0] }}"
-                                            alt="Imagen hotel {{ $hoteles[$i]->nombre }}"
-                                            class="img-fluid w-100"
-                                            style="max-width:300px;min-width:100px"><br><b>{{ $hoteles[$i]->nombre }}</b>
+                                        <img src="{{ $reserva->hotel->imagenes[0] }}"
+                                            alt="Imagen hotel {{ $reserva->hotel->nombre }}" class="img-fluid w-100"
+                                            style="max-width:300px;min-width:100px"><br>
+                                        <b>{{ $reserva->hotel->nombre }}</b>
                                     </a>
                                 </td>
-                                <td>{{ $hoteles[$i]->direccion }}, {{ $hoteles[$i]->localizacion }}</td>
-                                <td>{{ $habitacionesUsuario[$i]->pagado }}</td>
-                                <td>{{ $habitacionesUsuario[$i]->comida }}</td>
+                                <td>{{ $reserva->habitacion_id }}</td>
+                                <td>{{ $reserva->hotel->direccion }}, {{ $reserva->hotel->localizacion }}</td>
+                                <td>{{ $reserva->pagado }}</td>
+                                <td>{{ $reserva->comida }}</td>
+                                <td>{{ \Carbon\Carbon::parse($reserva->fecha_entrada)->format('d/m/Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($reserva->fecha_salida)->format('d/m/Y') }}</td>
                                 <td>
-                                    {{ \Carbon\Carbon::parse($habitacionesUsuario[$i]->fecha_entrada)->format('d/m/Y') }}
-
-                                </td>
-                                <td>
-                                    {{ \Carbon\Carbon::parse($habitacionesUsuario[$i]->fecha_salida)->format('d/m/Y') }}
-
-                                </td>
-
-                                <td>
-                                    <form action="{{ route('cancelarreserva', $cochesUsuario[$i]->id) }}" method="POST">
+                                    <form action="{{ route('cancelarreservahotel', $reserva->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        @if (\Carbon\Carbon::now()->diffInDays($cochesUsuario[$i]->fecha_salida, false) < 1)
-
+                                        @if (\Carbon\Carbon::now()->diffInDays($reserva->fecha_salida, false) < 1)
                                             <input type="submit" class="btn btn-danger" value="Cancelar reserva" disabled>
                                         @else
                                             <input type="submit" class="btn btn-danger" value="Cancelar reserva">
@@ -116,12 +110,13 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endfor
+                        @endforeach
+
                     </table>
                 </div>
             </div>
         </div>
-        @if (count($coches) == 0)
+        @if (count($coches) == 0 && count($reservas) == 0)
             <p>Todavía no has reservado nada, ¿a qué esperas?</p>
         @endif
     </div>
