@@ -15,23 +15,7 @@ class HabitacionController extends Controller
         if ($request->has('hotel_id')) {
             $query->where('hotel_id', 'like', $request->hotel_id);
         }
-        // else {
-        //     $query->where('origen', 'like', '%' . $request->origen . '%');
-        //     $query->where('destino', 'like', '%' . $request->destino . '%');
-        //     if ($request->has('marca') && !empty($request->marca)) {
-        //         $query->whereRaw('LOWER(TRIM(marca)) like ?', ['%' . strtolower(trim($request->marca)) . '%']);
-        //     }
-        //     if ($request->has('modelo') && !empty($request->modelo)) {
-        //         $query->whereRaw('LOWER(TRIM(modelo)) like ?', ['%' . strtolower(trim($request->modelo)) . '%']);
-        //     }
-        //     if ($request->has('precio_min') && !empty($request->precio_min)) {
-        //         $query->where('precio', '>=', $request->precio_min);
-        //     }
-        //     if ($request->has('precio_max') && !empty($request->precio_max)) {
-        //         $query->where('precio', '<=', $request->precio_max);
-        //     }
-
-        // }
+       
 
         $habitaciones = $query->get();
 

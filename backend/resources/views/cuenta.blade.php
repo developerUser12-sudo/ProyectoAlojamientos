@@ -37,7 +37,7 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label">Correo electrónico</label>
                                 <input type="email" name="email" id="email" class="form-control"
-                                    value="{{ old('email', auth()->user()->email) }}" required>
+                                    value="{{ old('email', auth()->user()->email) }}" required readonly>
                             </div>
                             <button type="submit" class="btn btn-primary">Actualizar correo</button>
                         </form>

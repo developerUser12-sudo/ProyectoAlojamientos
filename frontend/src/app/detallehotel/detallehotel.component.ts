@@ -26,6 +26,7 @@ export class DetallehotelComponent {
   idHabitacion: number = 0;
   faltaComida: boolean = false;
   constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService) { }
+  
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
     this.habitacionService.getHabitacionesById(id).subscribe((data) => {

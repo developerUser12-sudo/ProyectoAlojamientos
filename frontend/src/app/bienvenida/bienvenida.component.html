@@ -10,13 +10,12 @@
                 aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"
                 aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
+
         </div>
         <div class="carousel-inner rounded-4">
             <div id="carrousel1" class="carousel-item active p-5" data-bs-interval="4000">
                 <div class="c-item c-item1 w-75">
-                    <h1 class="col-8 h-25 mt-3 text-light">Alquila tu coche preferido con precios únicos</h1>
+                    <h1 class="col-8 h-25 mt-3 text-light">Reserva viajes en coche con precios únicos</h1>
                     <a routerLink="/coches" routerLinkActive="active" class="btn btn-primary mt-2 ms-auto ">Encuentralo
                         aqui</a>
 
@@ -24,9 +23,9 @@
             </div>
             <div id="carrousel3" class="carousel-item position-relative p-5" data-bs-interval="4000">
                 <div
-                    class="position-absolute top-50 end-0 text-end translate-middle-y col-md-8 me-md-4  p-5 c-item c-item3">
+                    class="position-absolute top-50 end-0 text-end translate-middle-y col-md-7 me-md-4  p-5 c-item c-item3">
                     <h1 class="text-light">Los mejores hoteles con hasta un 30% de descuento</h1>
-                    <button class="btn btn-primary mt-2">Descúbrelo aquí</button>
+                    <a routerLink="/hoteles" routerLinkActive="active" class="btn btn-primary mt-2">Descúbrelo aquí</a>
                 </div>
             </div>
         </div>
@@ -41,13 +40,13 @@
             <span class="visually-hidden h-25">Next</span>
         </button>
     </div>
-    
+
 </div>
 <div class="accordion mt-4" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                aria-expanded="true" aria-controls="collapseOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 ¿Cómo funciona HolidaysNow?
             </button>
         </h2>
