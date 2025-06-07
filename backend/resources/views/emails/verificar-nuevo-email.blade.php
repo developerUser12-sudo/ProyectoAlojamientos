@@ -11,7 +11,8 @@
     <h1>¡Hola, {{ $usuario->name }}!</h1>
     <p>Accede al siguiente enlace para cambiar tu correo electrónico
     </p>
-    <a href="{{ $url }}">Confirmar correo</a>
+    <a href="{{ url('/email/change/confirm/'.$token) }}">Confirmar correo</a>
+    <p>Si no solicitaste este cambio, puedes ignorar este mensaje</p>
     <p>Saludos, HolidaysNow</p>
 </body>
 

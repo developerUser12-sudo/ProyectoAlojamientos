@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\AccountController;
+use App\Http\Controllers\CambiarEmailController;
 use App\Http\Controllers\EmailChangeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 
     Route::post('/', [AuthenticatedSessionController::class, 'store']);
-        
+
 });
 Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
     ->name('password.request');
@@ -62,10 +63,12 @@ Route::middleware('auth')->group(function () {
         return view('cuenta');
     });
     Route::put('/cuenta/usuario', [AccountController::class, 'updateUsername'])->name('account.update.username');
-    Route::get('/verify-new-email', [EmailChangeController::class, 'verify']);
+
     Route::get('/change-email', function () {
         return view('auth.change-email');
-    });
+    })->name('change-email');
+    Route::post('/email/change/request', [CambiarEmailController::class, 'requestChange'])->name('email.change.request');
+    Route::get('/email/change/confirm/{token}', [CambiarEmailController::class, 'confirmChange'])->name('email.change.confirm');
 
 
 
