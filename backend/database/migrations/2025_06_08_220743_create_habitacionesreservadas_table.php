@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha_entrada');
             $table->date('fecha_salida');
             $table->string('comida');
-            $table->integer('pagado');
+            $table->decimal('pagado', 10, 2);
             $table->string('tipo_pago');
             $table->timestamps();
         });
