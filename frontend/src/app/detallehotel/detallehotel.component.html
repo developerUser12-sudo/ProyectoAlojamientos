@@ -15,12 +15,12 @@
                     style="max-width: 400px; height: 300px;">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <a [href]="hotel.imagenes[0]" data-lightbox="gallery">
+                            <a [href]="hotel.imagenes[0]"  [attr.data-lightbox]="'habitacion-' + hotel.id">
                                 <img class="d-block w-100 rounded" [src]="hotel.imagenes[0]" alt="Carrousel slide">
                             </a>
                         </div>
                         <div *ngFor="let image of hotel.imagenes.slice(1);let i=index" class="carousel-item">
-                            <a [href]="image" data-lightbox="gallery">
+                            <a [href]="image" [attr.data-lightbox]="'habitacion-' + hotel.id">
                                 <img class="d-block w-100 rounded" [src]="image" alt="Carrousel slide">
                             </a>
                         </div>
@@ -56,30 +56,30 @@
                 </div>
                 <div class="mt-2">
                     <h5 class="fw-bold">Habitaciones</h5>
-                    <div *ngFor="let habitacion of habitaciones" class="d-flex flex-row align-items-center gap-3">
-                        <div id="habitaciones" class="carousel slide" data-bs-ride="carousel"
+                    <div *ngFor="let habitacion of habitaciones" class="d-flex flex-row align-items-center gap-3 mt-2">
+                        <div [attr.id]="'habitaciones' + habitacion.id" class="carousel slide" 
                             style="max-width: 200px; height: 150px;">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <a [href]="habitacion.imagenes[0]" data-lightbox="gallery">
+                                    <a [href]="habitacion.imagenes[0]" [attr.data-lightbox]="'habitacion-' + habitacion.id">
                                         <img class="d-block w-100 rounded" [src]="habitacion.imagenes[0]"
                                             alt="Carrousel slide">
                                     </a>
                                 </div>
                                 <div *ngFor="let image of habitacion.imagenes.slice(1)" class="carousel-item">
-                                    <a [href]="image" data-lightbox="gallery">
+                                    <a [href]="image" [attr.data-lightbox]="'habitacion-' + habitacion.id">
                                         <img class="d-block w-100 rounded" [src]="image" alt="Carrousel slide">
                                     </a>
                                 </div>
                             </div>
-                            <a class="carousel-control-prev" href="#habitaciones" role="button" data-bs-slide="prev">
+                            <a class="carousel-control-prev" [attr.href]="'#habitaciones' + habitacion.id" role="button" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             </a>
-                            <a class="carousel-control-next" href="#habitaciones" role="button" data-bs-slide="next">
+                            <a class="carousel-control-next" [attr.href]="'#habitaciones' + habitacion.id" role="button" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             </a>
                         </div>
-                        <p>
+                        
                         <p>{{habitacion.tipo_habitacion}}: <b><span class="text-muted text-decoration-line-through"
                                     *ngIf="habitacion.descuento>0">{{habitacion.precio_original_noche}}</span>
                                 {{habitacion.precio_noche}}</b></p>
@@ -117,9 +117,9 @@
                 <label class="form-label" for="habitacion">Selecciona habitación: </label>
                 <select name="habitacion" id="habitacion" class="form-select" [(ngModel)]="habitacionSeleccionada">
                     <option [ngValue]="null" disabled selected>Selecciona una opción</option>
-                    <option [ngValue]="habitacion" *ngFor="let habitacion of habitaciones">
+                    <option [ngValue]="habitacion" *ngFor="let habitacion of habitaciones"  [disabled]="habitacion.disponibles <= 0">
                         {{habitacion.tipo_habitacion}}: {{habitacion.precio_noche}}€
-                        <span *ngIf="habitacion.disponibles==0">Agotado</span>
+                        <span *ngIf="habitacion.disponibles<=0">Agotado</span>
                     </option>
                 </select>
 
@@ -128,17 +128,12 @@
                     Reservar
                 </button>
 
-                <button *ngIf="habitacionSeleccionada!=null&&habitacionSeleccionada.disponibles==0"
-                    class="btn btn-primary w-100" type="submit" disabled>Agotado</button>
-
                 <p class="text-danger" *ngIf="rangoIncorrecto">El día de salida no puede ser menor o igual al de entrada
                 </p>
                 <p class="text-danger" *ngIf="diaSalidaIncorrecto">El día de salida no puede ser menor o igual al dia
                     actual</p>
                 <p class="text-danger" *ngIf="faltaComida">Debes seleccionar el servicio de comida</p>
-                <p class="text-success" *ngIf="reservado">Has reservado la habitación. Revista tu correo electrónico
-                    para ver
-                    los detalles </p>
+                
             </form>
         </div>
     </div>

@@ -104,7 +104,16 @@
 
                     <div class="d-flex flex-row  gap-5">
                         <p>Capacidad total: {{hotel.capacidad}}</p>
-                        <p><b>{{precioHabitacion(hotel.id)}}€</b></p>
+                        <b *ngIf="precioHabitacion(hotel.id) as habitacion">
+                            <span *ngIf="habitacion.descuento > 0" class="text-decoration-line-through text-muted">
+                                {{ habitacion.precio_original_noche }}€
+                            </span>
+                            <span>{{ habitacion.precio_noche }}€</span>
+                        </b>
+
+                    </div>
+                    <div *ngIf="agotado">
+                        <p class="text-danger">Agotado</p>
                     </div>
 
                 </a>

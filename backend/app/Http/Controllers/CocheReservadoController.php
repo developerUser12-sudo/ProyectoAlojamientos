@@ -42,6 +42,7 @@ class CocheReservadoController extends Controller
             'id_coche' => 'required|integer',
             'id_usuario' => 'required|integer',
             'fecha_salida' => 'required|date',
+            'tipo_pago' => 'required|string',
         ]);
         $coche = Coche::find($validated['id_coche']);
         if ($coche) {

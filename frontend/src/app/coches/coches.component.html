@@ -35,6 +35,8 @@
                     <b *ngIf="coche.descuento==0" class="fs-5">{{coche.precio}}€</b>
                     <b *ngIf="coche.descuento>0" class="fs-5"><span
                             class="text-decoration-line-through text-muted">{{coche.precio_original}}€</span><span> {{coche.precio}}€</span></b>
+                    <p *ngIf="coche.disponibles==0" class="text-danger mt-2">Agotado</p>
+                    <p *ngIf="coche.disponibles>0" class="mt-2">Quedan: {{coche.disponibles}}</p>
                 </a>
             </div>
         </div>
@@ -51,8 +53,7 @@
                     <p>Modelo: {{filtra.modelo}}</p>
                     <b *ngIf="filtra.descuento==0" class="fs-5">{{filtra.precio}}€</b>
                     <b *ngIf="filtra.descuento>0" class="fs-5"><span
-                            class="text-decoration-line-through text-muted">{{+filtra.precio / (1 - filtra.descuento /
-                            100)}}€</span><span> {{filtra.precio}}€</span></b>
+                            class="text-decoration-line-through text-muted">{{filtra.precio_original}}€</span><span> {{filtra.precio}}€</span></b>
                 </a>
             </div>
         </div>

@@ -30,6 +30,7 @@ export class CochesComponent {
   };
   coches: Coche[] = [];
   filtrar: any = [];
+  agotado = false;
   constructor(private serviciosService: CochesService) { }
 
   ngOnInit(): void {
@@ -50,9 +51,10 @@ export class CochesComponent {
     this.modelo = '';
     this.minValue = 0;
     this.maxValue = 1000;
-    this.buscado=false;
-    this.filtrar=[];
+    this.buscado = false;
+    this.filtrar = [];
   }
+ 
   onSubmit() {
     this.buscado = true;
     this.serviciosService.getCochesBusqueda(this.origen, this.destino, this.marca, this.modelo, this.minValue, this.maxValue).subscribe(data => {

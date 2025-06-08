@@ -20,10 +20,10 @@ export class HabitacionesService {
 
     return this.http.get(`${this.apiHabitacionesUrl}/api/habitaciones`);
   }
-  reservarHabitacion(idHabitacion:string|null,idUsuario:number,fechaEntrada:string,fechaSalida:string,comida:string){
+  reservarHabitacion(idHabitacion:string|null,idUsuario:number,fechaEntrada:string,fechaSalida:string,comida:string,metodoPago:string){
     
     let datos=
-      {habitacion_id:Number(idHabitacion),id_usuario:idUsuario,fecha_salida:fechaSalida,fecha_entrada:fechaEntrada,comida:comida}
+      {habitacion_id:Number(idHabitacion),id_usuario:idUsuario,fecha_salida:fechaSalida,fecha_entrada:fechaEntrada,comida:comida,tipo_pago:metodoPago}
     ;      
     
     return this.http.post(`${this.apiHabitacionesUrl}/api/habitaciones-reservadas`,datos);

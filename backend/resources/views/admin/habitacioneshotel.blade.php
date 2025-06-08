@@ -28,7 +28,7 @@
                     @foreach ($habitaciones as $habitacion)
                         <tr>
                             <td>
-                                <div id="carouselExampleIndicators" data-interval="false" class="carousel slide w-100 m-auto" data-ride="carousel">
+                                <div id="carouselExampleIndicators{{ $habitacion->id }}" data-interval="false" class="carousel slide w-100 m-auto" data-ride="carousel">
 
                                     <div class="carousel-inner">
                                         @for ($i = 0; $i < count($habitacion->imagenes); $i++)
@@ -55,11 +55,11 @@
                                         @endfor
 
                                     </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators{{ $habitacion->id }}" role="button"
                                         data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators{{ $habitacion->id }}" role="button"
                                         data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     </a>

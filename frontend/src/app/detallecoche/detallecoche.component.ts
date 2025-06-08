@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CochesService } from '../coches.service';
 import { UsuarioService } from '../usuario.service';
 import { Coche } from '../coche';
@@ -19,7 +19,7 @@ export class DetallecocheComponent {
   reservado = false;
   diaIncorrecto = false;
   faltaLugar = false;
-  constructor(private route: ActivatedRoute, private cocheDetalle: CochesService, private usuario: UsuarioService) { }
+  constructor(private router: Router,private route: ActivatedRoute, private cocheDetalle: CochesService, private usuario: UsuarioService) { }
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -51,11 +51,14 @@ export class DetallecocheComponent {
 
         } else {
           let idCoche = this.route.snapshot.paramMap.get('id');
-          this.cocheDetalle.reservarCoche(idCoche, dataUsuario.id, inicio)
-            .subscribe(() => {
-
-              this.reservado = true;
+          this.router.navigate(['/metodopago'], {
+              queryParams: {
+                idCoche: idCoche,
+                usuarioId: dataUsuario.id,
+                inicio:this.fechaInicio
+              }
             });
+          
         }
       }
     });

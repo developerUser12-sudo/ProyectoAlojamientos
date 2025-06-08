@@ -36,6 +36,9 @@ export class HotelesComponent {
   opcionesSeleccionadas: string[] = [];
   buscado: boolean = false;
   filtrar: any = [];
+  descuento = false;
+  agotado=false;
+  masBarata: Habitacion | null = null;
   constructor(private serviciosService: HotelesService, private habitacionService: HabitacionesService) { }
   ngOnInit(): void {
     this.cargando = 'Cargando...';
@@ -68,19 +71,42 @@ export class HotelesComponent {
   }
   precioHabitacion(id: number) {
     let precios: number[] = [];
-
+    this.descuento = false;
+    this.masBarata;
     for (let index = 0; index < this.habitaciones.length; index++) {
       if (this.habitaciones[index].hotel_id == id) {
         precios.push(this.habitaciones[index].precio_noche);
       }
+      if (this.habitaciones[index].descuento > 0) {
+        this.descuento = true;
+      }
     }
+    for (let index = 0; index < this.habitaciones.length; index++) {
+      if (this.habitaciones[index].precio_noche == Math.min(...precios)) {
+        this.masBarata = this.habitaciones[index];
+      }
 
-    return Math.min(...precios);
+    }
+    return this.masBarata;
+
+  }
+  habitacionesDisponibles(id: number) {
+    this.agotado=false;
+    for (let index = 0; index < this.habitaciones.length; index++) {
+      if (this.habitaciones[index].hotel_id == id) {
+        if (this.habitaciones[index].disponibles==0) {
+          
+          this.agotado=true;
+        }else{
+          this.agotado=false;
+        }
+      }
+    }
   }
   onSubmit() {
-    
+
     this.buscado = true;
-    
+
     this.serviciosService.getHotelesBusqueda(this.nombre, this.localizacion, this.estrellas, this.hora_apertura, this.hora_cierre, this.minValue, this.maxValue, this.opcionesSeleccionadas).subscribe(data => {
       this.filtrar = data;
 

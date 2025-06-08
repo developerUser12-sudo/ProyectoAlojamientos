@@ -21,6 +21,7 @@ import { PoliticadeprivacidadComponent } from './politicadeprivacidad/politicade
 import { SobrenosotrosComponent } from './sobrenosotros/sobrenosotros.component';
 import { InformaciondelaempresaComponent } from './informaciondelaempresa/informaciondelaempresa.component';
 import { SoporteComponent } from './soporte/soporte.component';
+import { MetodopagoComponent } from './metodopago/metodopago.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SoporteComponent } from './soporte/soporte.component';
     SobrenosotrosComponent,
     InformaciondelaempresaComponent,
     SoporteComponent,
+    MetodopagoComponent,
     
   ],
   imports: [

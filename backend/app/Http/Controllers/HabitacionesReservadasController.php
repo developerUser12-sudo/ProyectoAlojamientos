@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\CorreoHabitacion;
+use Carbon\Carbon;
 class HabitacionesReservadasController extends Controller
 {
     public function index()
@@ -32,7 +33,7 @@ class HabitacionesReservadasController extends Controller
         return $reservas;
 
     }
-    
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,6 +42,7 @@ class HabitacionesReservadasController extends Controller
             'fecha_salida' => 'required|date',
             'fecha_entrada' => 'required|date',
             'comida' => 'required|string',
+            'tipo_pago' => 'required|string',
         ]);
 
         $habitacion = Habitacion::find($validated['habitacion_id']);
@@ -48,7 +50,11 @@ class HabitacionesReservadasController extends Controller
             $habitacion->disponibles -= 1;
             $habitacion->save();
         }
-        $validated['pagado'] = $habitacion->precio_noche;
+        $fechaEntrada = Carbon::parse($validated['fecha_entrada']);
+        $fechaSalida = Carbon::parse($validated['fecha_salida']);
+        $dias = $fechaSalida->diffInDays($fechaEntrada,true);
+        $validated['pagado'] = $habitacion->precio_noche * $dias;
+
         $hotel = Hotel::find($habitacion->hotel_id);
         HabitacionesReservadas::create($validated);
         $usuario = User::find($validated['id_usuario']);

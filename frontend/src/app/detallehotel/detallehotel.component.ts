@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Hotel } from '../hotel';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotelesService } from '../hoteles.service';
 import { UsuarioService } from '../usuario.service';
 import { HabitacionesService } from '../habitaciones.service';
@@ -21,12 +21,11 @@ export class DetallehotelComponent {
   fecha_entrada: string = '';
   comida: string = '';
   rangoIncorrecto: boolean = false;
-  reservado: boolean = false;
   diaSalidaIncorrecto: boolean = false;
   idHabitacion: number = 0;
   faltaComida: boolean = false;
-  constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService) { }
-  
+  constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService, private router: Router) { }
+
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id');
     this.habitacionService.getHabitacionesById(id).subscribe((data) => {
@@ -95,21 +94,18 @@ export class DetallehotelComponent {
           window.location.href = environment.apiUrl;
         }
         else {
-          if (this.habitacionSeleccionada) {
-
-
-            this.habitacionService.reservarHabitacion(
-              this.habitacionSeleccionada.id,
-              dataUsuario.id,
-              this.fecha_entrada,
-              this.fecha_salida,
-              this.comida
-            ).subscribe({
-              next: () => {
-                this.reservado = true;
+            if (this.habitacionSeleccionada) {
+              this.router.navigate(['/metodopago'], {
+              queryParams: {
+                habitacionId: this.habitacionSeleccionada.id,
+                usuarioId: dataUsuario.id,
+                entrada: this.fecha_entrada,
+                salida: this.fecha_salida,
+                comida: this.comida
               }
             });
-          }
+            }
+          
         }
       });
     }

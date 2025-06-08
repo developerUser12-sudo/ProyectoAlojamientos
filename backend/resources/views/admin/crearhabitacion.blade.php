@@ -42,7 +42,7 @@
 
             <button type="submit" class="btn btn-primary">Crear Habitacion</button>
         </form>
-        <form action="{{ route('admin.paneladministracion') }}">
+        <form action="{{ route('admin.habitacioneshotel', $hotel->id ) }}">
             <input type="submit" value="Volver" class="btn btn-secondary">
         </form>
     </div>

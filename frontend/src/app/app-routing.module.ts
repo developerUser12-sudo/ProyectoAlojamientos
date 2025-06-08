@@ -13,6 +13,7 @@ import { PoliticadeprivacidadComponent } from './politicadeprivacidad/politicade
 import { PoliticadecookiesComponent } from './politicadecookies/politicadecookies.component';
 import { InformaciondelaempresaComponent } from './informaciondelaempresa/informaciondelaempresa.component';
 import { SoporteComponent } from './soporte/soporte.component';
+import { MetodopagoComponent } from './metodopago/metodopago.component';
 
 const routes: Routes = [
   {path:'',component:BienvenidaComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'politica-de-cookies',component:PoliticadecookiesComponent},
   {path:'informacion-de-la-empresa',component:InformaciondelaempresaComponent},
   {path:'soporte',component:SoporteComponent},
+  {path:'metodopago',component:MetodopagoComponent},
 
   {path:'**',component:NoencontradoComponent},
 
