@@ -49,20 +49,30 @@ class CocheReservadoController extends Controller
             $coche->disponibles -= 1;
             $coche->save();
         }
-        $validated['pagado']= $coche->precio;
+        $validated['pagado'] = $coche->precio;
         CocheReservado::create($validated);
         $usuario = User::find($validated['id_usuario']);
         if ($usuario) {
-            
-            Mail::to($usuario->email)->send(new CorreoCoche($usuario,$coche));
+
+            Mail::to($usuario->email)->send(new CorreoCoche($usuario, $coche));
         }
 
 
     }
     public function destroy($id)
     {
-        $coche = CocheReservado::where('id', $id);
-        $coche->delete();
+        $cocheReservado = CocheReservado::find($id);
+
+        $cocheActualizar = Coche::find($cocheReservado->id_coche);
+
+        if ($cocheActualizar) {
+            $cocheActualizar->disponibles += 1;
+            $cocheActualizar->save();
+        }
+
+        $cocheReservado->delete();
+
         return redirect()->route('reservas');
     }
+
 }

@@ -66,22 +66,21 @@
                             </div>
                         </form>
                         <div class="row mt-5">
-                            <div class="d-flex flex-md-row flex-column gap-4 justify-content-center">
-                                <div class="d-flex flex-row justify-content-center gap-1">
-                                    <p>¿No tienes una cuenta?</p>
-                                    <form action="{{ config('app.url') }}/register">
-                                        <input type="submit" class="btn btn-primary  justify-content-center"
-                                            value="Regístrate">
+                            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <p class="mb-0">¿No tienes una cuenta?</p>
+                                    <form action="{{ config('app.url') }}/register" class="m-0 p-0">
+                                        <input type="submit" class="btn btn-primary" value="Regístrate">
                                     </form>
                                 </div>
                                 <div>
-                                    <form action="{{ config('app.frontend_url') }}">
-                                        <input type="submit" class="btn btn-secondary ms-3" value="Volver">
+                                    <form action="{{ config('app.frontend_url') }}" class="m-0 p-0">
+                                        <input type="submit" class="btn btn-secondary" value="Volver">
                                     </form>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>

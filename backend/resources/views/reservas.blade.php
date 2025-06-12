@@ -75,7 +75,7 @@
                             <th>Nombre</th>
                             <th>Habitacion</th>
                             <th>Direccion</th>
-                            <th>Precio por noche</th>
+                            <th>Precio total</th>
                             <th>Servicio de comida</th>
                             <th>Dia de entrada</th>
                             <th>Dia de salida</th>
@@ -92,7 +92,7 @@
                                         <b>{{ $reserva->hotel->nombre }}</b>
                                     </a>
                                 </td>
-                                <td>{{ $reserva->habitacion_id }}</td>
+                                <td>{{ $reserva->tipo_habitacion }}</td>
                                 <td>{{ $reserva->hotel->direccion }}, {{ $reserva->hotel->localizacion }}</td>
                                 <td>{{ $reserva->pagado }}</td>
                                 <td>{{ $reserva->comida }}</td>

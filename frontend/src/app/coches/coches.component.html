@@ -11,12 +11,13 @@
                     <input type="text" class="form-control" name="marca" [(ngModel)]="marca" placeholder="Marca">
                     <input type="text" class="form-control" name="modelo" [(ngModel)]="modelo" placeholder="Modelo">
                 </div>
-                    <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options">
-                    </ngx-slider>
-               <div class="d-flex flex-row gap-3 mt-3">
-                 <button class="btn btn-secondary" type="button" (click)="limpiarFormulario(formBusqueda)">Limpiar</button>
-                <button class="btn btn-primary" type="submit" [disabled]="formBusqueda.invalid">Buscar</button>
-               </div>
+                <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options">
+                </ngx-slider>
+                <div class="d-flex flex-row gap-3 mt-3">
+                    <button class="btn btn-secondary" type="button"
+                        (click)="limpiarFormulario(formBusqueda)">Limpiar</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="formBusqueda.invalid">Buscar</button>
+                </div>
             </form>
         </div>
     </div>
@@ -28,13 +29,15 @@
             <div *ngFor="let coche of coches.slice(0,20)" class=" p-2 rounded cars card">
                 <a [routerLink]="['/detalle-coche', coche.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
-                    <img [src]="coche.imagen" alt="Imagen coche coche.marca coche.modelo" style="width: 200px;height:100px;object-fit: cover;">
+                    <img [src]="coche.imagen" alt="Imagen coche coche.marca coche.modelo"
+                        style="width: 200px;height:100px;object-fit: cover;">
                     <p><i class="bi bi-geo-alt-fill"></i> {{coche.origen}} - {{coche.destino}}</p>
                     <p>Marca: {{coche.marca}}</p>
                     <p>Modelo: {{coche.modelo}}</p>
                     <b *ngIf="coche.descuento==0" class="fs-5">{{coche.precio}}€</b>
                     <b *ngIf="coche.descuento>0" class="fs-5"><span
-                            class="text-decoration-line-through text-muted">{{coche.precio_original}}€</span><span> {{coche.precio}}€</span></b>
+                            class="text-decoration-line-through text-muted">{{coche.precio_original}}€</span><span>
+                            {{coche.precio}}€</span></b>
                     <p *ngIf="coche.disponibles==0" class="text-danger mt-2">Agotado</p>
                     <p *ngIf="coche.disponibles>0" class="mt-2">Quedan: {{coche.disponibles}}</p>
                 </a>
@@ -47,13 +50,17 @@
             <div *ngFor="let filtra of filtrar" class="border border-secondary bg-white p-2 rounded cars card">
                 <a [routerLink]="['/detalle-coche', filtra.id]" routerLinkActive="active"
                     class="text-decoration-none text-black">
-                    <img [src]="filtra.imagen" alt="Imagen coche filtra.marca filtra.modelo" style="width: 200px;height:100px;object-fit: cover;">
+                    <img [src]="filtra.imagen" alt="Imagen coche filtra.marca filtra.modelo"
+                        style="width: 200px;height:100px;object-fit: cover;">
                     <p><i class="bi bi-geo-alt-fill"></i> {{filtra.origen}} - {{filtra.destino}}</p>
                     <p>Marca: {{filtra.marca}}</p>
                     <p>Modelo: {{filtra.modelo}}</p>
                     <b *ngIf="filtra.descuento==0" class="fs-5">{{filtra.precio}}€</b>
                     <b *ngIf="filtra.descuento>0" class="fs-5"><span
-                            class="text-decoration-line-through text-muted">{{filtra.precio_original}}€</span><span> {{filtra.precio}}€</span></b>
+                            class="text-decoration-line-through text-muted">{{filtra.precio_original}}€</span><span>
+                            {{filtra.precio}}€</span></b>
+                    <p *ngIf="filtra.disponibles==0" class="text-danger mt-2">Agotado</p>
+                    <p *ngIf="filtra.disponibles>0" class="mt-2">Quedan: {{filtra.disponibles}}</p>
                 </a>
             </div>
         </div>

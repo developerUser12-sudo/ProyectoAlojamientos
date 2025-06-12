@@ -21,9 +21,9 @@ export class DetallehotelComponent {
   fecha_entrada: string = '';
   comida: string = '';
   rangoIncorrecto: boolean = false;
-  diaSalidaIncorrecto: boolean = false;
   idHabitacion: number = 0;
   faltaComida: boolean = false;
+  nombreHotel='';
   constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
@@ -53,6 +53,7 @@ export class DetallehotelComponent {
           if (typeof this.hotel.comidas === 'string') {
             this.hotel.comidas = JSON.parse(this.hotel.comidas);
           }
+           this.nombreHotel = this.hotel.nombre;
 
         }
 
@@ -66,25 +67,24 @@ export class DetallehotelComponent {
     return !!(
       this.fecha_entrada &&
       this.fecha_salida &&
-      this.fecha_salida > this.fecha_entrada &&
+      
       this.comida &&
       this.habitacionSeleccionada
     );
   }
 
   onSubmit() {
-    this.diaSalidaIncorrecto = false;
+    console.log(this.hotel);
+    
     this.rangoIncorrecto = false;
     let hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
     let entrada = new Date(this.fecha_entrada);
     entrada.setHours(0, 0, 0, 0);
-    if (this.fecha_entrada == this.fecha_salida || this.fecha_salida < this.fecha_entrada) {
+    if (this.fecha_entrada == this.fecha_salida || this.fecha_salida < this.fecha_entrada||entrada<=hoy) {
       this.rangoIncorrecto = true;
     }
-    else if (entrada <= hoy) {
-      this.diaSalidaIncorrecto = true;
-    }
+    
     else if (this.comida == '') {
       this.faltaComida = true;
     }
@@ -95,9 +95,11 @@ export class DetallehotelComponent {
         }
         else {
             if (this.habitacionSeleccionada) {
+              
               this.router.navigate(['/metodopago'], {
               queryParams: {
                 habitacionId: this.habitacionSeleccionada.id,
+               hotelId: this.hotel?.id,
                 usuarioId: dataUsuario.id,
                 entrada: this.fecha_entrada,
                 salida: this.fecha_salida,

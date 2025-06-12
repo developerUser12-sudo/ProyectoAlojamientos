@@ -4,6 +4,8 @@ import { HotelesService } from '../hoteles.service';
 import { HabitacionesService } from '../habitaciones.service';
 import { UsuarioService } from '../usuario.service';
 import { CochesService } from '../coches.service';
+import { Hotel } from '../hotel';
+import { Coche } from '../coche';
 
 @Component({
   selector: 'app-metodopago',
@@ -12,48 +14,80 @@ import { CochesService } from '../coches.service';
   styleUrl: './metodopago.component.css'
 })
 export class MetodopagoComponent {
-  constructor(private cocheDetalle: CochesService, private route: ActivatedRoute, private habitacionService: HabitacionesService, private usuario: UsuarioService, private router: Router) { }
+  constructor(private cocheDetalle: CochesService, private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService, private router: Router) { }
   reserva: any = {};
   metodoPago: string = '';
   numeroTarjeta: string = '';
-  reservado:boolean=false;
+  reservado: boolean = false;
+  hotel: Hotel | null = null;
+  coche: Coche | null = null;
+
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['habitacionId'] && +params['habitacionId'] > 0) {
+      if (!params['habitacionId'] && !params['hotelId']) {
+        this.router.navigate(['/']);
 
-        this.reserva = {
-          habitacionId: +params['habitacionId'],
-          usuarioId: +params['usuarioId'],
-          entrada: params['entrada'],
-          salida: params['salida'],
-          comida: params['comida']
-        };
-      } else {
-        this.reserva = {
-          idCoche: +params['idCoche'],
-          usuarioId: +params['usuarioId'],
-          inicio: params['inicio']
-        };
       }
+      else {
+        if (params['habitacionId'] && +params['habitacionId'] > 0) {
+
+          this.reserva = {
+
+            habitacionId: +params['habitacionId'],
+            hotel: params['hotelId'],
+            usuarioId: +params['usuarioId'],
+            entrada: params['entrada'],
+            salida: params['salida'],
+            comida: params['comida']
+          };
+          if (this.reserva.hotel) {
+            this.hotelDetalle.getHotel(this.reserva.hotel).subscribe((data) => {
+              this.hotel = data[0];
+              if (this.hotel) {
+                if (typeof this.hotel.imagenes === 'string') {
+                  this.hotel.imagenes = JSON.parse(this.hotel.imagenes);
+                }
+
+              }
+
+            });
+          }
+        } else {
+          this.reserva = {
+            idCoche: +params['idCoche'],
+            usuarioId: +params['usuarioId'],
+            inicio: params['inicio']
+          };
+          if (this.reserva.idCoche) {
+            this.cocheDetalle.getCoche(this.reserva.idCoche).subscribe((data) => {
+              this.coche = data[0];
+
+            });
+          }
+        }
+      }
+
     });
   }
- 
+
+
+
   onSubmit() {
-    this.reservado=false;
+    this.reservado = false;
     if (this.reserva.habitacionId > 0) {
       this.habitacionService.reservarHabitacion(this.reserva.habitacionId, this.reserva.usuarioId, this.reserva.entrada, this.reserva.salida, this.reserva.comida, this.metodoPago).subscribe({
         next: () => {
-          this.reservado=true;
+          this.reservado = true;
         }
       });
-      
+
     } else {
-      
+
       this.cocheDetalle.reservarCoche(this.reserva.idCoche, this.reserva.usuarioId, this.reserva.inicio, this.metodoPago).subscribe({
         next: () => {
-          this.reservado=true;
-          
+          this.reservado = true;
+
         }
 
       });
