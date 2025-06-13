@@ -27,9 +27,8 @@
     </form>
     <a *ngIf="!reservado" routerLink="/" routerLinkActive="active" class="btn btn-secondary ms-3">Cancelar</a>
 
+    <h5 class="p-3">Tu producto:</h5>
     <div *ngIf="reserva.habitacionId > 0 && hotel" class="rounded card p-2 mt-4" style="width: 300px;">
-        <a [routerLink]="['/detalle-hotel', hotel.id]" routerLinkActive="active"
-            class="text-decoration-none text-black">
             <img [src]="hotel.imagenes[0]" alt="Imagen hotel hotel.nombre"
                 style="width: 300px; height:200px; object-fit: cover;" class="img-fluid">
 
@@ -38,13 +37,11 @@
             </div>
 
             <p><i class="bi bi-geo-alt-fill"></i>{{hotel.direccion}}, {{hotel.localizacion}}</p>
-        </a>
+        
     </div>
     <div class="p-3">
-        <h5>Tu producto:</h5>
         <div *ngIf="reserva.idCoche > 0 && coche" class="rounded card p-2 mt-4" style="width: 300px;">
-            <a [routerLink]="['/detalle-coche', coche.id]" routerLinkActive="active"
-                class="text-decoration-none text-black">
+            
                 <img [src]="coche.imagen" alt="Imagen coche coche.nombre"
                     style="width: 250px; height:150px; object-fit: cover;" class="img-fluid">
 
@@ -53,7 +50,7 @@
                 </div>
 
                 <p><i class="bi bi-geo-alt-fill"></i> De {{coche.origen}} a {{coche.destino}}</p>
-            </a>
+           
         </div>
     </div>
 

@@ -25,7 +25,7 @@ export class MetodopagoComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (!params['habitacionId'] && !params['hotelId']) {
+      if (!params['habitacionId'] && !params['idCoche']) {
         this.router.navigate(['/']);
 
       }

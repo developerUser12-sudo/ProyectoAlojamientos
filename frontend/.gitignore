@@ -1,23 +1,17 @@
+# Node dependencies
 /node_modules
-/public
-/storage/*.key
-/vendor
+
+# Build output
 /dist
-.angular/
-.env
-.env.backup
-.env.production
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
+/.angular
+
+# Logs
+npm-debug.log
+yarn-error.log
 *.log
 *.tmp
 
-npm-debug.log
-yarn-error.log
-
-
+# IDEs y tools
 /.fleet
 /.idea
 /.vscode
