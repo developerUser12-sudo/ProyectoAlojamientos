@@ -61,13 +61,13 @@
                             <td>
                                 <div class="ms-auto d-flex flex-md-row flex-column gap-2">
                                     <form action="{{ route('admin.actualizarcoche', $coche->id) }}">
-                                        <input type="submit" class="btn btn-warning" value="Editar">
+                                        <input type="submit" class="btn editar  text-light" value="Editar">
                                     </form>
                                     <form action="{{ route('admin.deletecoche', $coche->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
 
-                                        <input type="submit" class="btn btn-danger" value="Eliminar">
+                                        <input type="submit" class="btn eliminar  text-light" value="Eliminar">
                                     </form>
                                 </div>
                             </td>
@@ -142,7 +142,7 @@
                                             @if ($i == 0)
 
                                                 <div class="carousel-item active">
-                                                    <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery">
+                                                    <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery-{{ $hotel->id }}">
 
                                                         <img class="d-block" style="width: 300px; height: 200px;" src="{{ $hotel->imagenes[$i] }}"
                                                             alt="{{  $hotel->nombre }} slide">
@@ -151,7 +151,8 @@
                                             @else
 
                                                 <div class="carousel-item ">
-                                                    <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery">
+                                                    <a href="{{ $hotel->imagenes[$i] }}" data-lightbox="gallery-{{ $hotel->id }}">
+
                                                         
                                                         <img class="d-block" style="width: 300px; height: 200px;" src="{{ $hotel->imagenes[$i] }}"
                                                             alt="{{  $hotel->nombre }} slide">
@@ -215,13 +216,13 @@
 
                                     </form>
                                     <form action="{{ route('admin.actualizarhotel', $hotel->id) }}">
-                                        <input type="submit" class="btn btn-warning" value="Editar">
+                                        <input type="submit" class="btn editar  text-light" value="Editar">
                                     </form>
                                     <form action="{{ route('admin.deletehotel', $hotel->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
 
-                                        <input type="submit" class="btn btn-danger" value="Eliminar">
+                                        <input type="submit" class="btn eliminar  text-light" value="Eliminar">
                                     </form>
                                 </div>
                             </td>

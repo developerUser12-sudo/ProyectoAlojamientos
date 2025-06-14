@@ -52,4 +52,9 @@ main{
   max-height: 600px !important;
   object-fit: contain; 
 }
-
+.eliminar{
+    background-color: #d9534f !important;
+}
+.editar{
+    background-color: #f0ad4e !important;
+}

@@ -28,8 +28,8 @@
                     @foreach ($habitaciones as $habitacion)
                         <tr>
                             <td>
-                                <div id="carouselExampleIndicators{{ $habitacion->id }}" data-interval="false" class="carousel slide w-100 m-auto" data-ride="carousel">
-
+                                <div id="carouselExampleIndicators{{ $habitacion->id }}" class="carousel slide m-auto"
+                                    data-ride="carousel" data-interval="false" style="width:300px; position:relative;">
                                     <div class="carousel-inner">
                                         @for ($i = 0; $i < count($habitacion->imagenes); $i++)
                                             @if ($i == 0)
@@ -37,7 +37,8 @@
                                                 <div class="carousel-item active">
                                                     <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery">
 
-                                                        <img class="d-block" style="width:300px; height: 200px;" src="{{ $habitacion->imagenes[$i] }}"
+                                                        <img class="d-block" style="width:300px; height: 200px;"
+                                                            src="{{ $habitacion->imagenes[$i] }}"
                                                             alt="{{  $habitacion->tipo_habitacion }} slide">
                                                     </a>
                                                 </div>
@@ -46,7 +47,8 @@
                                                 <div class="carousel-item ">
                                                     <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery">
 
-                                                        <img class="d-block"  style="width:300px; height: 200px;" src="{{ $habitacion->imagenes[$i] }}"
+                                                        <img class="d-block" style="width:300px; height: 200px;"
+                                                            src="{{ $habitacion->imagenes[$i] }}"
                                                             alt="{{  $habitacion->tipo_habitacion }} slide">
                                                     </a>
                                                 </div>
@@ -55,12 +57,12 @@
                                         @endfor
 
                                     </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators{{ $habitacion->id }}" role="button"
-                                        data-slide="prev">
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators{{ $habitacion->id }}"
+                                        role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators{{ $habitacion->id }}" role="button"
-                                        data-slide="next">
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators{{ $habitacion->id }}"
+                                        role="button" data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     </a>
                                 </div><br><b class="text-center">
@@ -87,13 +89,13 @@
                             <td>
                                 <div class="ms-auto d-flex flex-md-row flex-column gap-2">
                                     <form action="{{ route('admin.actualizarhabitacion', $habitacion->id) }}">
-                                        <input type="submit" class="btn btn-warning" value="Editar">
+                                        <input type="submit" class="btn editar  text-light" value="Editar">
                                     </form>
                                     <form action="{{ route('admin.deletehabitacion', $habitacion->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
 
-                                        <input type="submit" class="btn btn-danger" value="Eliminar">
+                                        <input type="submit" class="btn eliminar text-light" value="Eliminar">
                                     </form>
                                 </div>
                             </td>
