@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\CorreoCoche;
+use Illuminate\Support\Str;
+use App\Mail\CancelaServicio;
 class CocheReservadoController extends Controller
 {
     public function index()
@@ -50,11 +52,12 @@ class CocheReservadoController extends Controller
             $coche->save();
         }
         $validated['pagado'] = $coche->precio;
+        $validated['codigo_reserva'] = date('Ymd') . '-' . strtoupper(Str::random(4));
         CocheReservado::create($validated);
         $usuario = User::find($validated['id_usuario']);
         if ($usuario) {
 
-            Mail::to($usuario->email)->send(new CorreoCoche($usuario, $coche));
+            Mail::to($usuario->email)->send(new CorreoCoche($usuario, $coche,$validated['codigo_reserva']));
         }
 
 
@@ -69,6 +72,7 @@ class CocheReservadoController extends Controller
             $cocheActualizar->disponibles += 1;
             $cocheActualizar->save();
         }
+            Mail::to(Auth::user()->email)->send(new CancelaServicio(Auth::user(),null,null, $cocheActualizar));
 
         $cocheReservado->delete();
 

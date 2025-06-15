@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cochesreservados', function (Blueprint $table) {
+       Schema::create('cochesreservados', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_coche')->constrained('coches')->onDelete('cascade');
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
             $table->date('fecha_salida');
             $table->decimal('pagado', 10, 2);
             $table->string('tipo_pago')->nullable();
+            $table->string('codigo_reserva')->nullable();
+
             $table->timestamps();
         });
     }

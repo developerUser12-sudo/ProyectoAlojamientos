@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CorreoHabitacion extends Mailable
+class CancelaServicio extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,17 +19,17 @@ class CorreoHabitacion extends Mailable
     public $usuario;
     public $habitacion;
     public $hotel;
-    public $codigoReserva;
+    public $coche;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($usuario,$habitacion,$hotel, $codigoReserva)
+    public function __construct($usuario,$habitacion=null,$hotel=null, $coche=null)
     {
         $this->usuario = $usuario;
         $this->habitacion = $habitacion;
         $this->hotel = $hotel;
-        $this->codigoReserva = $codigoReserva;
+        $this->coche = $coche;
 
     }
 
@@ -39,8 +39,7 @@ class CorreoHabitacion extends Mailable
    public function build()
 {
     return $this->subject('Has reservado tu habitación de hotel')
-                ->view('emails.habitacion')
-                ->with(['usuario' => $this->usuario,'habitacion'=> $this->habitacion,'hotel'=> $this->hotel,'codigo_reserva'=> $this->codigoReserva]);
+                ->view('emails.cancelar')
+                ->with(['usuario' => $this->usuario,'habitacion'=> $this->habitacion,'hotel'=> $this->hotel,'coche'=> $this->coche]);
 }
-
 }

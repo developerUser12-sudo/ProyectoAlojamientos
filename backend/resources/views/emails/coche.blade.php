@@ -11,10 +11,11 @@
     <h1>¡Hola, {{ $usuario->name }}!</h1>
     <p>Has reservado el coche {{ $coche->marca }} {{ $coche->modelo}} de {{ $coche->origen }} a {{ $coche->destino }}
     </p>
+    <p>Tu código de reserva es {{ $codigoReserva }}. Presentelo al llegar al establecimiento</p>
     <h2>Acude el día de reserva a la ubicacion de tu ciudad de destino:</h2>
     <ul>
         <li>Madrid: Calle Sevilla nº 6</li>
-        <li>Sevilla: Calle Cadiz n º10</li>
+        <li>Sevilla: Calale Cadiz n º10</li>
         <li>Barcelona: Calle Utrera n º10</li>
     </ul>
     <p>Saludos, HolidaysNow</p>

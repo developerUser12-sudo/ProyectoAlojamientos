@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('comida');
             $table->decimal('pagado', 10, 2);
             $table->string('tipo_pago');
+             $table->string('codigo_reserva')->nullable();
             $table->timestamps();
         });
     }

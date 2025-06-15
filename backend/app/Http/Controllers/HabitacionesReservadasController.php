@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CancelaServicio;
 use App\Models\Habitacion;
 use App\Models\Hotel;
 use App\Models\HabitacionesReservadas;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\CorreoHabitacion;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 class HabitacionesReservadasController extends Controller
 {
     public function index()
@@ -52,23 +54,34 @@ class HabitacionesReservadasController extends Controller
         }
         $fechaEntrada = Carbon::parse($validated['fecha_entrada']);
         $fechaSalida = Carbon::parse($validated['fecha_salida']);
-        $dias = $fechaSalida->diffInDays($fechaEntrada,true);
+        $dias = $fechaSalida->diffInDays($fechaEntrada, true);
         $validated['pagado'] = $habitacion->precio_noche * $dias;
+        $validated['codigo_reserva'] = date('Ymd') . '-' . strtoupper(Str::random(4));
 
         $hotel = Hotel::find($habitacion->hotel_id);
         HabitacionesReservadas::create($validated);
         $usuario = User::find($validated['id_usuario']);
         if ($usuario) {
 
-            Mail::to($usuario->email)->send(new CorreoHabitacion($usuario, $habitacion, $hotel));
+            Mail::to($usuario->email)->send(new CorreoHabitacion($usuario, $habitacion, $hotel, $validated['codigo_reserva']));
         }
 
 
     }
     public function destroy($id)
     {
-        $coche = HabitacionesReservadas::where('id', $id);
-        $coche->delete();
+        $habitacion = HabitacionesReservadas::find($id);
+
+        $encontrarHabitacion = Habitacion::find($habitacion->habitacion_id);
+        if ($encontrarHabitacion) {
+            $encontrarHabitacion->disponibles+=1;
+            $encontrarHabitacion->save();
+        }
+        $hotel = Hotel::find($encontrarHabitacion->hotel_id);
+
+        Mail::to(Auth::user()->email)->send(new CancelaServicio(Auth::user(), $encontrarHabitacion, $hotel));
+        $habitacion->delete();
+
         return redirect()->route('reservas');
     }
 }
