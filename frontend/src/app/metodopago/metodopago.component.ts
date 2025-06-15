@@ -21,7 +21,11 @@ export class MetodopagoComponent {
   reservado: boolean = false;
   hotel: Hotel | null = null;
   coche: Coche | null = null;
-
+  caducidad: string = '';
+  ccv: number = 0;
+  ccvIncorrecto = false;
+  fechaIncorrecta = false;
+  tarjetaIncorrecta=false;
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -39,8 +43,9 @@ export class MetodopagoComponent {
             usuarioId: +params['usuarioId'],
             entrada: params['entrada'],
             salida: params['salida'],
-            comida: params['comida']
+            comida: params['comida'] ?? null
           };
+
           if (this.reserva.hotel) {
             this.hotelDetalle.getHotel(this.reserva.hotel).subscribe((data) => {
               this.hotel = data[0];
@@ -75,7 +80,24 @@ export class MetodopagoComponent {
 
   onSubmit() {
     this.reservado = false;
-    if (this.reserva.habitacionId > 0) {
+    this.ccvIncorrecto = false;
+    this.fechaIncorrecta=false;
+    this.tarjetaIncorrecta=false;
+    let hoy = new Date();
+    hoy.setHours(0, 0, 0, 0); 
+    let caducidadDate = new Date(this.caducidad);
+    caducidadDate.setHours(0, 0, 0, 0);
+    if (this.ccv < 99 || this.ccv > 1000) {
+      this.ccvIncorrecto = true;
+    }
+    else if (caducidadDate <hoy) {
+      this.fechaIncorrecta=true;
+    }
+    else if (!/^\d{16}$/.test(this.numeroTarjeta)) {
+      this.tarjetaIncorrecta=true;
+    }
+    else{
+      if (this.reserva.habitacionId > 0) {
       this.habitacionService.reservarHabitacion(this.reserva.habitacionId, this.reserva.usuarioId, this.reserva.entrada, this.reserva.salida, this.reserva.comida, this.metodoPago).subscribe({
         next: () => {
           this.reservado = true;
@@ -92,10 +114,11 @@ export class MetodopagoComponent {
 
       });
     }
+    }
   }
   isFormValid(): boolean {
     return !!(
-      this.numeroTarjeta ||
+      (this.numeroTarjeta && this.caducidad && this.ccv) ||
       this.metodoPago == 'efectivo'
     );
   }

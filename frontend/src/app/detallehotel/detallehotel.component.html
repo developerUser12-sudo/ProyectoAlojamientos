@@ -112,6 +112,7 @@
                 <label class="form-label" for="comida">Comida: </label>
                 <select name="comida" id="comida" class="form-select" [(ngModel)]="comida">
                     <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="">Ninguna</option>
                     <option [value]="comida" *ngFor="let comida of hotel.comidas">
                         {{comida}}
                     </option>

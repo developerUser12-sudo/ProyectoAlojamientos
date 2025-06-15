@@ -29,9 +29,16 @@ class HotelController extends Controller
             if ($request->has('hora_cierre') && !empty($request->hora_cierre)) {
                 $queryHotel->whereRaw('hora_cierre like ?', ['%' . $request->hora_cierre . '%']);
             }
-            if ($request->has('comidas') && !empty($request->comidass)) {
-                $queryHotel->whereJsonContains('comidas', $request->comidas);
+            if ($request->has('comidas') && !empty($request->comidas)) {
+                $comidasString = $request->input('comidas');
+                $comidas = array_map('trim', explode(',', $comidasString));
+                $queryHotel->where(function ($query) use ($comidas) {
+                    foreach ($comidas as $comida) {
+                        $query->orWhereJsonContains('comidas', $comida);
+                    }
+                });
             }
+
             if ($request->has('precio_min') || $request->has('precio_max')) {
                 $precioMin = $request->precio_min ?? 0;
                 $precioMax = $request->precio_max ?? 1000;

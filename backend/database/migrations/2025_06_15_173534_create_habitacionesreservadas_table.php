@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('habitacionesreservadas', function (Blueprint $table) {
+         Schema::create('habitacionesreservadas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('habitacion_id')->constrained('habitaciones')->onDelete('cascade');
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
             $table->date('fecha_entrada');
             $table->date('fecha_salida');
-            $table->string('comida');
+            $table->string('comida')->nullable();
             $table->decimal('pagado', 10, 2);
             $table->string('tipo_pago');
              $table->string('codigo_reserva')->nullable();

@@ -92,7 +92,7 @@
                                         <b>{{ $reserva->hotel->nombre }}</b>
                                     </a>
                                 </td>
-                                <td>{{ $reserva->tipo_habitacion }}</td>
+                                <td>{{ $reserva->habitacion->tipo_habitacion }}</td>
                                 <td>{{ $reserva->hotel->direccion }}, {{ $reserva->hotel->localizacion }}</td>
                                 <td>{{ $reserva->pagado }}</td>
                                 <td>{{ $reserva->comida }}</td>

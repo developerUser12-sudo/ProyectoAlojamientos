@@ -67,14 +67,11 @@ export class DetallehotelComponent {
     return !!(
       this.fecha_entrada &&
       this.fecha_salida &&
-      
-      this.comida &&
       this.habitacionSeleccionada
     );
   }
 
   onSubmit() {
-    console.log(this.hotel);
     
     this.rangoIncorrecto = false;
     let hoy = new Date();
@@ -85,29 +82,26 @@ export class DetallehotelComponent {
       this.rangoIncorrecto = true;
     }
     
-    else if (this.comida == '') {
-      this.faltaComida = true;
-    }
+
     else {
       this.usuario.getUsuario().subscribe((dataUsuario) => {
         if (dataUsuario.username == 'invitado') {
           window.location.href = environment.apiUrl;
         }
         else {
-            if (this.habitacionSeleccionada) {
-              
-              this.router.navigate(['/metodopago'], {
-              queryParams: {
-                habitacionId: this.habitacionSeleccionada.id,
-               hotelId: this.hotel?.id,
-                usuarioId: dataUsuario.id,
-                entrada: this.fecha_entrada,
-                salida: this.fecha_salida,
-                comida: this.comida
-              }
-            });
+          if (this.habitacionSeleccionada) {
+            const queryParams: any = {
+              habitacionId: this.habitacionSeleccionada.id,
+              hotelId: this.hotel?.id,
+              usuarioId: dataUsuario.id,
+              entrada: this.fecha_entrada,
+              salida: this.fecha_salida
+            };
+            if (this.comida) {
+              queryParams.comida = this.comida;
             }
-          
+            this.router.navigate(['/metodopago'], { queryParams: queryParams });
+          }
         }
       });
     }

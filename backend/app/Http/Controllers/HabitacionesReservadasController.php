@@ -43,7 +43,7 @@ class HabitacionesReservadasController extends Controller
             'id_usuario' => 'required|integer',
             'fecha_salida' => 'required|date',
             'fecha_entrada' => 'required|date',
-            'comida' => 'required|string',
+            'comida' => 'nullable|string',
             'tipo_pago' => 'required|string',
         ]);
 
