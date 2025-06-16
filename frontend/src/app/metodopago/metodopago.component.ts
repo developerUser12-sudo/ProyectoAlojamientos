@@ -87,13 +87,13 @@ export class MetodopagoComponent {
     hoy.setHours(0, 0, 0, 0); 
     let caducidadDate = new Date(this.caducidad);
     caducidadDate.setHours(0, 0, 0, 0);
-    if (this.ccv < 99 || this.ccv > 1000) {
+    if (this.ccv&&(this.ccv < 99 || this.ccv > 1000)) {
       this.ccvIncorrecto = true;
     }
-    else if (caducidadDate <hoy) {
+    else if (this.caducidad&&caducidadDate <hoy) {
       this.fechaIncorrecta=true;
     }
-    else if (!/^\d{16}$/.test(this.numeroTarjeta)) {
+    else if (this.numeroTarjeta&&!/^\d{16}$/.test(this.numeroTarjeta)) {
       this.tarjetaIncorrecta=true;
     }
     else{
