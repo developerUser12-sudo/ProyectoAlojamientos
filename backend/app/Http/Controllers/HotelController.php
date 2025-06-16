@@ -25,10 +25,11 @@ class HotelController extends Controller
 
             }
             if ($request->has('hora_apertura') && !empty($request->hora_apertura)) {
-                $queryHotel->whereRaw('hora_apertura like ?', ['%' . $request->hora_apertura . '%']);
+                $queryHotel->whereTime('hora_apertura', $request->hora_apertura);
             }
+
             if ($request->has('hora_cierre') && !empty($request->hora_cierre)) {
-                $queryHotel->whereRaw('hora_cierre like ?', ['%' . $request->hora_cierre . '%']);
+                $queryHotel->whereTime('hora_cierre', $request->hora_cierre);
             }
             if ($request->has('comidas') && !empty($request->comidas)) {
 
