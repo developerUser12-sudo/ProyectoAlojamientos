@@ -29,10 +29,10 @@ class HotelController extends Controller
             if ($request->has('hora_cierre') && !empty($request->hora_cierre)) {
                 $queryHotel->whereRaw('hora_cierre like ?', ['%' . $request->hora_cierre . '%']);
             }
-            if ($request->has('comidas') && !empty($request->comidas)) {
+            if ($request->has('comidas')) {
                 $comidasString = $request->input('comidas');
-                $comidas = array_filter(array_map('trim', explode(',', $comidasString)));
-                if (!empty($comidas)) { 
+                $comidas = array_filter(array_map('trim', explode(',', $comidasString))); 
+                if (count($comidas) > 0) {
                     $queryHotel->where(function ($query) use ($comidas) {
                         foreach ($comidas as $comida) {
                             $query->orWhereJsonContains('comidas', $comida);
