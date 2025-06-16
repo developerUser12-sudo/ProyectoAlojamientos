@@ -106,7 +106,7 @@ export class HotelesComponent {
   onSubmit() {
 
     this.buscado = true;
-    console.log(this.opcionesSeleccionadas);
+    console.log(this.minValue);
     
     this.serviciosService.getHotelesBusqueda(this.nombre, this.localizacion, this.estrellas, this.hora_apertura, this.hora_cierre, this.minValue, this.maxValue, this.opcionesSeleccionadas).subscribe(data => {
       this.filtrar = data;

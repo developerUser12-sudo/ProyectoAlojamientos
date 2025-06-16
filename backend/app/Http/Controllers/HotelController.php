@@ -21,7 +21,8 @@ class HotelController extends Controller
                 $queryHotel->whereRaw('LOWER(TRIM(localizacion)) like ?', ['%' . strtolower(trim($request->localizacion)) . '%']);
             }
             if ($request->has('estrellas') && !empty($request->estrellas)) {
-                $queryHotel->whereRaw('estrellas like ?', ['%' . $request->estrellas . '%']);
+                $queryHotel->where('estrellas', $request->estrellas);
+
             }
             if ($request->has('hora_apertura') && !empty($request->hora_apertura)) {
                 $queryHotel->whereRaw('hora_apertura like ?', ['%' . $request->hora_apertura . '%']);
