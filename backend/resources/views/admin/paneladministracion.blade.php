@@ -76,7 +76,7 @@
                     @endforeach
                 </table>
                 <div class="paginate">
-                    {{ $coches->links() }}
+                    {{ $coches->withQueryString()->links() }}
 
                 </div>
 
@@ -231,7 +231,7 @@
                     @endforeach
                 </table>
                 <div class="paginate">
-                    {{ $hoteles->links() }}
+                    {{ $hoteles->withQueryString()->links() }}
 
                 </div>
 

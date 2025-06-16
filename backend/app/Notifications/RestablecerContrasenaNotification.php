@@ -8,14 +8,20 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Mail\Mailable;
 
-class RestablecerContrasena extends Mailable
+
+
+class RestablecerContrasenaNotification extends Notification implements ShouldQueue
+
 {
+    use Queueable;
     public $token;
 
     public function __construct($token)
     {
         $this->token = $token;
+        $this->id = sha1($token);
     }
+
 
     public function via($notifiable)
     {

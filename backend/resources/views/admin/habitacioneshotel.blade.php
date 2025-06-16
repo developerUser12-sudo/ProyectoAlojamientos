@@ -35,7 +35,7 @@
                                             @if ($i == 0)
 
                                                 <div class="carousel-item active">
-                                                    <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery">
+                                                    <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery{{ $habitacion->id }}">
 
                                                         <img class="d-block" style="width:300px; height: 200px;"
                                                             src="{{ $habitacion->imagenes[$i] }}"
@@ -45,7 +45,7 @@
                                             @else
 
                                                 <div class="carousel-item ">
-                                                    <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery">
+                                                    <a href="{{ $habitacion->imagenes[$i] }}" data-lightbox="gallery{{ $habitacion->id }}">
 
                                                         <img class="d-block" style="width:300px; height: 200px;"
                                                             src="{{ $habitacion->imagenes[$i] }}"
