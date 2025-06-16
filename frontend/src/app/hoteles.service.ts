@@ -45,7 +45,7 @@ export class HotelesService {
       if (precio_max) {
         params = params.set('precio_max', precio_max.toString());
       }
-      if (opcionesSeleccionadas) {
+      if (opcionesSeleccionadas && opcionesSeleccionadas.length > 0) {
         params = params.set('comidas', opcionesSeleccionadas.join(','));
         
       }
