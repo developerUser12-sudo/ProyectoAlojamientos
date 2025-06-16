@@ -31,8 +31,8 @@ class HotelController extends Controller
             }
             if ($request->has('comidas') && !empty($request->comidas)) {
                 $comidasString = $request->input('comidas');
-                $comidas = array_filter(array_map('trim', explode(',', $comidasString))); 
-                if (!empty($comidas)) {
+                $comidas = array_filter(array_map('trim', explode(',', $comidasString)));
+                if (!empty($comidas)) { 
                     $queryHotel->where(function ($query) use ($comidas) {
                         foreach ($comidas as $comida) {
                             $query->orWhereJsonContains('comidas', $comida);
@@ -40,6 +40,7 @@ class HotelController extends Controller
                     });
                 }
             }
+
             if ($request->has('precio_min') || $request->has('precio_max')) {
                 $precioMin = $request->precio_min ?? 0;
                 $precioMax = $request->precio_max ?? 1000;
