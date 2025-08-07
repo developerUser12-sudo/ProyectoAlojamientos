@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', '.holidaysnowauth.onrender.com'),
+    'domain' => env('SESSION_DOMAIN', 'holidaysnowauth.onrender.com'),
 
 
     /*
