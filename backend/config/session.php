@@ -169,7 +169,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE',false),
+    'secure' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -197,7 +197,7 @@ return [
     |
     */
 
-   'same_site' => str_contains(env('FRONTEND_URL'), 'https://holidaysnow.onrender.com') ? 'none' : 'lax',
+   'same_site' => 'none',
 
 
 
