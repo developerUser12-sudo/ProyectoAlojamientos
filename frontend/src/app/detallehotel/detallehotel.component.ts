@@ -23,7 +23,7 @@ export class DetallehotelComponent {
   rangoIncorrecto: boolean = false;
   idHabitacion: number = 0;
   faltaComida: boolean = false;
-  nombreHotel='';
+  nombreHotel = '';
   constructor(private route: ActivatedRoute, private hotelDetalle: HotelesService, private habitacionService: HabitacionesService, private usuario: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class DetallehotelComponent {
           if (typeof this.hotel.comidas === 'string') {
             this.hotel.comidas = JSON.parse(this.hotel.comidas);
           }
-           this.nombreHotel = this.hotel.nombre;
+          this.nombreHotel = this.hotel.nombre;
 
         }
 
@@ -72,16 +72,19 @@ export class DetallehotelComponent {
   }
 
   onSubmit() {
-    
+
     this.rangoIncorrecto = false;
     let hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
     let entrada = new Date(this.fecha_entrada);
     entrada.setHours(0, 0, 0, 0);
-    if (this.fecha_entrada == this.fecha_salida || this.fecha_salida < this.fecha_entrada||entrada<=hoy) {
+    let diffMsNow = entrada.getTime() - hoy.getTime();
+    let diffDiasNow = diffMsNow / (1000 * 60 * 60 * 24);
+    if (this.fecha_entrada == this.fecha_salida || this.fecha_salida < this.fecha_entrada || entrada <= hoy||diffDiasNow<3) {
       this.rangoIncorrecto = true;
     }
-    
+
+
 
     else {
       this.usuario.getUsuario().subscribe((dataUsuario) => {

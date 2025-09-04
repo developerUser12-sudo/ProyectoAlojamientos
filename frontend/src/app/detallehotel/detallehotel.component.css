@@ -11,6 +11,7 @@ img {
     opacity: 0.80;
 }
 
+
 .carousel-control-prev {
     animation: moverIzquierda 1s infinite ease-in-out;
 }

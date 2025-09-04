@@ -1,7 +1,7 @@
-<div class="container mt-4 mx-auto" style="max-width: 700px;">
+<div class="container mt-4  d-flex flex-column gap-3 justify-content-center p-4  " style="max-width: 700px;">
 
     <h4>Seleccione un método de pago</h4>
-    <form (ngSubmit)="onSubmit()" class="d-flex flex-column gap-2 w-100 p-3">
+    <form (ngSubmit)="onSubmit()" class="d-flex flex-column gap-2 w-100 ">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="metodoPago" id="tarjeta" value="tarjeta"
                 [(ngModel)]="metodoPago">
@@ -34,33 +34,32 @@
         <p *ngIf="reservado" class="text-success">Compra finalizada. Recibirás en tu correo electrónico los detalles</p>
 
     </form>
-    <a *ngIf="!reservado" routerLink="/" routerLinkActive="active" class="btn btn-secondary ms-3">Cancelar</a>
-
-    <h5 class="p-3">Tu producto:</h5>
-    <div *ngIf="reserva.habitacionId > 0 && hotel" class="rounded card p-2 mt-4" style="width: 300px;">
+    
+    <h5 >Tu producto:</h5>
+        
+        <div *ngIf="reserva.habitacionId > 0 && hotel" class="rounded card p-2 " style="width: 300px;">
             <img [src]="hotel.imagenes[0]" alt="Imagen hotel hotel.nombre"
-                style="width: 300px; height:200px; object-fit: cover;" class="img-fluid">
-
+            style="width: 300px; height:200px; object-fit: cover;" class="img-fluid">
+            
             <div class="d-flex flex-row gap-5 mt-2">
                 <p><b>{{hotel.nombre}}</b></p>
             </div>
-
-            <p><i class="bi bi-geo-alt-fill"></i>{{hotel.direccion}}, {{hotel.localizacion}}</p>
-        
-    </div>
-    <div class="p-3">
-        <div *ngIf="reserva.idCoche > 0 && coche" class="rounded card p-2 mt-4" style="width: 300px;">
             
-                <img [src]="coche.imagen" alt="Imagen coche coche.nombre"
-                    style="width: 250px; height:150px; object-fit: cover;" class="img-fluid">
-
-                <div class="d-flex flex-row gap-5 mt-2">
-                    <p><b>{{coche.marca}} {{coche.modelo}}</b></p>
-                </div>
-
-                <p><i class="bi bi-geo-alt-fill"></i> De {{coche.origen}} a {{coche.destino}}</p>
-           
+            <p><i class="bi bi-geo-alt-fill"></i>{{hotel.direccion}}, {{hotel.localizacion}}</p>
+            
         </div>
-    </div>
-
+        <div *ngIf="reserva.idCoche > 0 && coche" class="rounded card p-2 " style="width: 300px;">
+            
+            <img [src]="coche.imagen" alt="Imagen coche coche.nombre"
+            style="width: 250px; height:150px; object-fit: cover;" class="img-fluid">
+            
+            <div class="d-flex flex-row gap-5 mt-2">
+                <p><b>{{coche.marca}} {{coche.modelo}}</b></p>
+            </div>
+            
+            <p><i class="bi bi-geo-alt-fill"></i> De {{coche.origen}} a {{coche.destino}}</p>
+            
+        </div>
+    <a *ngIf="!reservado" routerLink="/" routerLinkActive="active" class="btn btn-secondary mb-2 w-25 ">Cancelar</a>
+    
 </div>
