@@ -1,5 +1,3 @@
-🚧 **Still in development** 🚧
-
 ## Summary
 
 This project is a web application focused on holiday planning, allowing users to book hotels and cars easily.
